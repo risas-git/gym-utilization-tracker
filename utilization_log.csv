@@ -45,203 +45,403 @@ timestamp,studio,slot_start,slot_end,percentage,level
 2026-08-15 13:28:27,Bielefeld Schildesche,13:00:00,14:00:00,30,LOW
 2026-08-15 13:28:27,Bielefeld Sieker,13:00:00,14:00:00,15,LOW
 2026-08-15 13:28:27,Bielefeld City,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Ahlen City,13:00:00,14:00:00,8,LOW
-2026-08-15 13:38:49,AI Fitness Bonn Hardtberg,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Ahlen Süd,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Ansbach,13:00:00,14:00:00,7,LOW
-2026-08-15 13:38:49,Ai Fitness Bielefeld City,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Alsfeld,13:00:00,14:00:00,8,LOW
-2026-08-15 13:38:49,Ai Fitness Augsburg-Haunstetten,13:00:00,14:00:00,24,LOW
-2026-08-15 13:38:49,Ai Fitness Bocholt,13:00:00,14:00:00,21,LOW
-2026-08-15 13:38:49,Ai Fitness Augsburg-Stadtbergen,13:00:00,14:00:00,22,LOW
-2026-08-15 13:38:49,Ai Fitness Bad Oeynhausen,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai FItness Bremen Osterholz,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bielefeld Brackwede,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bergisch Gladbach,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Bassum,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Berlin Moabit,13:00:00,14:00:00,6,LOW
-2026-08-15 13:38:49,Ai Fitness Bielefeld Sieker,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Achim,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bielefeld Schildesche,13:00:00,14:00:00,30,LOW
-2026-08-15 13:38:49,Ai Fitness Bad Hersfeld,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Bochum,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Bonn Auguststraße,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bremen Admiralstraße,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Borken,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Bonn Endenich,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Bottrop,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Bremen Munte,13:00:00,14:00:00,17,LOW
-2026-08-15 13:38:49,Ai Fitness Bremen Oberneuland,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bünde,13:00:00,14:00:00,21,LOW
-2026-08-15 13:38:49,Ai Fitness Brinkum (Stuhr),closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bonn Beuel,13:00:00,14:00:00,23,LOW
-2026-08-15 13:38:49,Ai Fitness Bremen Berliner Freiheit,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Celle Neuenhäusen,13:00:00,14:00:00,8,LOW
-2026-08-15 13:38:49,Ai Fitness Bremen-Klemperhagen (Ritterhude),closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Castrop-Rauxel,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Bremen Blumenthal,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Castrop Nord (Castrop-Rauxel),13:00:00,14:00:00,17,LOW
-2026-08-15 13:38:49,Ai Fitness Bremen Die Fabrik,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Bremen Vahr,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Brilon,13:00:00,14:00:00,7,LOW
-2026-08-15 13:38:49,Ai Fitness Celle Telefunkenstrasse,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Coburg,13:00:00,14:00:00,9,LOW
-2026-08-15 13:38:49,Ai Fitness Darmstadt,13:00:00,14:00:00,23,LOW
-2026-08-15 13:38:49,Ai Fitness Delmenhorst,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Dietzenbach,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Detmold,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Dodenhof (Ottersberg),closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Dortmund-Dorstfeld,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Dortmund Lütgendortmund,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Dortmund-City,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Dinslaken Neutor Galerie,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Duisburg City,13:00:00,14:00:00,22,LOW
-2026-08-15 13:38:49,Ai Fitness Düsseldorf Oberbilk,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Erlangen-Ost,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Duisburg Königsgalerie,13:00:00,14:00:00,8,LOW
-2026-08-15 13:38:49,Ai Fitness Erlangen City,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Dreieich,13:00:00,14:00:00,28,LOW
-2026-08-15 13:38:49,Ai Fitness Duisburg Innenhafen,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Düsseldorf Flingern,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Duisburg Meiderich,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Essen Bergerhausen,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Essen-Altenessen,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai Fitness Essen-Borbeck,13:00:00,14:00:00,24,LOW
-2026-08-15 13:38:49,Ai Fitness Essen Kray,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Freising,13:00:00,14:00:00,31,LOW
-2026-08-15 13:38:49,Ai Fitness Fürth-Poppenreuth,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Fürth,13:00:00,14:00:00,9,LOW
-2026-08-15 13:38:49,Ai Fitness Fürth-Südstadt,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Esslingen,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Friedrichshafen-Flughafen,13:00:00,14:00:00,20,LOW
-2026-08-15 13:38:49,Ai Fitness Friedrichshafen,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Gelsenkirchen,13:00:00,14:00:00,0,LOW
-2026-08-15 13:38:49,Ai Fitness Gütersloh,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Göttingen Weende,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Gummersbach,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Gnarrenburg,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Göppingen,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Hagen City,13:00:00,14:00:00,21,LOW
-2026-08-15 13:38:49,Ai Fitness Gütersloh Kampstrasse,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Göttingen Grone,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Haan,13:00:00,14:00:00,23,LOW
-2026-08-15 13:38:49,Ai Fitness Hagen Markt,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Hainburg,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Haltern (Haltern am See),13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Hannover,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Hamm,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Heidenheim,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Heilbronn Böckingen,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Hannover City,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Hannover Misburg,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Hannover-Hainholz,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Heilbronn Wollhaus,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Hanau,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai Fitness Heusenstamm,13:00:00,14:00:00,23,LOW
-2026-08-15 13:38:49,Ai Fitness Herford Süd,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Herford Nord,13:00:00,14:00:00,26,LOW
-2026-08-15 13:38:49,Ai Fitness Kaiserslautern,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Hof,13:00:00,14:00:00,9,LOW
-2026-08-15 13:38:49,Ai Fitness Kaiserslautern Augustastr.,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Iserlohn,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Homburg,13:00:00,14:00:00,22,LOW
-2026-08-15 13:38:49,Ai Fitness Jülich,13:00:00,14:00:00,20,LOW
-2026-08-15 13:38:49,Ai Fitness Kamp-Lintfort,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Kassel Kurfürstengalerie,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Kassel Holländische Str.,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Kirchheim u. Teck,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Koblenz,13:00:00,14:00:00,30,LOW
-2026-08-15 13:38:49,Ai Fitness Krefeld,13:00:00,14:00:00,9,LOW
-2026-08-15 13:38:49,Ai Fitness Köln Agnesviertel,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Köln Lindenthal,13:00:00,14:00:00,20,LOW
-2026-08-15 13:38:49,Ai Fitness Köln Ossendorf,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Köln Hürth,13:00:00,14:00:00,30,LOW
-2026-08-15 13:38:49,Ai Fitness Köln Poll,13:00:00,14:00:00,24,LOW
-2026-08-15 13:38:49,Ai Fitness Laatzen,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Köln Porz,13:00:00,14:00:00,26,LOW
-2026-08-15 13:38:49,Ai Fitness Lahr,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Lahnstein,13:00:00,14:00:00,36,LOW
-2026-08-15 13:38:49,Ai Fitness Köln Sülz,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Landshut Kumhausen,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Langen,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Langenselbold,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Langenfeld City,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Langenfeld Berghausen (Langenfeld (Rheinland)),13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Lippstadt,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai Fitness Leverkusen,13:00:00,14:00:00,47,NORMAL
-2026-08-15 13:38:49,Ai Fitness Marburg,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Leipzig - Südvorstadt,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Melle,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Monheim (Monheim am Rhein),13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Menden,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Moers,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Minden,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Mönchengladbach,13:00:00,14:00:00,9,LOW
-2026-08-15 13:38:49,Ai Fitness München Giesing,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Großhadern,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Mülheim,13:00:00,14:00:00,0,LOW
-2026-08-15 13:38:49,Ai Fitness München - Sendling,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Haar (Haar (München)),13:00:00,14:00:00,24,LOW
-2026-08-15 13:38:49,Ai Fitness München Laim,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Freiham,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Schwabing,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Perlach,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Pasing,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Trudering,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Neuried,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Münster,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness München-Neuhausen,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München-Berg am Laim,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness München Unterhaching,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Neumarkt Süd (Neumarkt in der Oberpfalz),closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Neumarkt NeuerMarkt,13:00:00,14:00:00,21,LOW
-2026-08-15 13:38:49,Ai Fitness Neustadt am Rübenberge,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Nürnberg,13:00:00,14:00:00,23,LOW
-2026-08-15 13:38:49,Ai Fitness Neuwied,13:00:00,14:00:00,6,LOW
-2026-08-15 13:38:49,Ai Fitness Obertshausen,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Oberhausen,13:00:00,14:00:00,20,LOW
-2026-08-15 13:38:49,Ai Fitness Nürnberg Eberhardshof,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Paderborn,13:00:00,14:00:00,21,LOW
-2026-08-15 13:38:49,Ai Fitness Nürnberg City,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Oyten,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Oldenburg,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Osnabrück,13:00:00,14:00:00,50,NORMAL
-2026-08-15 13:38:49,Ai Fitness Passau,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Pulheim,13:00:00,14:00:00,25,LOW
-2026-08-15 13:38:49,Ai Fitness Ravensburg,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Regensburg,13:00:00,14:00:00,10,LOW
-2026-08-15 13:38:49,Ai Fitness Recklinghausen-Hochlarmark,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai Fitness Recklinghausen-City,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Rosenheim Aicherpark,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Saarlouis,13:00:00,14:00:00,40,LOW
-2026-08-15 13:38:49,Ai Fitness Rosenheim-City,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Schwabach,13:00:00,14:00:00,22,LOW
-2026-08-15 13:38:49,Ai Fitness Siegen,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai Fitness Schweinfurt,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Soest,13:00:00,14:00:00,15,LOW
-2026-08-15 13:38:49,Ai Fitness Sindelfingen,13:00:00,14:00:00,5,LOW
-2026-08-15 13:38:49,Ai Fitness Straubing,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Springe,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Tönisvorst,13:00:00,14:00:00,11,LOW
-2026-08-15 13:38:49,Ai Fitness Stuttgart-Degerloch,13:00:00,14:00:00,17,LOW
-2026-08-15 13:38:49,Ai Fitness Unna,13:00:00,14:00:00,18,LOW
-2026-08-15 13:38:49,Ai Fitness Völklingen,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Weinheim,closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Weiskirchen (Rodgau),13:00:00,14:00:00,23,LOW
-2026-08-15 13:38:49,Ai Fitness Wanne-Eickel (Herne),13:00:00,14:00:00,17,LOW
-2026-08-15 13:38:49,Ai Fitness Weiden,13:00:00,14:00:00,19,LOW
-2026-08-15 13:38:49,Ai Fitness Wesel City,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Werne,13:00:00,14:00:00,22,LOW
-2026-08-15 13:38:49,Ai Fitness Wuppertal Elberfeld Gathe,13:00:00,14:00:00,13,LOW
-2026-08-15 13:38:49,Ai Fitness Wiesbaden,13:00:00,14:00:00,14,LOW
-2026-08-15 13:38:49,Ai Fitness Wesel Industriegebiet,13:00:00,14:00:00,12,LOW
-2026-08-15 13:38:49,Ai Fitness Winsen (Winsen (Luhe)),closed,closed,0,CLOSED
-2026-08-15 13:38:49,Ai Fitness Wuppertal-Barmen,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Wuppertal Elberfeld Neumarkt,13:00:00,14:00:00,16,LOW
-2026-08-15 13:38:49,Ai Fitness Würzburg,13:00:00,14:00:00,35,LOW
+2026-08-15 13:38:49,Ahlen City,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Bonn Hardtberg,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ahlen Süd,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ansbach,13:00:00,14:00:00,7,LOW
+2026-08-15 13:38:49,Bielefeld City,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Alsfeld,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Augsburg-Haunstetten,13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Bocholt,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Augsburg-Stadtbergen,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Bad Oeynhausen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Bremen Osterholz,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bielefeld Brackwede,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bergisch Gladbach,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Bassum,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Berlin Moabit,13:00:00,14:00:00,6,LOW
+2026-08-15 13:38:49,Bielefeld Sieker,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Achim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bielefeld Schildesche,13:00:00,14:00:00,30,LOW
+2026-08-15 13:38:49,Bad Hersfeld,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Bochum,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Bonn Auguststraße,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bremen Admiralstraße,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Borken,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Bonn Endenich,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Bottrop,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Bremen Munte,13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Bremen Oberneuland,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bünde,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Brinkum (Stuhr),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bonn Beuel,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Bremen Berliner Freiheit,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Celle Neuenhäusen,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Bremen-Klemperhagen (Ritterhude),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Castrop-Rauxel,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Bremen Blumenthal,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Castrop Nord (Castrop-Rauxel),13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Bremen Die Fabrik,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Bremen Vahr,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Brilon,13:00:00,14:00:00,7,LOW
+2026-08-15 13:38:49,Celle Telefunkenstrasse,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Coburg,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Darmstadt,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Delmenhorst,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Dietzenbach,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Detmold,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Dodenhof (Ottersberg),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Dortmund-Dorstfeld,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Dortmund Lütgendortmund,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Dortmund-City,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Dinslaken Neutor Galerie,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Duisburg City,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Düsseldorf Oberbilk,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Erlangen-Ost,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Duisburg Königsgalerie,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Erlangen City,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Dreieich,13:00:00,14:00:00,28,LOW
+2026-08-15 13:38:49,Duisburg Innenhafen,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Düsseldorf Flingern,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Duisburg Meiderich,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Essen Bergerhausen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Essen-Altenessen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Essen-Borbeck,13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Essen Kray,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Freising,13:00:00,14:00:00,31,LOW
+2026-08-15 13:38:49,Fürth-Poppenreuth,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Fürth,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Fürth-Südstadt,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Esslingen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Friedrichshafen-Flughafen,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Friedrichshafen,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Gelsenkirchen,13:00:00,14:00:00,0,LOW
+2026-08-15 13:38:49,Gütersloh,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Göttingen Weende,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Gummersbach,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Gnarrenburg,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Göppingen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Hagen City,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Gütersloh Kampstrasse,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Göttingen Grone,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Haan,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Hagen Markt,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Hainburg,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Haltern (Haltern am See),13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Hannover,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Hamm,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Heidenheim,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Heilbronn Böckingen,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Hannover City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Hannover Misburg,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Hannover-Hainholz,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Heilbronn Wollhaus,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Hanau,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Heusenstamm,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Herford Süd,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Herford Nord,13:00:00,14:00:00,26,LOW
+2026-08-15 13:38:49,Kaiserslautern,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Hof,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Kaiserslautern Augustastr.,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Iserlohn,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Homburg,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Jülich,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Kamp-Lintfort,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Kassel Kurfürstengalerie,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Kassel Holländische Str.,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Kirchheim u. Teck,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Koblenz,13:00:00,14:00:00,30,LOW
+2026-08-15 13:38:49,Krefeld,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Köln Agnesviertel,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Köln Lindenthal,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Köln Ossendorf,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Köln Hürth,13:00:00,14:00:00,30,LOW
+2026-08-15 13:38:49,Köln Poll,13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Laatzen,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Köln Porz,13:00:00,14:00:00,26,LOW
+2026-08-15 13:38:49,Lahr,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Lahnstein,13:00:00,14:00:00,36,LOW
+2026-08-15 13:38:49,Köln Sülz,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Landshut Kumhausen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Langen,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Langenselbold,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Langenfeld City,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Langenfeld Berghausen (Langenfeld (Rheinland)),13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Lippstadt,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Leverkusen,13:00:00,14:00:00,47,NORMAL
+2026-08-15 13:38:49,Marburg,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Leipzig - Südvorstadt,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Melle,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Monheim (Monheim am Rhein),13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Menden,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Moers,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Minden,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Mönchengladbach,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,München Giesing,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Großhadern,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Mülheim,13:00:00,14:00:00,0,LOW
+2026-08-15 13:38:49,München - Sendling,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Haar (Haar (München)),13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,München Laim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Freiham,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Schwabing,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Perlach,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Pasing,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Trudering,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Neuried,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Münster,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,München-Neuhausen,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München-Berg am Laim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,München Unterhaching,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Neumarkt Süd (Neumarkt in der Oberpfalz),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Neumarkt NeuerMarkt,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Neustadt am Rübenberge,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Nürnberg,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Neuwied,13:00:00,14:00:00,6,LOW
+2026-08-15 13:38:49,Obertshausen,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Oberhausen,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Nürnberg Eberhardshof,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Paderborn,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Nürnberg City,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Oyten,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Oldenburg,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Osnabrück,13:00:00,14:00:00,50,NORMAL
+2026-08-15 13:38:49,Passau,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Pulheim,13:00:00,14:00:00,25,LOW
+2026-08-15 13:38:49,Ravensburg,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Regensburg,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Recklinghausen-Hochlarmark,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Recklinghausen-City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Rosenheim Aicherpark,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Saarlouis,13:00:00,14:00:00,40,LOW
+2026-08-15 13:38:49,Rosenheim-City,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Schwabach,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Siegen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Schweinfurt,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Soest,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Sindelfingen,13:00:00,14:00:00,5,LOW
+2026-08-15 13:38:49,Straubing,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Springe,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Tönisvorst,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Stuttgart-Degerloch,13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Unna,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Völklingen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Weinheim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Weiskirchen (Rodgau),13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Wanne-Eickel (Herne),13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Weiden,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Wesel City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Werne,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Wuppertal Elberfeld Gathe,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Wiesbaden,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Wesel Industriegebiet,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Winsen (Winsen (Luhe)),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Wuppertal-Barmen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Wuppertal Elberfeld Neumarkt,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Würzburg,13:00:00,14:00:00,35,LOW
 2026-08-15 13:38:49,Ai Verwaltung (Rosenheim),closed,closed,0,CLOSED
 2026-08-15 13:38:49,Oldenburg- Ammergaustraße (Oldenburg (Oldb)),closed,closed,0,CLOSED
 2026-08-15 13:38:49,Soltau,closed,closed,0,CLOSED
 2026-08-15 13:38:49,Testing Sandbox (Hamburg),13:00:00,14:00:00,2,LOW
 2026-08-15 13:38:49,Syke,closed,closed,0,CLOSED
 2026-08-15 13:38:49,Verden (Verden (Aller)),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Augsburg-Stadtbergen,13:00:00,14:00:00,22,LOW
+2026-08-15 13:52:17,Bremen Osterholz,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bonn Hardtberg,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Augsburg-Haunstetten,13:00:00,14:00:00,21,LOW
+2026-08-15 13:52:17,Ansbach,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Alsfeld,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Bergisch Gladbach,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Bad Hersfeld,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Bochum,13:00:00,14:00:00,9,LOW
+2026-08-15 13:52:17,Bassum,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Achim,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bielefeld Schildesche,13:00:00,14:00:00,29,LOW
+2026-08-15 13:52:17,Ahlen City,13:00:00,14:00:00,9,LOW
+2026-08-15 13:52:17,Berlin Moabit,13:00:00,14:00:00,5,LOW
+2026-08-15 13:52:17,Bielefeld Brackwede,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bielefeld City,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Bielefeld Sieker,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Ahlen Süd,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Bad Oeynhausen,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Bocholt,13:00:00,14:00:00,20,LOW
+2026-08-15 13:52:17,Bonn Beuel,13:00:00,14:00:00,24,LOW
+2026-08-15 13:52:17,Bonn Auguststraße,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bonn Endenich,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Borken,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Bremen Admiralstraße,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bremen Berliner Freiheit,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bremen Blumenthal,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bremen Vahr,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Bremen-Klemperhagen (Ritterhude),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bremen Oberneuland,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bottrop,13:00:00,14:00:00,19,LOW
+2026-08-15 13:52:17,Bremen Die Fabrik,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Bremen Munte,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Brinkum (Stuhr),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Castrop Nord (Castrop-Rauxel),13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Brilon,13:00:00,14:00:00,7,LOW
+2026-08-15 13:52:17,Castrop-Rauxel,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Bünde,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Celle Neuenhäusen,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Celle Telefunkenstrasse,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Delmenhorst,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Coburg,13:00:00,14:00:00,9,LOW
+2026-08-15 13:52:17,Dortmund Lütgendortmund,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Darmstadt,13:00:00,14:00:00,24,LOW
+2026-08-15 13:52:17,Dodenhof (Ottersberg),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Dinslaken Neutor Galerie,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Dietzenbach,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Detmold,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Düsseldorf Oberbilk,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Dortmund-Dorstfeld,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Duisburg City,13:00:00,14:00:00,22,LOW
+2026-08-15 13:52:17,Dortmund-City,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Duisburg Meiderich,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Erlangen City,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Duisburg Königsgalerie,13:00:00,14:00:00,7,LOW
+2026-08-15 13:52:17,Duisburg Innenhafen,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Dreieich,13:00:00,14:00:00,25,LOW
+2026-08-15 13:52:17,Düsseldorf Flingern,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Erlangen-Ost,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Essen Bergerhausen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Essen Kray,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Essen-Altenessen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Friedrichshafen,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Freising,13:00:00,14:00:00,30,LOW
+2026-08-15 13:52:17,Esslingen,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Fürth-Poppenreuth,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Fürth-Südstadt,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Göppingen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Gelsenkirchen,13:00:00,14:00:00,0,LOW
+2026-08-15 13:52:17,Essen-Borbeck,13:00:00,14:00:00,22,LOW
+2026-08-15 13:52:17,Friedrichshafen-Flughafen,13:00:00,14:00:00,20,LOW
+2026-08-15 13:52:17,Göttingen Weende,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Fürth,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Gütersloh,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Gütersloh Kampstrasse,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Göttingen Grone,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Gnarrenburg,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Haan,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Gummersbach,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Hagen City,13:00:00,14:00:00,23,LOW
+2026-08-15 13:52:17,Hagen Markt,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Hannover,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Hainburg,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Hannover City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Hannover Misburg,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Hanau,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Hamm,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Haltern (Haltern am See),13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Hannover-Hainholz,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Heidenheim,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Heilbronn Wollhaus,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Heilbronn Böckingen,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Herford Süd,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Herford Nord,13:00:00,14:00:00,26,LOW
+2026-08-15 13:52:17,Heusenstamm,13:00:00,14:00:00,25,LOW
+2026-08-15 13:52:17,Iserlohn,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Homburg,13:00:00,14:00:00,21,LOW
+2026-08-15 13:52:17,Hof,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Kaiserslautern Augustastr.,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Kaiserslautern,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Jülich,13:00:00,14:00:00,19,LOW
+2026-08-15 13:52:17,Kamp-Lintfort,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Koblenz,13:00:00,14:00:00,31,LOW
+2026-08-15 13:52:17,Kirchheim u. Teck,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Köln Lindenthal,13:00:00,14:00:00,19,LOW
+2026-08-15 13:52:17,Kassel Kurfürstengalerie,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Krefeld,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Kassel Holländische Str.,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Köln Hürth,13:00:00,14:00:00,30,LOW
+2026-08-15 13:52:17,Köln Agnesviertel,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Köln Ossendorf,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Köln Poll,13:00:00,14:00:00,25,LOW
+2026-08-15 13:52:17,Köln Porz,13:00:00,14:00:00,27,LOW
+2026-08-15 13:52:17,Köln Sülz,13:00:00,14:00:00,17,LOW
+2026-08-15 13:52:17,Laatzen,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Lahnstein,13:00:00,14:00:00,37,LOW
+2026-08-15 13:52:17,Landshut Kumhausen,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Lahr,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Langenfeld City,13:00:00,14:00:00,19,LOW
+2026-08-15 13:52:17,Langenfeld Berghausen (Langenfeld (Rheinland)),13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Langen,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Langenselbold,13:00:00,14:00:00,17,LOW
+2026-08-15 13:52:17,Leipzig - Südvorstadt,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Leverkusen,13:00:00,14:00:00,47,NORMAL
+2026-08-15 13:52:17,Lippstadt,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Melle,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Minden,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Marburg,13:00:00,14:00:00,21,LOW
+2026-08-15 13:52:17,Monheim (Monheim am Rhein),13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Moers,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Mönchengladbach,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Menden,13:00:00,14:00:00,9,LOW
+2026-08-15 13:52:17,München - Sendling,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Mülheim,13:00:00,14:00:00,0,LOW
+2026-08-15 13:52:17,München Haar (Haar (München)),13:00:00,14:00:00,24,LOW
+2026-08-15 13:52:17,München Freiham,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Großhadern,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Giesing,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Laim,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Perlach,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Pasing,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Schwabing,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Trudering,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Neuried,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München Unterhaching,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Neumarkt NeuerMarkt,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Neustadt am Rübenberge,closed,closed,0,CLOSED
+2026-08-15 13:52:17,München-Neuhausen,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Münster,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,München-Berg am Laim,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Neuwied,13:00:00,14:00:00,6,LOW
+2026-08-15 13:52:17,Oberhausen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Neumarkt Süd (Neumarkt in der Oberpfalz),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Nürnberg Eberhardshof,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Nürnberg City,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Obertshausen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Oldenburg,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Nürnberg,13:00:00,14:00:00,24,LOW
+2026-08-15 13:52:17,Paderborn,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Oyten,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Osnabrück,13:00:00,14:00:00,50,NORMAL
+2026-08-15 13:52:17,Passau,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Recklinghausen-Hochlarmark,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Recklinghausen-City,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Pulheim,13:00:00,14:00:00,22,LOW
+2026-08-15 13:52:17,Ravensburg,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Rosenheim Aicherpark,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Regensburg,13:00:00,14:00:00,8,LOW
+2026-08-15 13:52:17,Schwabach,13:00:00,14:00:00,20,LOW
+2026-08-15 13:52:17,Rosenheim-City,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Schweinfurt,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Saarlouis,13:00:00,14:00:00,37,LOW
+2026-08-15 13:52:17,Siegen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Sindelfingen,13:00:00,14:00:00,5,LOW
+2026-08-15 13:52:17,Soest,13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Straubing,13:00:00,14:00:00,18,LOW
+2026-08-15 13:52:17,Springe,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Stuttgart-Degerloch,13:00:00,14:00:00,17,LOW
+2026-08-15 13:52:17,Unna,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Tönisvorst,13:00:00,14:00:00,13,LOW
+2026-08-15 13:52:17,Wanne-Eickel (Herne),13:00:00,14:00:00,14,LOW
+2026-08-15 13:52:17,Völklingen,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Werne,13:00:00,14:00:00,24,LOW
+2026-08-15 13:52:17,Weiden,13:00:00,14:00:00,20,LOW
+2026-08-15 13:52:17,Weiskirchen (Rodgau),13:00:00,14:00:00,20,LOW
+2026-08-15 13:52:17,Weinheim,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Winsen (Winsen (Luhe)),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Wiesbaden,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Wesel City,13:00:00,14:00:00,12,LOW
+2026-08-15 13:52:17,Wuppertal Elberfeld Neumarkt,13:00:00,14:00:00,15,LOW
+2026-08-15 13:52:17,Wuppertal Elberfeld Gathe,13:00:00,14:00:00,10,LOW
+2026-08-15 13:52:17,Wuppertal-Barmen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:52:17,Wesel Industriegebiet,13:00:00,14:00:00,11,LOW
+2026-08-15 13:52:17,Ai Verwaltung (Rosenheim),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Würzburg,13:00:00,14:00:00,30,LOW
+2026-08-15 13:52:17,Oldenburg- Ammergaustraße (Oldenburg (Oldb)),closed,closed,0,CLOSED
+2026-08-15 13:52:17,Soltau,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Testing Sandbox (Hamburg),13:00:00,14:00:00,2,LOW
+2026-08-15 13:52:17,Syke,closed,closed,0,CLOSED
+2026-08-15 13:52:17,Verden (Verden (Aller)),closed,closed,0,CLOSED

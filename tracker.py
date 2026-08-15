@@ -32,6 +32,16 @@ def fetch_url_json(url):
             return json.loads(raw)
 
 
+import re
+
+def clean_studio_name(name):
+    if not name:
+        return ""
+    # Strip prefixes like "Ai Fitness ", "AI Fitness ", "Ai FItness ", "AI-Fitness "
+    cleaned = re.sub(r'^(ai\s*[-_]?\s*fitness\s*)', '', name, flags=re.IGNORECASE).strip()
+    return cleaned if cleaned else name
+
+
 def get_all_studios():
     try:
         studios_data = fetch_url_json(STUDIO_DIRECTORY_URL)
@@ -42,11 +52,11 @@ def get_all_studios():
             city = s.get("address", {}).get("city", "").strip() if s.get("address") else ""
 
             if sid:
-                # Standardize studio name format
-                clean_name = name if name else f"Studio {sid}"
-                if city and city.lower() not in clean_name.lower():
-                    clean_name = f"{clean_name} ({city})"
-                studios.append({"id": sid, "name": clean_name})
+                # Standardize studio name format and remove prefix duplicates
+                c_name = clean_studio_name(name) if name else f"Studio {sid}"
+                if city and city.lower() not in c_name.lower():
+                    c_name = f"{c_name} ({city})"
+                studios.append({"id": sid, "name": c_name})
         return studios
     except Exception as e:
         print(f"Error fetching studio directory: {e}")

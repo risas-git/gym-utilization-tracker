@@ -376,6 +376,13 @@
       }
     }
 
+    function cleanStudioName(name) {
+      if (!name) return 'General Gym';
+      let cleaned = name.replace(/^ai\s*[-_]?\s*fitness\s*/i, '').trim();
+      if (cleaned === 'Bielefeld Eckendorfer') cleaned = 'Bielefeld City';
+      return cleaned || name;
+    }
+
     function parseCSV(csvText) {
       const lines = csvText.trim().split('\n');
       if (lines.length <= 1) return generateDemoData();
@@ -390,8 +397,7 @@
           let ts, studio, pct, level;
           if (hasStudioCol && parts.length >= 5) {
             ts = parts[0].trim();
-            studio = parts[1].trim() || 'General Gym';
-            if (studio === 'Bielefeld Eckendorfer') studio = 'Bielefeld City';
+            studio = cleanStudioName(parts[1].trim());
             pct = parseFloat(parts[4].trim()) || 0;
             level = parts[5] ? parts[5].trim() : 'UNKNOWN';
           } else {
