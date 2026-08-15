@@ -2,6 +2,10 @@
 
 Automated 15-minute gym capacity tracker and visualization system for AI Fitness studios.
 
+📊 **[View Interactive Dashboard (Live Web App)](https://risas-git.github.io/gym-utilization-tracker/)** | **[HTML Preview Link](https://htmlpreview.github.io/?https://github.com/risas-git/gym-utilization-tracker/blob/main/index.html)** | **[Source index.html](index.html)**
+
+---
+
 ## Features
 
 - **15-Minute Automated Scraping**: Runs via GitHub Actions (`.github/workflows/scrape.yml`) on a 15-minute cron schedule (`*/15 * * * *`).
@@ -25,7 +29,10 @@ python plot_utilization.py
 This generates `gym_utilization_analysis.png`.
 
 ### 3. Open Interactive Web Dashboard
-Open `index.html` in your web browser to view the interactive 15-minute graphs, peak utilization stats, and hourly heatmaps.
+You can jump directly to the visualization using any of the following links:
+- **Live Dashboard (GitHub Pages)**: [https://risas-git.github.io/gym-utilization-tracker/](https://risas-git.github.io/gym-utilization-tracker/)
+- **Instant HTML Preview**: [View on HTMLPreview](https://htmlpreview.github.io/?https://github.com/risas-git/gym-utilization-tracker/blob/main/index.html)
+- **Local / Repository File**: Open [index.html](index.html) directly in your browser or repository.
 
 ## Automated Scheduling
 
