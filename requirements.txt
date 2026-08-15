@@ -1,1 +1,4 @@
 requests
+tzdata
+pandas
+matplotlib

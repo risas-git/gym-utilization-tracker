@@ -2,7 +2,10 @@ from datetime import datetime
 import json
 import os
 from zoneinfo import ZoneInfo
-import requests
+try:
+    import requests
+except ImportError:
+    requests = None
 
 URL = "https://www.ai-fitness.de/connect/v1/studio/1321967250/utilization"
 CSV_FILE = "utilization_log.csv"
@@ -15,21 +18,30 @@ HEADERS = {
 
 def log_utilization():
     try:
-        response = requests.get(URL, headers=HEADERS, timeout=10)
-        response.raise_for_status()
-        data = response.json()
+        data = None
+        if requests is not None:
+            response = requests.get(URL, headers=HEADERS, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+        else:
+            import urllib.request
+            req = urllib.request.Request(URL, headers=HEADERS)
+            with urllib.request.urlopen(req, timeout=10) as res:
+                data = json.loads(res.read().decode("utf-8"))
 
-        # Explicitly get the current time in Germany (handles CET/CEST automatically)
-        germany_tz = ZoneInfo("Europe/Berlin")
-        now = datetime.now(germany_tz).strftime("%Y-%m-%d %H:%M:%S")
+        try:
+            germany_tz = ZoneInfo("Europe/Berlin")
+            now = datetime.now(germany_tz).strftime("%Y-%m-%d %H:%M:%S")
+        except Exception:
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # Find the active hour slot or save all slots
-        items = data.get("items", [])
+        # Find the active hour slot
+        items = data.get("items", []) if data else []
         current_slot = next((item for item in items if item.get("isCurrent")), None)
 
-        file_exists = os.path.exists(CSV_FILE)
+        file_has_content = os.path.exists(CSV_FILE) and os.path.getsize(CSV_FILE) > 0
         with open(CSV_FILE, "a", encoding="utf-8") as f:
-            if not file_exists:
+            if not file_has_content:
                 f.write("timestamp,slot_start,slot_end,percentage,level\n")
 
             if current_slot:

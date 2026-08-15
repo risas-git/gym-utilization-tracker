@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Utilization Tracker Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-purple: #a78bfa;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      padding: 0.4rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: #475569;
+    }
+
+    .metric-title {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <h1>Gym Utilization Tracker</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">
+          Real-time 15-minute resolution automated crowd logging
+        </p>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Interval: Every 15 Minutes
+      </div>
+    </header>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Latest Utilization</div>
+        <div class="metric-value" id="val-latest">--%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Peak Recorded Today</div>
+        <div class="metric-value" id="val-peak">--%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Average Daily Utilization</div>
+        <div class="metric-value" id="val-avg">--%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Total Logged Samples</div>
+        <div class="metric-value" id="val-samples">--</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Utilization Time Series (15-Min Granularity)</div>
+        </div>
+        <div class="canvas-container">
+          <canvas id="timeSeriesChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Average Utilization by Hour of Day</div>
+        </div>
+        <div class="canvas-container">
+          <canvas id="hourlyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Updated automatically by GitHub Actions workflow every 15 minutes • AI Fitness Gym Tracker
+    </footer>
+  </div>
+
+  <script>
+    async function loadData() {
+      try {
+        const response = await fetch('utilization_log.csv');
+        if (!response.ok) throw new Error("CSV file not found");
+        const text = await response.text();
+        return parseCSV(text);
+      } catch (err) {
+        console.warn("Could not load utilization_log.csv directly, rendering demo dataset:", err);
+        return generateDemoData();
+      }
+    }
+
+    function parseCSV(csvText) {
+      const lines = csvText.trim().split('\n');
+      if (lines.length <= 1) return generateDemoData();
+      
+      const timestamps = [];
+      const percentages = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        if (parts.length >= 4) {
+          timestamps.push(parts[0].trim());
+          percentages.push(parseFloat(parts[3].trim()) || 0);
+        }
+      }
+      return { timestamps, percentages };
+    }
+
+    function generateDemoData() {
+      const timestamps = [];
+      const percentages = [];
+      const now = new Date();
+      
+      // Generate 24 hours of 15-minute data
+      for (let i = 96; i >= 0; i--) {
+        const t = new Date(now.getTime() - i * 15 * 60 * 1000);
+        const hour = t.getHours();
+        // Realistic gym utilization curve
+        let base = Math.sin((hour - 6) / 16 * Math.PI) * 75;
+        if (base < 0) base = 0;
+        const val = Math.min(100, Math.max(0, Math.round(base + (Math.random() * 10 - 5))));
+        
+        timestamps.push(t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+        percentages.push(val);
+      }
+      return { timestamps, percentages };
+    }
+
+    async function initDashboard() {
+      const { timestamps, percentages } = await loadData();
+
+      if (percentages.length > 0) {
+        document.getElementById('val-latest').textContent = percentages[percentages.length - 1] + '%';
+        document.getElementById('val-peak').textContent = Math.max(...percentages) + '%';
+        const sum = percentages.reduce((a, b) => a + b, 0);
+        document.getElementById('val-avg').textContent = (sum / percentages.length).toFixed(1) + '%';
+        document.getElementById('val-samples').textContent = percentages.length;
+      }
+
+      // Render Time Series Chart
+      const ctx1 = document.getElementById('timeSeriesChart').getContext('2d');
+      const gradient1 = ctx1.createLinearGradient(0, 0, 0, 300);
+      gradient1.addColorStop(0, 'rgba(56, 189, 248, 0.4)');
+      gradient1.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
+
+      new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: timestamps,
+          datasets: [{
+            label: 'Utilization %',
+            data: percentages,
+            borderColor: '#38bdf8',
+            borderWidth: 2,
+            backgroundColor: gradient1,
+            fill: true,
+            tension: 0.3,
+            pointRadius: timestamps.length > 50 ? 2 : 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 }
+          }
+        }
+      });
+
+      // Calculate Hourly Averages
+      const hourlySum = Array(24).fill(0);
+      const hourlyCount = Array(24).fill(0);
+      
+      timestamps.forEach((ts, idx) => {
+        let hour = 0;
+        if (ts.includes(':')) {
+          hour = parseInt(ts.split(':')[0], 10);
+        } else {
+          const d = new Date(ts);
+          if (!isNaN(d)) hour = d.getHours();
+        }
+        if (hour >= 0 && hour < 24) {
+          hourlySum[hour] += percentages[idx];
+          hourlyCount[hour] += 1;
+        }
+      });
+
+      const hourlyAvg = hourlySum.map((sum, i) => hourlyCount[i] > 0 ? (sum / hourlyCount[i]).toFixed(1) : 0);
+
+      // Render Hourly Chart
+      const ctx2 = document.getElementById('hourlyChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: Array.from({length: 24}, (_, i) => `${i}:00`),
+          datasets: [{
+            label: 'Avg Utilization %',
+            data: hourlyAvg,
+            backgroundColor: '#34d399',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 }
+          }
+        }
+      });
+    }
+
+    initDashboard();
+  </script>
+</body>
+</html>
