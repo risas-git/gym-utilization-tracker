@@ -344,8 +344,6 @@
         if (records.length === 0) return;
 
         const latest = records[records.length - 1].percentage;
-        const maxPct = Math.max(...records.map(r => r.percentage));
-        const avgPct = (records.reduce((a, b) => a + b.percentage, 0) / records.length).toFixed(1);
 
         const card = document.createElement('div');
         const colorClass = idx % 3 === 0 ? '' : (idx % 3 === 1 ? 'green' : 'amber');
@@ -354,9 +352,6 @@
           <div class="metric-studio">${st}</div>
           <div class="metric-title">Current Utilization</div>
           <div class="metric-value">${latest}%</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
-            Peak Today: <strong>${maxPct}%</strong> | Avg: <strong>${avgPct}%</strong>
-          </div>
         `;
         container.appendChild(card);
       });
