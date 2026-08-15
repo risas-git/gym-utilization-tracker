@@ -13,6 +13,10 @@ STUDIO_DIRECTORY_URL = "https://www.ai-fitness.de/connect/v2/studio"
 UTILIZATION_URL_TEMPLATE = "https://www.ai-fitness.de/connect/v1/studio/{id}/utilization"
 CSV_FILE = "utilization_log.csv"
 
+# Supabase Credentials
+SUPABASE_URL = "https://vnsqquagjxgjteuvypwo.supabase.co/rest/v1/gym_utilization"
+SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl"
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
@@ -32,13 +36,12 @@ def fetch_url_json(url):
             return json.loads(raw)
 
 
-import re
-
 def clean_studio_name(name):
     if not name:
         return ""
-    # Strip prefixes like "Ai Fitness ", "AI Fitness ", "Ai FItness ", "AI-Fitness "
-    cleaned = re.sub(r'^(ai\s*[-_]?\s*fitness\s*)', '', name, flags=re.IGNORECASE).strip()
+    import re
+
+    cleaned = re.sub(r"^(ai\s*[-_]?\s*fitness\s*)", "", name, flags=re.IGNORECASE).strip()
     return cleaned if cleaned else name
 
 
@@ -52,7 +55,6 @@ def get_all_studios():
             city = s.get("address", {}).get("city", "").strip() if s.get("address") else ""
 
             if sid:
-                # Standardize studio name format and remove prefix duplicates
                 c_name = clean_studio_name(name) if name else f"Studio {sid}"
                 if city and city.lower() not in c_name.lower():
                     c_name = f"{c_name} ({city})"
@@ -60,7 +62,6 @@ def get_all_studios():
         return studios
     except Exception as e:
         print(f"Error fetching studio directory: {e}")
-        # Fallback to local default studios if directory fetch fails
         return [
             {"id": "1468963780", "name": "Bielefeld Schildesche"},
             {"id": "1316633090", "name": "Bielefeld Sieker"},
@@ -79,13 +80,62 @@ def fetch_studio_utilization(studio, timestamp):
         current_slot = next((item for item in items if item.get("isCurrent")), None)
 
         if current_slot:
-            return (
-                f"{timestamp},{name},{current_slot['startTime']},{current_slot['endTime']},{current_slot['percentage']},{current_slot['level']}\n"
-            )
+            return {
+                "timestamp": timestamp,
+                "studio": name,
+                "slot_start": current_slot["startTime"],
+                "slot_end": current_slot["endTime"],
+                "percentage": current_slot["percentage"],
+                "level": current_slot["level"],
+            }
         else:
-            return f"{timestamp},{name},closed,closed,0,CLOSED\n"
+            return {
+                "timestamp": timestamp,
+                "studio": name,
+                "slot_start": "closed",
+                "slot_end": "closed",
+                "percentage": 0,
+                "level": "CLOSED",
+            }
+    except Exception:
+        return {
+            "timestamp": timestamp,
+            "studio": name,
+            "slot_start": "closed",
+            "slot_end": "closed",
+            "percentage": 0,
+            "level": "CLOSED",
+        }
+
+
+def push_to_supabase(records):
+    try:
+        if requests is not None:
+            headers = {
+                "apikey": SUPABASE_KEY,
+                "Authorization": f"Bearer {SUPABASE_KEY}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal",
+            }
+            res = requests.post(SUPABASE_URL, json=records, headers=headers, timeout=15)
+            res.raise_for_status()
+            print(f"Successfully pushed {len(records)} records to Supabase Cloud Database.")
+        else:
+            import urllib.request
+
+            headers = {
+                "apikey": SUPABASE_KEY,
+                "Authorization": f"Bearer {SUPABASE_KEY}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal",
+            }
+            req = urllib.request.Request(
+                SUPABASE_URL, data=json.dumps(records).encode("utf-8"), headers=headers, method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=15) as res:
+                print(f"Successfully pushed {len(records)} records to Supabase Cloud Database.")
     except Exception as e:
-        return f"{timestamp},{name},closed,closed,0,CLOSED\n"
+        print(f"Error pushing to Supabase: {e}")
 
 
 def ensure_csv_header():
@@ -99,25 +149,38 @@ def log_utilization():
 
     try:
         germany_tz = ZoneInfo("Europe/Berlin")
-        now = datetime.now(germany_tz).strftime("%Y-%m-%d %H:%M:%S")
+        dt_now = datetime.now(germany_tz)
+        now_str = dt_now.strftime("%Y-%m-%d %H:%M:%S")
+        iso_str = dt_now.strftime("%Y-%m-%dT%H:%M:%S%z")
     except Exception:
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        dt_now = datetime.now()
+        now_str = dt_now.strftime("%Y-%m-%d %H:%M:%S")
+        iso_str = now_str.replace(" ", "T") + "+02:00"
 
     studios = get_all_studios()
-    print(f"[{now}] Discovering & fetching utilization for {len(studios)} studios in Germany...")
+    print(f"[{now_str}] Discovering & fetching utilization for {len(studios)} studios in Germany...")
 
     # Fetch all studio utilization data in parallel using ThreadPoolExecutor
-    log_rows = []
+    db_records = []
+    csv_rows = []
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-        futures = [executor.submit(fetch_studio_utilization, s, now) for s in studios]
+        futures = [executor.submit(fetch_studio_utilization, s, iso_str) for s in studios]
         for future in concurrent.futures.as_completed(futures):
-            log_rows.append(future.result())
+            rec = future.result()
+            db_records.append(rec)
+            csv_rows.append(
+                f"{now_str},{rec['studio']},{rec['slot_start']},{rec['slot_end']},{rec['percentage']},{rec['level']}\n"
+            )
 
-    # Write all fetched records to CSV in a single batch
+    # Batch insert into Supabase Cloud Database
+    push_to_supabase(db_records)
+
+    # Also log to local CSV backup
     with open(CSV_FILE, "a", encoding="utf-8") as f:
-        f.writelines(log_rows)
+        f.writelines(csv_rows)
 
-    print(f"[{now}] Successfully logged {len(log_rows)} studio records into {CSV_FILE}.")
+    print(f"[{now_str}] Logged {len(db_records)} studio records.")
 
 
 if __name__ == "__main__":

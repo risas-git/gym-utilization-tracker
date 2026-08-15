@@ -67,7 +67,6 @@
       position: relative;
     }
 
-    /* Custom Multi-Select Dropdown Component */
     .dropdown-container {
       position: relative;
     }
@@ -295,12 +294,11 @@
       <div>
         <h1>Gym Utilization Tracker</h1>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">
-          Select & Compare Multiple Gym Locations (200+ Studios in Germany)
+          Cloud Database Multi-Studio Analytics (Supabase Connected)
         </p>
       </div>
 
       <div class="header-controls">
-        <!-- Multi-Select Dropdown Container -->
         <div class="dropdown-container">
           <button class="dropdown-btn" onclick="toggleDropdown()">
             <span>Select Studios</span>
@@ -322,7 +320,7 @@
 
         <div class="badge">
           <span class="badge-dot"></span>
-          Auto-Logged: 15 Min
+          Cloud DB Live
         </div>
       </div>
     </header>
@@ -352,11 +350,14 @@
     </div>
 
     <footer>
-      Data automatically logged every 15 minutes • AI Fitness Germany
+      Powered by Supabase Cloud Database • Auto-Logged Every 15 Minutes
     </footer>
   </div>
 
   <script>
+    const SUPABASE_REST_URL = "https://vnsqquagjxgjteuvypwo.supabase.co/rest/v1/gym_utilization?select=*&order=timestamp.asc&limit=5000";
+    const SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl";
+
     const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e', '#06b6d4', '#84cc16', '#e11d48', '#10b981', '#f59e0b'];
     let globalData = {}; // { studioName: [{ timestamp, percentage, level }] }
     let selectedStudios = new Set(['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker']);
@@ -364,23 +365,62 @@
     let hourlyChartInstance = null;
     let allStudios = [];
 
+    function cleanStudioName(name) {
+      if (!name) return 'General Gym';
+      let cleaned = name.replace(/^ai\s*[-_]?\s*fitness\s*/i, '').trim();
+      if (cleaned === 'Bielefeld Eckendorfer') cleaned = 'Bielefeld City';
+      return cleaned || name;
+    }
+
     async function loadData() {
+      try {
+        const response = await fetch(SUPABASE_REST_URL, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+
+        if (!response.ok) throw new Error("Supabase query failed");
+        const rows = await response.json();
+        
+        const studioData = {};
+        rows.forEach(r => {
+          const st = cleanStudioName(r.studio);
+          if (!studioData[st]) studioData[st] = [];
+          
+          let tsFormatted = r.timestamp;
+          if (tsFormatted.includes('T')) {
+            const parts = tsFormatted.split('T');
+            const datePart = parts[0];
+            const timePart = parts[1].split('.')[0].split('+')[0];
+            tsFormatted = datePart + ' ' + timePart;
+          }
+
+          studioData[st].push({
+            timestamp: tsFormatted,
+            percentage: parseFloat(r.percentage) || 0,
+            level: r.level || 'LOW'
+          });
+        });
+
+        return studioData;
+      } catch (err) {
+        console.warn("Could not load from Supabase directly, falling back to CSV:", err);
+        return loadCSVFallback();
+      }
+    }
+
+    async function loadCSVFallback() {
       try {
         const response = await fetch('utilization_log.csv?cachebust=' + Date.now());
         if (!response.ok) throw new Error("CSV file not found");
         const text = await response.text();
         return parseCSV(text);
       } catch (err) {
-        console.warn("Could not load utilization_log.csv directly, rendering demo dataset:", err);
+        console.warn("CSV fallback failed, using demo data");
         return generateDemoData();
       }
-    }
-
-    function cleanStudioName(name) {
-      if (!name) return 'General Gym';
-      let cleaned = name.replace(/^ai\s*[-_]?\s*fitness\s*/i, '').trim();
-      if (cleaned === 'Bielefeld Eckendorfer') cleaned = 'Bielefeld City';
-      return cleaned || name;
     }
 
     function parseCSV(csvText) {
@@ -415,7 +455,7 @@
     }
 
     function generateDemoData() {
-      const demoStudios = ['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker', 'AI Fitness Bonn Hardtberg', 'AI Fitness Berlin Moabit'];
+      const demoStudios = ['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker', 'Bonn Hardtberg', 'Berlin Moabit'];
       const studioData = {};
       const now = new Date();
 
@@ -445,7 +485,6 @@
       document.getElementById('dropdownPanel').classList.toggle('open');
     }
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
       const container = document.querySelector('.dropdown-container');
       if (container && !container.contains(e.target)) {
@@ -456,7 +495,6 @@
     function populateStudioCheckboxes() {
       allStudios = Object.keys(globalData).sort((a, b) => a.localeCompare(b));
       
-      // Ensure defaults exist in dataset
       if (selectedStudios.size === 0) {
         allStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
         if (selectedStudios.size === 0 && allStudios.length > 0) selectedStudios.add(allStudios[0]);
@@ -545,7 +583,6 @@
     function renderCharts() {
       const studios = Array.from(selectedStudios);
 
-      // Time Series Datasets
       const timeSeriesDatasets = studios.map((st, idx) => {
         const records = globalData[st] || [];
         return {
@@ -560,12 +597,10 @@
         };
       });
 
-      // Extract unique timestamps
       const allTimestamps = Array.from(new Set(
         studios.flatMap(st => (globalData[st] || []).map(r => r.timestamp))
       )).sort();
 
-      // Render Time Series Chart
       const ctx1 = document.getElementById('timeSeriesChart').getContext('2d');
       if (timeSeriesChartInstance) timeSeriesChartInstance.destroy();
 
@@ -586,7 +621,6 @@
         }
       });
 
-      // Hourly Datasets
       const hourlyLabels = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
       const hourlyDatasets = studios.map((st, idx) => {
         const records = globalData[st] || [];
@@ -594,8 +628,13 @@
         const hourlyCount = Array(24).fill(0);
 
         records.forEach(r => {
-          const d = new Date(r.timestamp);
-          const h = isNaN(d) ? parseInt((r.timestamp.split(' ')[1] || '0').split(':')[0], 10) : d.getHours();
+          let h = 0;
+          if (r.timestamp.includes(' ')) {
+            h = parseInt((r.timestamp.split(' ')[1] || '0').split(':')[0], 10);
+          } else {
+            const d = new Date(r.timestamp);
+            if (!isNaN(d)) h = d.getHours();
+          }
           if (h >= 0 && h < 24) {
             hourlySum[h] += r.percentage;
             hourlyCount[h] += 1;
@@ -612,7 +651,6 @@
         };
       });
 
-      // Render Hourly Chart
       const ctx2 = document.getElementById('hourlyChart').getContext('2d');
       if (hourlyChartInstance) hourlyChartInstance.destroy();
 
