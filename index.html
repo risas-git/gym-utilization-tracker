@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Utilization Tracker - Multi-Studio Comparison</title>
+  <title>Gym Utilization Tracker - Germany-Wide Studios</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
     }
 
     .container {
-      max-width: 1240px;
+      max-width: 1280px;
       width: 100%;
     }
 
@@ -64,21 +64,21 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    select {
+    select, input {
       background: var(--bg-card);
       color: var(--text-main);
       border: 1px solid var(--border-color);
-      padding: 0.5rem 1rem;
+      padding: 0.55rem 1rem;
       border-radius: 0.5rem;
       font-family: inherit;
       font-size: 0.9rem;
       outline: none;
-      cursor: pointer;
     }
 
-    select:focus {
+    select:focus, input:focus {
       border-color: var(--accent-blue);
     }
 
@@ -134,7 +134,7 @@
     .metric-card.amber::before { background: var(--accent-amber); }
 
     .metric-studio {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
@@ -150,7 +150,7 @@
     }
 
     .metric-value {
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       font-weight: 700;
       color: var(--text-main);
     }
@@ -184,7 +184,7 @@
     .canvas-container {
       position: relative;
       width: 100%;
-      height: 380px;
+      height: 400px;
     }
 
     footer {
@@ -202,16 +202,17 @@
       <div>
         <h1>Gym Utilization Tracker</h1>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">
-          Multi-studio capacity tracking & side-by-side comparison
+          Tracking 200+ All Inclusive / AI Fitness Studios in Germany
         </p>
       </div>
       <div class="header-controls">
+        <input type="text" id="searchInput" placeholder="Search city or studio..." oninput="filterStudioOptions()">
         <select id="studioFilter" onchange="renderCharts()">
-          <option value="ALL">All Studios Comparison</option>
+          <option value="TOP5">Top 5 Active Studios</option>
         </select>
         <div class="badge">
           <span class="badge-dot"></span>
-          Auto-Scrape: 15 Min
+          200+ Gyms • 15 Min
         </div>
       </div>
     </header>
@@ -241,15 +242,16 @@
     </div>
 
     <footer>
-      Updated automatically by GitHub Actions workflow every 15 minutes • AI Fitness Studios
+      Updated automatically by GitHub Actions workflow every 15 minutes • AI Fitness Germany
     </footer>
   </div>
 
   <script>
-    const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e'];
+    const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e', '#06b6d4', '#84cc16', '#e11d48'];
     let globalData = {}; // { studioName: [{ timestamp, percentage, level }] }
     let timeSeriesChartInstance = null;
     let hourlyChartInstance = null;
+    let allStudiosList = [];
 
     async function loadData() {
       try {
@@ -296,7 +298,7 @@
     }
 
     function generateDemoData() {
-      const studios = ['Bielefeld Schildesche', 'Bielefeld Sieker', 'Bielefeld City'];
+      const studios = ['Bielefeld Schildesche', 'Bielefeld Sieker', 'Bielefeld City', 'AI Fitness Bonn Hardtberg', 'AI Fitness Berlin Moabit'];
       const studioData = {};
       const now = new Date();
 
@@ -305,7 +307,7 @@
         for (let i = 96; i >= 0; i--) {
           const t = new Date(now.getTime() - i * 15 * 60 * 1000);
           const hour = t.getHours();
-          let base = Math.sin((hour - 6) / 16 * Math.PI) * (60 + idx * 10);
+          let base = Math.sin((hour - 6) / 16 * Math.PI) * (60 + idx * 8);
           if (base < 0) base = 0;
           const val = Math.min(100, Math.max(0, Math.round(base + (Math.random() * 10 - 5))));
           
@@ -323,22 +325,35 @@
     }
 
     function populateStudioFilter(studios) {
-      const select = document.getElementById('studioFilter');
-      select.innerHTML = '<option value="ALL">Compare All Studios</option>';
-      studios.forEach(st => {
-        const opt = document.createElement('option');
-        opt.value = st;
-        opt.textContent = st;
-        select.appendChild(opt);
-      });
+      allStudiosList = studios.sort((a, b) => a.localeCompare(b));
+      filterStudioOptions();
     }
 
-    function renderMetrics(studioData, selectedStudio) {
+    function filterStudioOptions() {
+      const filterText = document.getElementById('searchInput').value.toLowerCase();
+      const select = document.getElementById('studioFilter');
+      const currentValue = select.value;
+
+      select.innerHTML = '<option value="TOP5">Top Active Studios</option><option value="BIELEFELD">All Bielefeld Studios</option>';
+      
+      allStudiosList.forEach(st => {
+        if (!filterText || st.toLowerCase().includes(filterText)) {
+          const opt = document.createElement('option');
+          opt.value = st;
+          opt.textContent = st;
+          select.appendChild(opt);
+        }
+      });
+
+      if (Array.from(select.options).some(o => o.value === currentValue)) {
+        select.value = currentValue;
+      }
+    }
+
+    function renderMetrics(studioData, studiosToDisplay) {
       const container = document.getElementById('metricsContainer');
       container.innerHTML = '';
 
-      const studiosToDisplay = selectedStudio === 'ALL' ? Object.keys(studioData) : [selectedStudio];
-      
       studiosToDisplay.forEach((st, idx) => {
         const records = studioData[st] || [];
         if (records.length === 0) return;
@@ -358,10 +373,24 @@
     }
 
     function renderCharts() {
-      const selectedStudio = document.getElementById('studioFilter').value;
-      renderMetrics(globalData, selectedStudio);
+      const selectedOption = document.getElementById('studioFilter').value;
+      const allStudios = Object.keys(globalData);
 
-      const studios = selectedStudio === 'ALL' ? Object.keys(globalData) : [selectedStudio];
+      let studios = [];
+      if (selectedOption === 'TOP5') {
+        studios = allStudios.sort((a, b) => {
+          const maxA = Math.max(...(globalData[a] || []).map(r => r.percentage), 0);
+          const maxB = Math.max(...(globalData[b] || []).map(r => r.percentage), 0);
+          return maxB - maxA;
+        }).slice(0, 5);
+      } else if (selectedOption === 'BIELEFELD') {
+        studios = allStudios.filter(st => st.toLowerCase().includes('bielefeld'));
+        if (studios.length === 0) studios = allStudios.slice(0, 3);
+      } else {
+        studios = [selectedOption];
+      }
+
+      renderMetrics(globalData, studios);
 
       // Time Series Datasets
       const timeSeriesDatasets = studios.map((st, idx) => {
@@ -378,7 +407,7 @@
         };
       });
 
-      // Extract all unique timestamps
+      // Extract unique timestamps
       const allTimestamps = Array.from(new Set(
         studios.flatMap(st => (globalData[st] || []).map(r => r.timestamp))
       )).sort();

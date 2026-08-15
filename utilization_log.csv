@@ -45,3 +45,203 @@ timestamp,studio,slot_start,slot_end,percentage,level
 2026-08-15 13:28:27,Bielefeld Schildesche,13:00:00,14:00:00,30,LOW
 2026-08-15 13:28:27,Bielefeld Sieker,13:00:00,14:00:00,15,LOW
 2026-08-15 13:28:27,Bielefeld City,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Ahlen City,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,AI Fitness Bonn Hardtberg,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Ahlen Süd,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Ansbach,13:00:00,14:00:00,7,LOW
+2026-08-15 13:38:49,Ai Fitness Bielefeld City,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Alsfeld,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Ai Fitness Augsburg-Haunstetten,13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Ai Fitness Bocholt,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Ai Fitness Augsburg-Stadtbergen,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Ai Fitness Bad Oeynhausen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai FItness Bremen Osterholz,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bielefeld Brackwede,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bergisch Gladbach,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Bassum,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Berlin Moabit,13:00:00,14:00:00,6,LOW
+2026-08-15 13:38:49,Ai Fitness Bielefeld Sieker,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Achim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bielefeld Schildesche,13:00:00,14:00:00,30,LOW
+2026-08-15 13:38:49,Ai Fitness Bad Hersfeld,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Bochum,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Bonn Auguststraße,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bremen Admiralstraße,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Borken,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Bonn Endenich,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Bottrop,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Bremen Munte,13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Ai Fitness Bremen Oberneuland,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bünde,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Ai Fitness Brinkum (Stuhr),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bonn Beuel,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Ai Fitness Bremen Berliner Freiheit,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Celle Neuenhäusen,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Ai Fitness Bremen-Klemperhagen (Ritterhude),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Castrop-Rauxel,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Bremen Blumenthal,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Castrop Nord (Castrop-Rauxel),13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Ai Fitness Bremen Die Fabrik,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Bremen Vahr,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Brilon,13:00:00,14:00:00,7,LOW
+2026-08-15 13:38:49,Ai Fitness Celle Telefunkenstrasse,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Coburg,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Ai Fitness Darmstadt,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Ai Fitness Delmenhorst,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Dietzenbach,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Detmold,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Dodenhof (Ottersberg),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Dortmund-Dorstfeld,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Dortmund Lütgendortmund,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Dortmund-City,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Dinslaken Neutor Galerie,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Duisburg City,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Ai Fitness Düsseldorf Oberbilk,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Erlangen-Ost,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Duisburg Königsgalerie,13:00:00,14:00:00,8,LOW
+2026-08-15 13:38:49,Ai Fitness Erlangen City,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Dreieich,13:00:00,14:00:00,28,LOW
+2026-08-15 13:38:49,Ai Fitness Duisburg Innenhafen,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Düsseldorf Flingern,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Duisburg Meiderich,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Essen Bergerhausen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Essen-Altenessen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai Fitness Essen-Borbeck,13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Ai Fitness Essen Kray,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Freising,13:00:00,14:00:00,31,LOW
+2026-08-15 13:38:49,Ai Fitness Fürth-Poppenreuth,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Fürth,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Ai Fitness Fürth-Südstadt,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Esslingen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Friedrichshafen-Flughafen,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Ai Fitness Friedrichshafen,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Gelsenkirchen,13:00:00,14:00:00,0,LOW
+2026-08-15 13:38:49,Ai Fitness Gütersloh,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Göttingen Weende,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Gummersbach,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Gnarrenburg,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Göppingen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Hagen City,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Ai Fitness Gütersloh Kampstrasse,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Göttingen Grone,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Haan,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Ai Fitness Hagen Markt,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Hainburg,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Haltern (Haltern am See),13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Hannover,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Hamm,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Heidenheim,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Heilbronn Böckingen,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Hannover City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Hannover Misburg,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Hannover-Hainholz,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Heilbronn Wollhaus,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Hanau,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai Fitness Heusenstamm,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Ai Fitness Herford Süd,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Herford Nord,13:00:00,14:00:00,26,LOW
+2026-08-15 13:38:49,Ai Fitness Kaiserslautern,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Hof,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Ai Fitness Kaiserslautern Augustastr.,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Iserlohn,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Homburg,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Ai Fitness Jülich,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Ai Fitness Kamp-Lintfort,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Kassel Kurfürstengalerie,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Kassel Holländische Str.,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Kirchheim u. Teck,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Koblenz,13:00:00,14:00:00,30,LOW
+2026-08-15 13:38:49,Ai Fitness Krefeld,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Ai Fitness Köln Agnesviertel,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Köln Lindenthal,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Ai Fitness Köln Ossendorf,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Köln Hürth,13:00:00,14:00:00,30,LOW
+2026-08-15 13:38:49,Ai Fitness Köln Poll,13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Ai Fitness Laatzen,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Köln Porz,13:00:00,14:00:00,26,LOW
+2026-08-15 13:38:49,Ai Fitness Lahr,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Lahnstein,13:00:00,14:00:00,36,LOW
+2026-08-15 13:38:49,Ai Fitness Köln Sülz,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Landshut Kumhausen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Langen,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Langenselbold,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Langenfeld City,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Langenfeld Berghausen (Langenfeld (Rheinland)),13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Lippstadt,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai Fitness Leverkusen,13:00:00,14:00:00,47,NORMAL
+2026-08-15 13:38:49,Ai Fitness Marburg,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Leipzig - Südvorstadt,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Melle,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Monheim (Monheim am Rhein),13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Menden,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Moers,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Minden,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Mönchengladbach,13:00:00,14:00:00,9,LOW
+2026-08-15 13:38:49,Ai Fitness München Giesing,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Großhadern,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Mülheim,13:00:00,14:00:00,0,LOW
+2026-08-15 13:38:49,Ai Fitness München - Sendling,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Haar (Haar (München)),13:00:00,14:00:00,24,LOW
+2026-08-15 13:38:49,Ai Fitness München Laim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Freiham,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Schwabing,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Perlach,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Pasing,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Trudering,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Neuried,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Münster,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness München-Neuhausen,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München-Berg am Laim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness München Unterhaching,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Neumarkt Süd (Neumarkt in der Oberpfalz),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Neumarkt NeuerMarkt,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Ai Fitness Neustadt am Rübenberge,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Nürnberg,13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Ai Fitness Neuwied,13:00:00,14:00:00,6,LOW
+2026-08-15 13:38:49,Ai Fitness Obertshausen,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Oberhausen,13:00:00,14:00:00,20,LOW
+2026-08-15 13:38:49,Ai Fitness Nürnberg Eberhardshof,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Paderborn,13:00:00,14:00:00,21,LOW
+2026-08-15 13:38:49,Ai Fitness Nürnberg City,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Oyten,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Oldenburg,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Osnabrück,13:00:00,14:00:00,50,NORMAL
+2026-08-15 13:38:49,Ai Fitness Passau,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Pulheim,13:00:00,14:00:00,25,LOW
+2026-08-15 13:38:49,Ai Fitness Ravensburg,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Regensburg,13:00:00,14:00:00,10,LOW
+2026-08-15 13:38:49,Ai Fitness Recklinghausen-Hochlarmark,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai Fitness Recklinghausen-City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Rosenheim Aicherpark,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Saarlouis,13:00:00,14:00:00,40,LOW
+2026-08-15 13:38:49,Ai Fitness Rosenheim-City,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Schwabach,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Ai Fitness Siegen,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai Fitness Schweinfurt,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Soest,13:00:00,14:00:00,15,LOW
+2026-08-15 13:38:49,Ai Fitness Sindelfingen,13:00:00,14:00:00,5,LOW
+2026-08-15 13:38:49,Ai Fitness Straubing,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Springe,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Tönisvorst,13:00:00,14:00:00,11,LOW
+2026-08-15 13:38:49,Ai Fitness Stuttgart-Degerloch,13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Ai Fitness Unna,13:00:00,14:00:00,18,LOW
+2026-08-15 13:38:49,Ai Fitness Völklingen,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Weinheim,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Weiskirchen (Rodgau),13:00:00,14:00:00,23,LOW
+2026-08-15 13:38:49,Ai Fitness Wanne-Eickel (Herne),13:00:00,14:00:00,17,LOW
+2026-08-15 13:38:49,Ai Fitness Weiden,13:00:00,14:00:00,19,LOW
+2026-08-15 13:38:49,Ai Fitness Wesel City,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Werne,13:00:00,14:00:00,22,LOW
+2026-08-15 13:38:49,Ai Fitness Wuppertal Elberfeld Gathe,13:00:00,14:00:00,13,LOW
+2026-08-15 13:38:49,Ai Fitness Wiesbaden,13:00:00,14:00:00,14,LOW
+2026-08-15 13:38:49,Ai Fitness Wesel Industriegebiet,13:00:00,14:00:00,12,LOW
+2026-08-15 13:38:49,Ai Fitness Winsen (Winsen (Luhe)),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Ai Fitness Wuppertal-Barmen,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Wuppertal Elberfeld Neumarkt,13:00:00,14:00:00,16,LOW
+2026-08-15 13:38:49,Ai Fitness Würzburg,13:00:00,14:00:00,35,LOW
+2026-08-15 13:38:49,Ai Verwaltung (Rosenheim),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Oldenburg- Ammergaustraße (Oldenburg (Oldb)),closed,closed,0,CLOSED
+2026-08-15 13:38:49,Soltau,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Testing Sandbox (Hamburg),13:00:00,14:00:00,2,LOW
+2026-08-15 13:38:49,Syke,closed,closed,0,CLOSED
+2026-08-15 13:38:49,Verden (Verden (Aller)),closed,closed,0,CLOSED

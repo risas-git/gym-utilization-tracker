@@ -8,14 +8,12 @@ Automated 15-minute gym capacity tracker and visualization system for AI Fitness
 
 ## Features
 
-- **Multi-Studio Comparison**: Automatically tracks and compares multiple AI Fitness locations:
-  - **Bielefeld Schildesche** (`1468963780`)
-  - **Bielefeld Sieker** (`1316633090`)
-  - **Bielefeld City** (`1321967250`)
-- **15-Minute Automated Scraping**: Runs via GitHub Actions (`.github/workflows/scrape.yml`) on a 15-minute cron schedule (`*/15 * * * *`).
-- **Resilient Logging**: Scrapes real-time crowd percentage data for all locations into `utilization_log.csv`.
+- **Germany-Wide Studio Tracking**: Automatically discovers and tracks all **200+ All Inclusive / AI Fitness studios across Germany**.
+- **Interactive Search & Filter**: Search and select any city or studio (e.g. Bielefeld City, Schildesche, Sieker, Bonn, Berlin, Munich) to compare capacity side-by-side.
+- **15-Minute Automated Parallel Scraping**: Runs via GitHub Actions (`.github/workflows/scrape.yml`) on a 15-minute cron schedule (`*/15 * * * *`), leveraging multithreaded requests to fetch 200+ studios in ~5 seconds.
+- **Resilient Logging**: Records capacity statistics into `utilization_log.csv`.
 - **Plotting & Analytics**: Includes `plot_utilization.py` to generate comparative multi-line charts and hourly average plots saved as PNG.
-- **Interactive Dashboard**: Includes `index.html` with studio selector filters & side-by-side Chart.js visualizations.
+- **Interactive Dashboard**: Includes `index.html` with real-time search & studio selector filters.
 
 ## Quick Start
 

@@ -6,13 +6,15 @@ import sys
 CSV_FILE = "utilization_log.csv"
 OUTPUT_PLOT = "gym_utilization_analysis.png"
 
-# Color palette for studios
 COLORS = [
     "#2563eb",  # Blue
     "#10b981",  # Emerald Green
     "#f59e0b",  # Amber/Orange
     "#8b5cf6",  # Purple
     "#ec4899",  # Pink
+    "#06b6d4",  # Cyan
+    "#f43f5e",  # Red
+    "#84cc16",  # Lime
 ]
 
 
@@ -52,12 +54,20 @@ def plot_with_matplotlib(studio_data):
         import numpy as np
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 9))
-        fig.suptitle("Gym Utilization Tracker - Multi-Studio Comparison", fontsize=16, fontweight="bold")
+        fig.suptitle("Gym Utilization Tracker - Germany-Wide Studio Analysis", fontsize=16, fontweight="bold")
 
-        studios = list(studio_data.keys())
+        # Select top active studios for chart clarity if there are many
+        sorted_studios = sorted(
+            studio_data.keys(),
+            key=lambda s: max([r[1] for r in studio_data[s]]) if studio_data[s] else 0,
+            reverse=True,
+        )
+
+        display_studios = sorted_studios[:8]
 
         # Plot 1: Time Series per Studio
-        for i, (studio, records) in enumerate(studio_data.items()):
+        for i, studio in enumerate(display_studios):
+            records = studio_data[studio]
             color = COLORS[i % len(COLORS)]
             timestamps = [r[0] for r in records]
             percentages = [r[1] for r in records]
@@ -72,37 +82,30 @@ def plot_with_matplotlib(studio_data):
                 alpha=0.85,
             )
 
-        ax1.set_title("Gym Utilization Over Time (15-Minute Intervals)", fontsize=12)
+        ax1.set_title(f"Utilization Over Time (Top {len(display_studios)} Active Studios)", fontsize=12)
         ax1.set_ylabel("Utilization (%)")
         ax1.set_ylim(0, 100)
         ax1.grid(True, linestyle="--", alpha=0.6)
         ax1.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))
-        ax1.legend(loc="upper left")
+        ax1.legend(loc="upper left", fontsize=9)
         fig.autofmt_xdate()
 
         # Plot 2: Hourly Averages per Studio
-        hourly_averages = {}  # {studio: [avg_pct_0 ... avg_pct_23]}
         all_hours = range(0, 24)
+        x = np.arange(len(all_hours))
+        num_studios = len(display_studios)
+        width = 0.8 / max(1, num_studios)
 
-        for studio, records in studio_data.items():
+        for i, studio in enumerate(display_studios):
+            records = studio_data[studio]
+            color = COLORS[i % len(COLORS)]
             hour_dict = {h: [] for h in all_hours}
             for dt, pct, _ in records:
                 hour_dict[dt.hour].append(pct)
 
-            avg_list = []
-            for h in all_hours:
-                vals = hour_dict[h]
-                avg_list.append(sum(vals) / len(vals) if vals else 0)
-            hourly_averages[studio] = avg_list
-
-        x = np.arange(len(all_hours))
-        num_studios = max(1, len(studios))
-        width = 0.8 / num_studios
-
-        for i, studio in enumerate(studios):
-            color = COLORS[i % len(COLORS)]
+            avg_list = [sum(hour_dict[h]) / len(hour_dict[h]) if hour_dict[h] else 0 for h in all_hours]
             offset = (i - num_studios / 2 + 0.5) * width
-            ax2.bar(x + offset, hourly_averages[studio], width, label=studio, color=color, alpha=0.85)
+            ax2.bar(x + offset, avg_list, width, label=studio, color=color, alpha=0.85)
 
         ax2.set_title("Average Utilization by Hour of Day", fontsize=12)
         ax2.set_xlabel("Hour of Day (0 - 23)")
@@ -111,7 +114,7 @@ def plot_with_matplotlib(studio_data):
         ax2.set_xticklabels([f"{h:02d}:00" for h in all_hours], rotation=45, fontsize=8)
         ax2.set_ylim(0, 100)
         ax2.grid(True, linestyle="--", alpha=0.6)
-        ax2.legend(loc="upper left")
+        ax2.legend(loc="upper left", fontsize=9)
 
         plt.tight_layout()
         plt.savefig(OUTPUT_PLOT, dpi=300)
