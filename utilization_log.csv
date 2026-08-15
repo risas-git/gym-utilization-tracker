@@ -1245,3 +1245,203 @@ timestamp,studio,slot_start,slot_end,percentage,level
 2026-08-15 15:17:55,Testing Sandbox (Hamburg),15:00:00,16:00:00,2,LOW
 2026-08-15 15:17:55,Syke,closed,closed,0,CLOSED
 2026-08-15 15:17:55,Verden (Verden (Aller)),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bochum,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Bielefeld Sieker,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Bad Hersfeld,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Augsburg-Stadtbergen,15:00:00,16:00:00,23,LOW
+2026-08-15 15:52:02,Bremen Osterholz,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bielefeld Schildesche,15:00:00,16:00:00,21,LOW
+2026-08-15 15:52:02,Augsburg-Haunstetten,15:00:00,16:00:00,16,LOW
+2026-08-15 15:52:02,Bergisch Gladbach,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Bielefeld Brackwede,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bassum,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bad Oeynhausen,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Bonn Hardtberg,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Ahlen City,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Ansbach,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Achim,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Ahlen Süd,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Alsfeld,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Berlin Moabit,15:00:00,16:00:00,4,LOW
+2026-08-15 15:52:02,Bielefeld City,15:00:00,16:00:00,22,LOW
+2026-08-15 15:52:02,Bocholt,15:00:00,16:00:00,24,LOW
+2026-08-15 15:52:02,Bonn Auguststraße,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bonn Beuel,15:00:00,16:00:00,20,LOW
+2026-08-15 15:52:02,Borken,15:00:00,16:00:00,16,LOW
+2026-08-15 15:52:02,Bottrop,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Bonn Endenich,15:00:00,16:00:00,12,LOW
+2026-08-15 15:52:02,Castrop Nord (Castrop-Rauxel),15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Bremen Blumenthal,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Castrop-Rauxel,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Brinkum (Stuhr),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bremen Berliner Freiheit,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bremen Vahr,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Bremen Oberneuland,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Celle Neuenhäusen,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Bremen Munte,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Bremen Die Fabrik,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bremen-Klemperhagen (Ritterhude),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Brilon,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Bremen Admiralstraße,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Bünde,15:00:00,16:00:00,16,LOW
+2026-08-15 15:52:02,Celle Telefunkenstrasse,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Darmstadt,15:00:00,16:00:00,27,LOW
+2026-08-15 15:52:02,Coburg,15:00:00,16:00:00,5,LOW
+2026-08-15 15:52:02,Detmold,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Delmenhorst,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Dinslaken Neutor Galerie,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Dietzenbach,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Dodenhof (Ottersberg),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Dortmund-Dorstfeld,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Duisburg City,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Duisburg Königsgalerie,15:00:00,16:00:00,6,LOW
+2026-08-15 15:52:02,Dortmund Lütgendortmund,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Dreieich,15:00:00,16:00:00,21,LOW
+2026-08-15 15:52:02,Duisburg Meiderich,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Dortmund-City,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Duisburg Innenhafen,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Erlangen City,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Essen Bergerhausen,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Düsseldorf Oberbilk,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Erlangen-Ost,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Düsseldorf Flingern,15:00:00,16:00:00,24,LOW
+2026-08-15 15:52:02,Essen-Altenessen,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Essen Kray,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Essen-Borbeck,15:00:00,16:00:00,26,LOW
+2026-08-15 15:52:02,Esslingen,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Freising,15:00:00,16:00:00,37,LOW
+2026-08-15 15:52:02,Fürth,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Friedrichshafen-Flughafen,15:00:00,16:00:00,20,LOW
+2026-08-15 15:52:02,Fürth-Poppenreuth,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Friedrichshafen,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Gnarrenburg,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Gütersloh,15:00:00,16:00:00,7,LOW
+2026-08-15 15:52:02,Göppingen,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Haan,15:00:00,16:00:00,12,LOW
+2026-08-15 15:52:02,Gelsenkirchen,15:00:00,16:00:00,0,LOW
+2026-08-15 15:52:02,Göttingen Grone,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Göttingen Weende,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Gummersbach,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Hagen Markt,15:00:00,16:00:00,7,LOW
+2026-08-15 15:52:02,Fürth-Südstadt,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Hagen City,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Gütersloh Kampstrasse,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Hainburg,15:00:00,16:00:00,6,LOW
+2026-08-15 15:52:02,Haltern (Haltern am See),15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Hamm,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Hanau,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Hannover-Hainholz,15:00:00,16:00:00,16,LOW
+2026-08-15 15:52:02,Hannover Misburg,15:00:00,16:00:00,12,LOW
+2026-08-15 15:52:02,Hannover,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Hannover City,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Heilbronn Böckingen,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Heilbronn Wollhaus,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Jülich,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Herford Nord,15:00:00,16:00:00,21,LOW
+2026-08-15 15:52:02,Kaiserslautern Augustastr.,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Kamp-Lintfort,15:00:00,16:00:00,16,LOW
+2026-08-15 15:52:02,Herford Süd,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Kaiserslautern,15:00:00,16:00:00,7,LOW
+2026-08-15 15:52:02,Iserlohn,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Kassel Holländische Str.,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Hof,15:00:00,16:00:00,7,LOW
+2026-08-15 15:52:02,Heidenheim,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Homburg,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Heusenstamm,15:00:00,16:00:00,28,LOW
+2026-08-15 15:52:02,Kassel Kurfürstengalerie,15:00:00,16:00:00,12,LOW
+2026-08-15 15:52:02,Kirchheim u. Teck,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Koblenz,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Krefeld,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Köln Agnesviertel,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Köln Hürth,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Köln Ossendorf,15:00:00,16:00:00,7,LOW
+2026-08-15 15:52:02,Köln Poll,15:00:00,16:00:00,24,LOW
+2026-08-15 15:52:02,Köln Sülz,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Laatzen,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Landshut Kumhausen,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Lahr,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Köln Lindenthal,15:00:00,16:00:00,20,LOW
+2026-08-15 15:52:02,Lahnstein,15:00:00,16:00:00,28,LOW
+2026-08-15 15:52:02,Köln Porz,15:00:00,16:00:00,20,LOW
+2026-08-15 15:52:02,Leipzig - Südvorstadt,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Langen,15:00:00,16:00:00,19,LOW
+2026-08-15 15:52:02,Langenfeld Berghausen (Langenfeld (Rheinland)),15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Langenselbold,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Langenfeld City,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Leverkusen,15:00:00,16:00:00,41,NORMAL
+2026-08-15 15:52:02,Lippstadt,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Marburg,15:00:00,16:00:00,23,LOW
+2026-08-15 15:52:02,Melle,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Menden,15:00:00,16:00:00,7,LOW
+2026-08-15 15:52:02,Minden,15:00:00,16:00:00,20,LOW
+2026-08-15 15:52:02,Moers,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Monheim (Monheim am Rhein),15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,München Laim,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Neuried,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Mönchengladbach,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,München Freiham,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Giesing,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Schwabing,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Pasing,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München - Sendling,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Haar (Haar (München)),15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,München Großhadern,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Perlach,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Mülheim,15:00:00,16:00:00,0,LOW
+2026-08-15 15:52:02,München Trudering,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München Unterhaching,15:00:00,16:00:00,19,LOW
+2026-08-15 15:52:02,München-Berg am Laim,closed,closed,0,CLOSED
+2026-08-15 15:52:02,München-Neuhausen,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Neumarkt Süd (Neumarkt in der Oberpfalz),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Neustadt am Rübenberge,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Neumarkt NeuerMarkt,15:00:00,16:00:00,17,LOW
+2026-08-15 15:52:02,Münster,15:00:00,16:00:00,17,LOW
+2026-08-15 15:52:02,Nürnberg City,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Nürnberg Eberhardshof,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Neuwied,15:00:00,16:00:00,6,LOW
+2026-08-15 15:52:02,Paderborn,15:00:00,16:00:00,17,LOW
+2026-08-15 15:52:02,Nürnberg,15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Osnabrück,15:00:00,16:00:00,63,NORMAL
+2026-08-15 15:52:02,Oyten,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Obertshausen,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Pulheim,15:00:00,16:00:00,28,LOW
+2026-08-15 15:52:02,Recklinghausen-City,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Oldenburg,15:00:00,16:00:00,11,LOW
+2026-08-15 15:52:02,Oberhausen,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Ravensburg,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Passau,15:00:00,16:00:00,6,LOW
+2026-08-15 15:52:02,Recklinghausen-Hochlarmark,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Regensburg,15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Rosenheim Aicherpark,15:00:00,16:00:00,6,LOW
+2026-08-15 15:52:02,Saarlouis,15:00:00,16:00:00,27,LOW
+2026-08-15 15:52:02,Rosenheim-City,15:00:00,16:00:00,6,LOW
+2026-08-15 15:52:02,Schwabach,15:00:00,16:00:00,28,LOW
+2026-08-15 15:52:02,Schweinfurt,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Sindelfingen,15:00:00,16:00:00,10,LOW
+2026-08-15 15:52:02,Siegen,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Stuttgart-Degerloch,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Tönisvorst,15:00:00,16:00:00,8,LOW
+2026-08-15 15:52:02,Springe,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Werne,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Weinheim,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Wanne-Eickel (Herne),15:00:00,16:00:00,9,LOW
+2026-08-15 15:52:02,Straubing,15:00:00,16:00:00,20,LOW
+2026-08-15 15:52:02,Unna,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Weiden,15:00:00,16:00:00,12,LOW
+2026-08-15 15:52:02,Völklingen,15:00:00,16:00:00,13,LOW
+2026-08-15 15:52:02,Soest,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Wesel City,15:00:00,16:00:00,17,LOW
+2026-08-15 15:52:02,Wesel Industriegebiet,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Weiskirchen (Rodgau),15:00:00,16:00:00,18,LOW
+2026-08-15 15:52:02,Winsen (Winsen (Luhe)),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Wiesbaden,15:00:00,16:00:00,15,LOW
+2026-08-15 15:52:02,Wuppertal Elberfeld Gathe,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Wuppertal Elberfeld Neumarkt,15:00:00,16:00:00,14,LOW
+2026-08-15 15:52:02,Soltau,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Oldenburg- Ammergaustraße (Oldenburg (Oldb)),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Würzburg,15:00:00,16:00:00,26,LOW
+2026-08-15 15:52:02,Wuppertal-Barmen,15:00:00,16:00:00,12,LOW
+2026-08-15 15:52:02,Ai Verwaltung (Rosenheim),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Syke,closed,closed,0,CLOSED
+2026-08-15 15:52:02,Verden (Verden (Aller)),closed,closed,0,CLOSED
+2026-08-15 15:52:02,Testing Sandbox (Hamburg),15:00:00,16:00:00,2,LOW
