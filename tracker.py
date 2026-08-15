@@ -11,7 +11,7 @@ except ImportError:
 STUDIOS = {
     "Bielefeld Schildesche": "https://www.ai-fitness.de/connect/v1/studio/1468963780/utilization",
     "Bielefeld Sieker": "https://www.ai-fitness.de/connect/v1/studio/1316633090/utilization",
-    "Bielefeld Eckendorfer": "https://www.ai-fitness.de/connect/v1/studio/1321967250/utilization",
+    "Bielefeld City": "https://www.ai-fitness.de/connect/v1/studio/1321967250/utilization",
 }
 
 CSV_FILE = "utilization_log.csv"
@@ -54,8 +54,8 @@ def migrate_csv_header_if_needed():
         for line in lines[1:]:
             parts = line.strip().split(",")
             if len(parts) == 5:
-                # Insert 'Bielefeld Eckendorfer' as studio name
-                new_lines.append(f"{parts[0]},Bielefeld Eckendorfer,{parts[1]},{parts[2]},{parts[3]},{parts[4]}\n")
+                # Insert 'Bielefeld City' as studio name
+                new_lines.append(f"{parts[0]},Bielefeld City,{parts[1]},{parts[2]},{parts[3]},{parts[4]}\n")
             else:
                 new_lines.append(line)
 

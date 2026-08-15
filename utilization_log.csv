@@ -1,14 +1,17 @@
 timestamp,studio,slot_start,slot_end,percentage,level
-2026-08-15 04:40:22,Bielefeld Eckendorfer,closed,closed,0,CLOSED
-2026-08-15 07:13:09,Bielefeld Eckendorfer,07:00:00,08:00:00,4,LOW
-2026-08-15 07:13:41,Bielefeld Eckendorfer,07:00:00,08:00:00,4,LOW
-2026-08-15 07:14:36,Bielefeld Eckendorfer,07:00:00,08:00:00,4,LOW
+2026-08-15 04:40:22,Bielefeld City,closed,closed,0,CLOSED
+2026-08-15 07:13:09,Bielefeld City,07:00:00,08:00:00,4,LOW
+2026-08-15 07:13:41,Bielefeld City,07:00:00,08:00:00,4,LOW
+2026-08-15 07:14:36,Bielefeld City,07:00:00,08:00:00,4,LOW
 2026-08-15 07:49:02,Bielefeld Schildesche,07:00:00,08:00:00,16,LOW
 2026-08-15 07:49:02,Bielefeld Sieker,07:00:00,08:00:00,5,LOW
-2026-08-15 07:49:02,Bielefeld Eckendorfer,07:00:00,08:00:00,7,LOW
+2026-08-15 07:49:02,Bielefeld City,07:00:00,08:00:00,7,LOW
 2026-08-15 07:50:07,Bielefeld Schildesche,07:00:00,08:00:00,16,LOW
 2026-08-15 07:50:07,Bielefeld Sieker,07:00:00,08:00:00,5,LOW
-2026-08-15 07:50:07,Bielefeld Eckendorfer,07:00:00,08:00:00,7,LOW
+2026-08-15 07:50:07,Bielefeld City,07:00:00,08:00:00,7,LOW
 2026-08-15 07:51:27,Bielefeld Schildesche,07:00:00,08:00:00,17,LOW
 2026-08-15 07:51:27,Bielefeld Sieker,07:00:00,08:00:00,5,LOW
-2026-08-15 07:51:27,Bielefeld Eckendorfer,07:00:00,08:00:00,7,LOW
+2026-08-15 07:51:27,Bielefeld City,07:00:00,08:00:00,7,LOW
+2026-08-15 07:53:42,Bielefeld Schildesche,07:00:00,08:00:00,17,LOW
+2026-08-15 07:53:42,Bielefeld Sieker,07:00:00,08:00:00,5,LOW
+2026-08-15 07:53:42,Bielefeld City,07:00:00,08:00:00,7,LOW
