@@ -253,7 +253,7 @@
 
     async function loadData() {
       try {
-        const response = await fetch('utilization_log.csv');
+        const response = await fetch('utilization_log.csv?cachebust=' + Date.now());
         if (!response.ok) throw new Error("CSV file not found");
         const text = await response.text();
         return parseCSV(text);
@@ -278,11 +278,12 @@
           if (hasStudioCol && parts.length >= 5) {
             ts = parts[0].trim();
             studio = parts[1].trim() || 'General Gym';
+            if (studio === 'Bielefeld Eckendorfer') studio = 'Bielefeld City';
             pct = parseFloat(parts[4].trim()) || 0;
             level = parts[5] ? parts[5].trim() : 'UNKNOWN';
           } else {
             ts = parts[0].trim();
-            studio = 'Bielefeld Studio';
+            studio = 'Bielefeld City';
             pct = parseFloat(parts[3].trim()) || 0;
             level = parts[4] ? parts[4].trim() : 'UNKNOWN';
           }

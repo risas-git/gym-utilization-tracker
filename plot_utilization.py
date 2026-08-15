@@ -30,8 +30,8 @@ def load_data(filepath):
                 dt = datetime.strptime(row["timestamp"], "%Y-%m-%d %H:%M:%S")
                 pct = float(row["percentage"])
                 studio = row.get("studio", "General Gym").strip()
-                if not studio:
-                    studio = "General Gym"
+                if not studio or studio == "Bielefeld Eckendorfer":
+                    studio = "Bielefeld City"
 
                 if studio not in studio_data:
                     studio_data[studio] = []
