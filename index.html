@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Utilization Tracker Dashboard</title>
+  <title>Gym Utilization Tracker - Multi-Studio Comparison</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
       --text-muted: #94a3b8;
       --accent-blue: #38bdf8;
       --accent-green: #34d399;
-      --accent-purple: #a78bfa;
+      --accent-amber: #fbbf24;
       --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     }
 
@@ -39,7 +39,7 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       width: 100%;
     }
 
@@ -55,9 +55,31 @@
     h1 {
       font-size: 1.875rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      background: linear-gradient(135deg, #38bdf8, #34d399);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    select {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--accent-blue);
     }
 
     .badge {
@@ -83,8 +105,8 @@
 
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
       margin-bottom: 2rem;
     }
 
@@ -92,25 +114,43 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.25rem;
       box-shadow: var(--card-shadow);
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .metric-card:hover {
-      transform: translateY(-2px);
-      border-color: #475569;
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-blue);
+    }
+
+    .metric-card.green::before { background: var(--accent-green); }
+    .metric-card.amber::before { background: var(--accent-amber); }
+
+    .metric-studio {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+      font-weight: 600;
     }
 
     .metric-title {
       font-size: 0.875rem;
-      color: var(--text-muted);
+      color: var(--text-main);
       margin-bottom: 0.5rem;
       font-weight: 500;
     }
 
     .metric-value {
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: 700;
       color: var(--text-main);
     }
@@ -162,38 +202,28 @@
       <div>
         <h1>Gym Utilization Tracker</h1>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">
-          Real-time 15-minute resolution automated crowd logging
+          Multi-studio capacity tracking & side-by-side comparison
         </p>
       </div>
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Interval: Every 15 Minutes
+      <div class="header-controls">
+        <select id="studioFilter" onchange="renderCharts()">
+          <option value="ALL">All Studios Comparison</option>
+        </select>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Auto-Scrape: 15 Min
+        </div>
       </div>
     </header>
 
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-title">Latest Utilization</div>
-        <div class="metric-value" id="val-latest">--%</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Peak Recorded Today</div>
-        <div class="metric-value" id="val-peak">--%</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Average Daily Utilization</div>
-        <div class="metric-value" id="val-avg">--%</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Total Logged Samples</div>
-        <div class="metric-value" id="val-samples">--</div>
-      </div>
+    <div class="metrics-grid" id="metricsContainer">
+      <!-- Dynamic Metric Cards -->
     </div>
 
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Utilization Time Series (15-Min Granularity)</div>
+          <div class="chart-title">Utilization Over Time (15-Min Intervals)</div>
         </div>
         <div class="canvas-container">
           <canvas id="timeSeriesChart"></canvas>
@@ -211,11 +241,16 @@
     </div>
 
     <footer>
-      Updated automatically by GitHub Actions workflow every 15 minutes • AI Fitness Gym Tracker
+      Updated automatically by GitHub Actions workflow every 15 minutes • AI Fitness Studios
     </footer>
   </div>
 
   <script>
+    const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e'];
+    let globalData = {}; // { studioName: [{ timestamp, percentage, level }] }
+    let timeSeriesChartInstance = null;
+    let hourlyChartInstance = null;
+
     async function loadData() {
       try {
         const response = await fetch('utilization_log.csv');
@@ -231,127 +266,201 @@
     function parseCSV(csvText) {
       const lines = csvText.trim().split('\n');
       if (lines.length <= 1) return generateDemoData();
-      
-      const timestamps = [];
-      const percentages = [];
+
+      const studioData = {};
+      const header = lines[0].split(',').map(s => s.trim());
+      const hasStudioCol = header.includes('studio');
 
       for (let i = 1; i < lines.length; i++) {
         const parts = lines[i].split(',');
         if (parts.length >= 4) {
-          timestamps.push(parts[0].trim());
-          percentages.push(parseFloat(parts[3].trim()) || 0);
+          let ts, studio, pct, level;
+          if (hasStudioCol && parts.length >= 5) {
+            ts = parts[0].trim();
+            studio = parts[1].trim() || 'General Gym';
+            pct = parseFloat(parts[4].trim()) || 0;
+            level = parts[5] ? parts[5].trim() : 'UNKNOWN';
+          } else {
+            ts = parts[0].trim();
+            studio = 'Bielefeld Studio';
+            pct = parseFloat(parts[3].trim()) || 0;
+            level = parts[4] ? parts[4].trim() : 'UNKNOWN';
+          }
+
+          if (!studioData[studio]) studioData[studio] = [];
+          studioData[studio].push({ timestamp: ts, percentage: pct, level: level });
         }
       }
-      return { timestamps, percentages };
+      return studioData;
     }
 
     function generateDemoData() {
-      const timestamps = [];
-      const percentages = [];
+      const studios = ['Bielefeld Schildesche', 'Bielefeld Sieker', 'Bielefeld Eckendorfer'];
+      const studioData = {};
       const now = new Date();
-      
-      // Generate 24 hours of 15-minute data
-      for (let i = 96; i >= 0; i--) {
-        const t = new Date(now.getTime() - i * 15 * 60 * 1000);
-        const hour = t.getHours();
-        // Realistic gym utilization curve
-        let base = Math.sin((hour - 6) / 16 * Math.PI) * 75;
-        if (base < 0) base = 0;
-        const val = Math.min(100, Math.max(0, Math.round(base + (Math.random() * 10 - 5))));
-        
-        timestamps.push(t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-        percentages.push(val);
-      }
-      return { timestamps, percentages };
+
+      studios.forEach((st, idx) => {
+        studioData[st] = [];
+        for (let i = 96; i >= 0; i--) {
+          const t = new Date(now.getTime() - i * 15 * 60 * 1000);
+          const hour = t.getHours();
+          let base = Math.sin((hour - 6) / 16 * Math.PI) * (60 + idx * 10);
+          if (base < 0) base = 0;
+          const val = Math.min(100, Math.max(0, Math.round(base + (Math.random() * 10 - 5))));
+          
+          const formattedTime = t.getFullYear() + '-' +
+            String(t.getMonth() + 1).padStart(2, '0') + '-' +
+            String(t.getDate()).padStart(2, '0') + ' ' +
+            String(t.getHours()).padStart(2, '0') + ':' +
+            String(t.getMinutes()).padStart(2, '0') + ':00';
+
+          studioData[st].push({ timestamp: formattedTime, percentage: val, level: 'LOW' });
+        }
+      });
+
+      return studioData;
     }
 
-    async function initDashboard() {
-      const { timestamps, percentages } = await loadData();
+    function populateStudioFilter(studios) {
+      const select = document.getElementById('studioFilter');
+      select.innerHTML = '<option value="ALL">Compare All Studios</option>';
+      studios.forEach(st => {
+        const opt = document.createElement('option');
+        opt.value = st;
+        opt.textContent = st;
+        select.appendChild(opt);
+      });
+    }
 
-      if (percentages.length > 0) {
-        document.getElementById('val-latest').textContent = percentages[percentages.length - 1] + '%';
-        document.getElementById('val-peak').textContent = Math.max(...percentages) + '%';
-        const sum = percentages.reduce((a, b) => a + b, 0);
-        document.getElementById('val-avg').textContent = (sum / percentages.length).toFixed(1) + '%';
-        document.getElementById('val-samples').textContent = percentages.length;
-      }
+    function renderMetrics(studioData, selectedStudio) {
+      const container = document.getElementById('metricsContainer');
+      container.innerHTML = '';
+
+      const studiosToDisplay = selectedStudio === 'ALL' ? Object.keys(studioData) : [selectedStudio];
+      
+      studiosToDisplay.forEach((st, idx) => {
+        const records = studioData[st] || [];
+        if (records.length === 0) return;
+
+        const latest = records[records.length - 1].percentage;
+        const maxPct = Math.max(...records.map(r => r.percentage));
+        const avgPct = (records.reduce((a, b) => a + b.percentage, 0) / records.length).toFixed(1);
+
+        const card = document.createElement('div');
+        const colorClass = idx % 3 === 0 ? '' : (idx % 3 === 1 ? 'green' : 'amber');
+        card.className = `metric-card ${colorClass}`;
+        card.innerHTML = `
+          <div class="metric-studio">${st}</div>
+          <div class="metric-title">Current Utilization</div>
+          <div class="metric-value">${latest}%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+            Peak Today: <strong>${maxPct}%</strong> | Avg: <strong>${avgPct}%</strong>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderCharts() {
+      const selectedStudio = document.getElementById('studioFilter').value;
+      renderMetrics(globalData, selectedStudio);
+
+      const studios = selectedStudio === 'ALL' ? Object.keys(globalData) : [selectedStudio];
+
+      // Time Series Datasets
+      const timeSeriesDatasets = studios.map((st, idx) => {
+        const records = globalData[st] || [];
+        return {
+          label: st,
+          data: records.map(r => ({ x: r.timestamp, y: r.percentage })),
+          borderColor: COLORS[idx % COLORS.length],
+          backgroundColor: COLORS[idx % COLORS.length] + '22',
+          borderWidth: 2,
+          fill: studios.length === 1,
+          tension: 0.3,
+          pointRadius: records.length > 50 ? 2 : 4,
+        };
+      });
+
+      // Extract all unique timestamps
+      const allTimestamps = Array.from(new Set(
+        studios.flatMap(st => (globalData[st] || []).map(r => r.timestamp))
+      )).sort();
 
       // Render Time Series Chart
       const ctx1 = document.getElementById('timeSeriesChart').getContext('2d');
-      const gradient1 = ctx1.createLinearGradient(0, 0, 0, 300);
-      gradient1.addColorStop(0, 'rgba(56, 189, 248, 0.4)');
-      gradient1.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
+      if (timeSeriesChartInstance) timeSeriesChartInstance.destroy();
 
-      new Chart(ctx1, {
+      timeSeriesChartInstance = new Chart(ctx1, {
         type: 'line',
         data: {
-          labels: timestamps,
-          datasets: [{
-            label: 'Utilization %',
-            data: percentages,
-            borderColor: '#38bdf8',
-            borderWidth: 2,
-            backgroundColor: gradient1,
-            fill: true,
-            tension: 0.3,
-            pointRadius: timestamps.length > 50 ? 2 : 4,
-            pointHoverRadius: 6
-          }]
+          labels: allTimestamps,
+          datasets: timeSeriesDatasets
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          plugins: { legend: { labels: { color: '#f8fafc' } } },
           scales: {
-            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', maxTicksLimit: 12 } },
             y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 }
           }
         }
       });
 
-      // Calculate Hourly Averages
-      const hourlySum = Array(24).fill(0);
-      const hourlyCount = Array(24).fill(0);
-      
-      timestamps.forEach((ts, idx) => {
-        let hour = 0;
-        if (ts.includes(':')) {
-          hour = parseInt(ts.split(':')[0], 10);
-        } else {
-          const d = new Date(ts);
-          if (!isNaN(d)) hour = d.getHours();
-        }
-        if (hour >= 0 && hour < 24) {
-          hourlySum[hour] += percentages[idx];
-          hourlyCount[hour] += 1;
-        }
-      });
+      // Hourly Datasets
+      const hourlyLabels = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
+      const hourlyDatasets = studios.map((st, idx) => {
+        const records = globalData[st] || [];
+        const hourlySum = Array(24).fill(0);
+        const hourlyCount = Array(24).fill(0);
 
-      const hourlyAvg = hourlySum.map((sum, i) => hourlyCount[i] > 0 ? (sum / hourlyCount[i]).toFixed(1) : 0);
+        records.forEach(r => {
+          const d = new Date(r.timestamp);
+          const h = isNaN(d) ? parseInt((r.timestamp.split(' ')[1] || '0').split(':')[0], 10) : d.getHours();
+          if (h >= 0 && h < 24) {
+            hourlySum[h] += r.percentage;
+            hourlyCount[h] += 1;
+          }
+        });
+
+        const hourlyAvg = hourlySum.map((sum, i) => hourlyCount[i] > 0 ? (sum / hourlyCount[i]).toFixed(1) : 0);
+
+        return {
+          label: st,
+          data: hourlyAvg,
+          backgroundColor: COLORS[idx % COLORS.length] + 'cc',
+          borderRadius: 4
+        };
+      });
 
       // Render Hourly Chart
       const ctx2 = document.getElementById('hourlyChart').getContext('2d');
-      new Chart(ctx2, {
+      if (hourlyChartInstance) hourlyChartInstance.destroy();
+
+      hourlyChartInstance = new Chart(ctx2, {
         type: 'bar',
         data: {
-          labels: Array.from({length: 24}, (_, i) => `${i}:00`),
-          datasets: [{
-            label: 'Avg Utilization %',
-            data: hourlyAvg,
-            backgroundColor: '#34d399',
-            borderRadius: 6
-          }]
+          labels: hourlyLabels,
+          datasets: hourlyDatasets
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          plugins: { legend: { labels: { color: '#f8fafc' } } },
           scales: {
             x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
             y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 }
           }
         }
       });
+    }
+
+    async function initDashboard() {
+      globalData = await loadData();
+      const studios = Object.keys(globalData);
+      populateStudioFilter(studios);
+      renderCharts();
     }
 
     initDashboard();

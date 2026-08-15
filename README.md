@@ -8,10 +8,14 @@ Automated 15-minute gym capacity tracker and visualization system for AI Fitness
 
 ## Features
 
+- **Multi-Studio Comparison**: Automatically tracks and compares multiple AI Fitness locations:
+  - **Bielefeld Schildesche** (`1468963780`)
+  - **Bielefeld Sieker** (`1316633090`)
+  - **Bielefeld Eckendorfer** (`1321967250`)
 - **15-Minute Automated Scraping**: Runs via GitHub Actions (`.github/workflows/scrape.yml`) on a 15-minute cron schedule (`*/15 * * * *`).
-- **Resilient Logging**: Scrapes real-time crowd percentage data and appends timestamped logs to `utilization_log.csv`.
-- **Plotting & Analytics**: Includes `plot_utilization.py` to generate time-series trend lines and hourly average charts saved as PNG.
-- **Interactive Dashboard**: Includes `index.html` with Chart.js to visualize logs directly in any web browser.
+- **Resilient Logging**: Scrapes real-time crowd percentage data for all locations into `utilization_log.csv`.
+- **Plotting & Analytics**: Includes `plot_utilization.py` to generate comparative multi-line charts and hourly average plots saved as PNG.
+- **Interactive Dashboard**: Includes `index.html` with studio selector filters & side-by-side Chart.js visualizations.
 
 ## Quick Start
 
