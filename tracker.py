@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 import os
+from zoneinfo import ZoneInfo
 import requests
 
 URL = "https://www.ai-fitness.de/connect/v1/studio/1321967250/utilization"
@@ -18,7 +19,9 @@ def log_utilization():
         response.raise_for_status()
         data = response.json()
 
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Explicitly get the current time in Germany (handles CET/CEST automatically)
+        germany_tz = ZoneInfo("Europe/Berlin")
+        now = datetime.now(germany_tz).strftime("%Y-%m-%d %H:%M:%S")
 
         # Find the active hour slot or save all slots
         items = data.get("items", [])
