@@ -150,12 +150,13 @@ def log_utilization():
     try:
         germany_tz = ZoneInfo("Europe/Berlin")
         dt_now = datetime.now(germany_tz)
-        now_str = dt_now.strftime("%Y-%m-%d %H:%M:%S")
-        iso_str = dt_now.strftime("%Y-%m-%dT%H:%M:%S%z")
     except Exception:
-        dt_now = datetime.now()
-        now_str = dt_now.strftime("%Y-%m-%d %H:%M:%S")
-        iso_str = now_str.replace(" ", "T") + "+02:00"
+        import datetime as dt_module
+        germany_tz = dt_module.timezone(dt_module.timedelta(hours=2))
+        dt_now = datetime.now(germany_tz)
+
+    now_str = dt_now.strftime("%Y-%m-%d %H:%M:%S")
+    iso_str = dt_now.isoformat()
 
     studios = get_all_studios()
     print(f"[{now_str}] Discovering & fetching utilization for {len(studios)} studios in Germany...")
