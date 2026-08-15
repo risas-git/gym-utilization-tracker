@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Utilization Tracker - Germany-Wide Studios</title>
+  <title>Gym Utilization Tracker - Multi-Studio Comparison</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -64,22 +64,115 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      flex-wrap: wrap;
+      position: relative;
     }
 
-    select, input {
+    /* Custom Multi-Select Dropdown Component */
+    .dropdown-container {
+      position: relative;
+    }
+
+    .dropdown-btn {
       background: var(--bg-card);
       color: var(--text-main);
       border: 1px solid var(--border-color);
-      padding: 0.55rem 1rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 0.5rem;
       font-family: inherit;
       font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+
+    .dropdown-btn:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .dropdown-panel {
+      position: absolute;
+      top: 110%;
+      right: 0;
+      width: 340px;
+      max-height: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      padding: 0.75rem;
+    }
+
+    .dropdown-panel.open {
+      display: flex;
+    }
+
+    .search-box {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
       outline: none;
     }
 
-    select:focus, input:focus {
-      border-color: var(--accent-blue);
+    .preset-btns {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-sm {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+    }
+
+    .btn-sm:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+
+    .studio-list {
+      overflow-y: auto;
+      max-height: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-right: 0.25rem;
+    }
+
+    .studio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .studio-item:hover {
+      background: #334155;
+    }
+
+    .studio-item input[type="checkbox"] {
+      accent-color: var(--accent-blue);
+      cursor: pointer;
     }
 
     .badge {
@@ -202,23 +295,40 @@
       <div>
         <h1>Gym Utilization Tracker</h1>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">
-          Tracking 200+ All Inclusive / AI Fitness Studios in Germany
+          Select & Compare Multiple Gym Locations (200+ Studios in Germany)
         </p>
       </div>
+
       <div class="header-controls">
-        <input type="text" id="searchInput" placeholder="Search city or studio..." oninput="filterStudioOptions()">
-        <select id="studioFilter" onchange="renderCharts()">
-          <option value="TOP5">Top 5 Active Studios</option>
-        </select>
+        <!-- Multi-Select Dropdown Container -->
+        <div class="dropdown-container">
+          <button class="dropdown-btn" onclick="toggleDropdown()">
+            <span>Select Studios</span>
+            <span id="selectedCountBadge" style="background: var(--accent-blue); color: #0f172a; padding: 0.1rem 0.4rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">3 Selected</span>
+            ▼
+          </button>
+          
+          <div class="dropdown-panel" id="dropdownPanel">
+            <input type="text" class="search-box" id="studioSearch" placeholder="Search city or studio..." oninput="filterStudioList()">
+            <div class="preset-btns">
+              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld Gyms</button>
+              <button class="btn-sm" onclick="selectPreset('clear')">Clear All</button>
+            </div>
+            <div class="studio-list" id="studioListContainer">
+              <!-- Dynamically populated checkboxes -->
+            </div>
+          </div>
+        </div>
+
         <div class="badge">
           <span class="badge-dot"></span>
-          200+ Gyms • 15 Min
+          Auto-Logged: 15 Min
         </div>
       </div>
     </header>
 
     <div class="metrics-grid" id="metricsContainer">
-      <!-- Dynamic Metric Cards -->
+      <!-- Dynamic Metric Cards for Selected Studios -->
     </div>
 
     <div class="charts-grid">
@@ -242,16 +352,17 @@
     </div>
 
     <footer>
-      Updated automatically by GitHub Actions workflow every 15 minutes • AI Fitness Germany
+      Data automatically logged every 15 minutes • AI Fitness Germany
     </footer>
   </div>
 
   <script>
-    const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e', '#06b6d4', '#84cc16', '#e11d48'];
+    const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e', '#06b6d4', '#84cc16', '#e11d48', '#10b981', '#f59e0b'];
     let globalData = {}; // { studioName: [{ timestamp, percentage, level }] }
+    let selectedStudios = new Set(['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker']);
     let timeSeriesChartInstance = null;
     let hourlyChartInstance = null;
-    let allStudiosList = [];
+    let allStudios = [];
 
     async function loadData() {
       try {
@@ -298,11 +409,11 @@
     }
 
     function generateDemoData() {
-      const studios = ['Bielefeld Schildesche', 'Bielefeld Sieker', 'Bielefeld City', 'AI Fitness Bonn Hardtberg', 'AI Fitness Berlin Moabit'];
+      const demoStudios = ['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker', 'AI Fitness Bonn Hardtberg', 'AI Fitness Berlin Moabit'];
       const studioData = {};
       const now = new Date();
 
-      studios.forEach((st, idx) => {
+      demoStudios.forEach((st, idx) => {
         studioData[st] = [];
         for (let i = 96; i >= 0; i--) {
           const t = new Date(now.getTime() - i * 15 * 60 * 1000);
@@ -324,38 +435,91 @@
       return studioData;
     }
 
-    function populateStudioFilter(studios) {
-      allStudiosList = studios.sort((a, b) => a.localeCompare(b));
-      filterStudioOptions();
+    function toggleDropdown() {
+      document.getElementById('dropdownPanel').classList.toggle('open');
     }
 
-    function filterStudioOptions() {
-      const filterText = document.getElementById('searchInput').value.toLowerCase();
-      const select = document.getElementById('studioFilter');
-      const currentValue = select.value;
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const container = document.querySelector('.dropdown-container');
+      if (container && !container.contains(e.target)) {
+        document.getElementById('dropdownPanel').classList.remove('open');
+      }
+    });
 
-      select.innerHTML = '<option value="TOP5">Top Active Studios</option><option value="BIELEFELD">All Bielefeld Studios</option>';
+    function populateStudioCheckboxes() {
+      allStudios = Object.keys(globalData).sort((a, b) => a.localeCompare(b));
       
-      allStudiosList.forEach(st => {
-        if (!filterText || st.toLowerCase().includes(filterText)) {
-          const opt = document.createElement('option');
-          opt.value = st;
-          opt.textContent = st;
-          select.appendChild(opt);
+      // Ensure defaults exist in dataset
+      if (selectedStudios.size === 0) {
+        allStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+        if (selectedStudios.size === 0 && allStudios.length > 0) selectedStudios.add(allStudios[0]);
+      }
+
+      filterStudioList();
+    }
+
+    function filterStudioList() {
+      const query = document.getElementById('studioSearch').value.toLowerCase();
+      const container = document.getElementById('studioListContainer');
+      container.innerHTML = '';
+
+      allStudios.forEach(st => {
+        if (!query || st.toLowerCase().includes(query)) {
+          const label = document.createElement('label');
+          label.className = 'studio-item';
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = selectedStudios.has(st);
+          checkbox.onchange = (e) => {
+            if (e.target.checked) {
+              selectedStudios.add(st);
+            } else {
+              selectedStudios.delete(st);
+            }
+            updateDashboard();
+          };
+
+          const span = document.createElement('span');
+          span.textContent = st;
+
+          label.appendChild(checkbox);
+          label.appendChild(span);
+          container.appendChild(label);
         }
       });
-
-      if (Array.from(select.options).some(o => o.value === currentValue)) {
-        select.value = currentValue;
-      }
     }
 
-    function renderMetrics(studioData, studiosToDisplay) {
+    function selectPreset(type) {
+      if (type === 'bielefeld') {
+        selectedStudios.clear();
+        allStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+      } else if (type === 'clear') {
+        selectedStudios.clear();
+      }
+      filterStudioList();
+      updateDashboard();
+    }
+
+    function updateDashboard() {
+      document.getElementById('selectedCountBadge').textContent = `${selectedStudios.size} Selected`;
+      renderMetrics();
+      renderCharts();
+    }
+
+    function renderMetrics() {
       const container = document.getElementById('metricsContainer');
       container.innerHTML = '';
 
-      studiosToDisplay.forEach((st, idx) => {
-        const records = studioData[st] || [];
+      const activeList = Array.from(selectedStudios);
+      if (activeList.length === 0) {
+        container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.9rem; grid-column: 1 / -1; text-align: center; padding: 2rem;">No studios selected. Use the "Select Studios" button above to pick locations to compare.</div>';
+        return;
+      }
+
+      activeList.forEach((st, idx) => {
+        const records = globalData[st] || [];
         if (records.length === 0) return;
 
         const latest = records[records.length - 1].percentage;
@@ -373,24 +537,7 @@
     }
 
     function renderCharts() {
-      const selectedOption = document.getElementById('studioFilter').value;
-      const allStudios = Object.keys(globalData);
-
-      let studios = [];
-      if (selectedOption === 'TOP5') {
-        studios = allStudios.sort((a, b) => {
-          const maxA = Math.max(...(globalData[a] || []).map(r => r.percentage), 0);
-          const maxB = Math.max(...(globalData[b] || []).map(r => r.percentage), 0);
-          return maxB - maxA;
-        }).slice(0, 5);
-      } else if (selectedOption === 'BIELEFELD') {
-        studios = allStudios.filter(st => st.toLowerCase().includes('bielefeld'));
-        if (studios.length === 0) studios = allStudios.slice(0, 3);
-      } else {
-        studios = [selectedOption];
-      }
-
-      renderMetrics(globalData, studios);
+      const studios = Array.from(selectedStudios);
 
       // Time Series Datasets
       const timeSeriesDatasets = studios.map((st, idx) => {
@@ -483,9 +630,8 @@
 
     async function initDashboard() {
       globalData = await loadData();
-      const studios = Object.keys(globalData);
-      populateStudioFilter(studios);
-      renderCharts();
+      populateStudioCheckboxes();
+      updateDashboard();
     }
 
     initDashboard();
