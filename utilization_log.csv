@@ -39,3 +39,6 @@ timestamp,studio,slot_start,slot_end,percentage,level
 2026-08-15 12:31:43,Bielefeld Schildesche,12:00:00,13:00:00,26,LOW
 2026-08-15 12:31:43,Bielefeld Sieker,12:00:00,13:00:00,16,LOW
 2026-08-15 12:31:43,Bielefeld City,12:00:00,13:00:00,21,LOW
+2026-08-15 12:59:15,Bielefeld Schildesche,12:00:00,13:00:00,27,LOW
+2026-08-15 12:59:15,Bielefeld Sieker,12:00:00,13:00:00,14,LOW
+2026-08-15 12:59:15,Bielefeld City,12:00:00,13:00:00,20,LOW
