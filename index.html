@@ -3,22 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Utilization Tracker - Multi-Studio Comparison</title>
+  <title>Gym Utilization Tracker - Multi-Studio Comparison & Live Analytics</title>
+  <meta name="description" content="Real-time Germany-wide gym utilization tracker with live multi-studio comparison, historical analytics, and hourly traffic profiles.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --bg-primary: #0f172a;
-      --bg-card: #1e293b;
-      --border-color: #334155;
+      --bg-primary: #0b0f19;
+      --bg-card: #151e32;
+      --bg-card-hover: #1c2742;
+      --bg-glass: rgba(21, 30, 50, 0.75);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(56, 189, 248, 0.5);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent-blue: #38bdf8;
-      --accent-green: #34d399;
+      --accent-emerald: #34d399;
       --accent-amber: #fbbf24;
-      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      --accent-rose: #f43f5e;
+      --accent-purple: #a78bfa;
+      --card-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5);
+      --glow-blue: 0 0 20px rgba(56, 189, 248, 0.2);
     }
 
     * {
@@ -28,43 +35,63 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-primary);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(52, 211, 153, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
-      padding: 2rem;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1320px;
       width: 100%;
     }
 
     header {
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    h1 {
-      font-size: 1.875rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #38bdf8, #34d399);
+    .title-area h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #38bdf8 0%, #34d399 50%, #a78bfa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      position: relative;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .dropdown-container {
@@ -75,131 +102,231 @@
       background: var(--bg-card);
       color: var(--text-main);
       border: 1px solid var(--border-color);
-      padding: 0.6rem 1.2rem;
-      border-radius: 0.5rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 0.6rem;
       font-family: inherit;
       font-size: 0.9rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       font-weight: 500;
-      transition: border-color 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .dropdown-btn:hover {
       border-color: var(--accent-blue);
+      background: var(--bg-card-hover);
+      box-shadow: var(--glow-blue);
     }
 
     .dropdown-panel {
       position: absolute;
-      top: 110%;
+      top: calc(100% + 0.5rem);
       right: 0;
-      width: 340px;
-      max-height: 420px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 0.75rem;
-      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
-      z-index: 100;
+      width: 360px;
+      max-height: 480px;
+      background: #111927;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.85rem;
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
       display: none;
       flex-direction: column;
-      padding: 0.75rem;
+      padding: 0.85rem;
+      backdrop-filter: blur(16px);
     }
 
     .dropdown-panel.open {
       display: flex;
+      animation: fadeIn 0.15s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .search-box {
       width: 100%;
-      background: #0f172a;
+      background: #090e17;
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.375rem;
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.45rem;
+      font-size: 0.875rem;
+      margin-bottom: 0.6rem;
       outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent-blue);
     }
 
     .preset-btns {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
     }
 
     .btn-sm {
       background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       color: var(--accent-blue);
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.35rem;
       font-size: 0.75rem;
+      font-weight: 500;
       cursor: pointer;
       flex: 1;
       text-align: center;
+      white-space: nowrap;
+      transition: all 0.15s ease;
     }
 
     .btn-sm:hover {
       background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-blue);
     }
 
     .studio-list {
       overflow-y: auto;
-      max-height: 280px;
+      max-height: 290px;
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      padding-right: 0.25rem;
+      padding-right: 0.35rem;
+    }
+
+    .studio-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .studio-list::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
     }
 
     .studio-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.5rem;
-      border-radius: 0.25rem;
+      gap: 0.6rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.35rem;
       font-size: 0.85rem;
       cursor: pointer;
       color: var(--text-main);
+      transition: background 0.15s ease;
     }
 
     .studio-item:hover {
-      background: #334155;
+      background: rgba(255, 255, 255, 0.06);
     }
 
     .studio-item input[type="checkbox"] {
       accent-color: var(--accent-blue);
+      width: 15px;
+      height: 15px;
       cursor: pointer;
     }
 
-    .badge {
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent-blue);
-      padding: 0.4rem 0.8rem;
+    /* Time range selector pills */
+    .time-filter-group {
+      display: flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.6rem;
+      padding: 0.25rem;
+      gap: 0.2rem;
+    }
+
+    .time-pill {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .time-pill:hover {
+      color: var(--text-main);
+    }
+
+    .time-pill.active {
+      background: var(--accent-blue);
+      color: #0b0f19;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Refresh button */
+    .btn-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 38px;
+      height: 38px;
+      border-radius: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-icon:hover {
+      color: var(--text-main);
+      border-color: var(--accent-blue);
+      box-shadow: var(--glow-blue);
+    }
+
+    .btn-icon.spinning svg {
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .live-badge {
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      color: var(--accent-emerald);
+      padding: 0.4rem 0.75rem;
       border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.8rem;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
     }
 
     .badge-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-green);
+      width: 7px;
+      height: 7px;
+      background-color: var(--accent-emerald);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulse 2s infinite;
     }
 
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* KPI Metrics Cards Grid */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.25rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
 
     .metric-card {
@@ -210,6 +337,15 @@
       box-shadow: var(--card-shadow);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
     }
 
     .metric-card::before {
@@ -222,35 +358,132 @@
       background: var(--accent-blue);
     }
 
-    .metric-card.green::before { background: var(--accent-green); }
+    .metric-card.green::before { background: var(--accent-emerald); }
     .metric-card.amber::before { background: var(--accent-amber); }
+    .metric-card.rose::before { background: var(--accent-rose); }
+    .metric-card.purple::before { background: var(--accent-purple); }
 
-    .metric-studio {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-      font-weight: 600;
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
     }
 
-    .metric-title {
-      font-size: 0.875rem;
+    .metric-studio {
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .status-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+    }
+
+    .status-pill.low { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+    .status-pill.moderate { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .status-pill.high { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .status-pill.closed { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); border: 1px solid rgba(148, 163, 184, 0.3); }
+
+    .metric-body {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .metric-value {
-      font-size: 1.85rem;
-      font-weight: 700;
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .metric-unit {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .metric-footer {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.65rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.15rem;
+    }
+
+    .stat-val {
+      font-weight: 600;
       color: var(--text-main);
     }
 
+    /* Insights Banner */
+    .insights-card {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(52, 211, 153, 0.08) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 1rem;
+      padding: 1.15rem 1.5rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .insights-icon {
+      font-size: 1.8rem;
+      background: rgba(56, 189, 248, 0.15);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .insights-content h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 0.2rem;
+    }
+
+    .insights-content p {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    /* Charts Section */
     .charts-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.75rem;
     }
 
     .chart-card {
@@ -259,24 +492,59 @@
       border-radius: 1rem;
       padding: 1.5rem;
       box-shadow: var(--card-shadow);
+      position: relative;
     }
 
     .chart-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .chart-title {
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chart-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
     }
 
     .canvas-container {
       position: relative;
       width: 100%;
-      height: 400px;
+      height: 380px;
+    }
+
+    /* Loading overlay */
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      gap: 1rem;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
     }
 
     footer {
@@ -284,6 +552,27 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding-bottom: 1.5rem;
+    }
+
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      header { flex-direction: column; align-items: stretch; }
+      .header-controls { justify-content: space-between; }
+      .canvas-container { height: 290px; }
+      .dropdown-panel { width: 100%; left: 0; right: 0; }
     }
   </style>
 </head>
@@ -291,48 +580,88 @@
 
   <div class="container">
     <header>
-      <div>
-        <h1>Gym Utilization Tracker</h1>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">
-          Cloud Database Multi-Studio Analytics (Supabase Connected)
-        </p>
+      <div class="title-area">
+        <h1>🏋️ Gym Utilization Tracker</h1>
+        <div class="subtitle">
+          <span>Germany-Wide Studio Analytics</span>
+          <span>•</span>
+          <span id="lastUpdatedText">Connecting to Supabase...</span>
+        </div>
       </div>
 
       <div class="header-controls">
+        <!-- Time Filter Pills -->
+        <div class="time-filter-group" id="timeFilterGroup">
+          <button class="time-pill" data-range="24h" onclick="setTimeRange('24h')">24H</button>
+          <button class="time-pill" data-range="3d" onclick="setTimeRange('3d')">3D</button>
+          <button class="time-pill active" data-range="7d" onclick="setTimeRange('7d')">7D</button>
+          <button class="time-pill" data-range="14d" onclick="setTimeRange('14d')">14D</button>
+          <button class="time-pill" data-range="all" onclick="setTimeRange('all')">All</button>
+        </div>
+
+        <!-- Studio Selector Dropdown -->
         <div class="dropdown-container">
-          <button class="dropdown-btn" onclick="toggleDropdown()">
+          <button class="dropdown-btn" id="dropdownToggleBtn" onclick="toggleDropdown()">
             <span>Select Studios</span>
-            <span id="selectedCountBadge" style="background: var(--accent-blue); color: #0f172a; padding: 0.1rem 0.4rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">3 Selected</span>
+            <span id="selectedCountBadge" style="background: var(--accent-blue); color: #090e17; padding: 0.15rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">3 Selected</span>
             ▼
           </button>
           
           <div class="dropdown-panel" id="dropdownPanel">
-            <input type="text" class="search-box" id="studioSearch" placeholder="Search city or studio..." oninput="filterStudioList()">
+            <input type="text" class="search-box" id="studioSearch" placeholder="Search city or studio name..." oninput="filterStudioList()">
             <div class="preset-btns">
-              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld Gyms</button>
-              <button class="btn-sm" onclick="selectPreset('clear')">Clear All</button>
+              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld</button>
+              <button class="btn-sm" onclick="selectPreset('major')">Major Cities</button>
+              <button class="btn-sm" onclick="selectPreset('all')">Select All</button>
+              <button class="btn-sm" onclick="selectPreset('clear')">Clear</button>
             </div>
             <div class="studio-list" id="studioListContainer">
-              <!-- Dynamically populated checkboxes -->
+              <div style="padding: 1rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+                Loading studio directory...
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="badge">
+        <!-- Refresh Button -->
+        <button class="btn-icon" id="refreshBtn" title="Refresh Live Data" onclick="refreshDashboard(true)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+          </svg>
+        </button>
+
+        <div class="live-badge" id="liveStatusBadge">
           <span class="badge-dot"></span>
-          Cloud DB Live
+          Supabase DB
         </div>
       </div>
     </header>
 
-    <div class="metrics-grid" id="metricsContainer">
-      <!-- Dynamic Metric Cards for Selected Studios -->
+    <!-- Insights Bar -->
+    <div class="insights-card" id="insightsCard">
+      <div class="insights-icon">💡</div>
+      <div class="insights-content">
+        <h4 id="insightsTitle">Optimal Workout Recommendation</h4>
+        <p id="insightsText">Analyzing current and historical utilization patterns for your selected gyms...</p>
+      </div>
     </div>
 
+    <!-- Metrics Cards -->
+    <div class="metrics-grid" id="metricsContainer">
+      <div class="loading-spinner" style="grid-column: 1 / -1;">
+        <div class="spinner"></div>
+        <div>Loading live gym metrics from Supabase...</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Utilization Over Time (15-Min Intervals)</div>
+          <div>
+            <div class="chart-title">📈 Utilization Timeline (15-Minute Intervals)</div>
+            <div class="chart-subtitle">Direct live time-series tracking across selected fitness locations</div>
+          </div>
         </div>
         <div class="canvas-container">
           <canvas id="timeSeriesChart"></canvas>
@@ -341,7 +670,10 @@
 
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Average Utilization by Hour of Day</div>
+          <div>
+            <div class="chart-title">📊 24-Hour Average Utilization Profile</div>
+            <div class="chart-subtitle">Historical average occupancy by hour of the day (00:00 - 23:00)</div>
+          </div>
         </div>
         <div class="canvas-container">
           <canvas id="hourlyChart"></canvas>
@@ -350,20 +682,37 @@
     </div>
 
     <footer>
-      Powered by Supabase Cloud Database • Auto-Logged Every 15 Minutes
+      <div>Powered exclusively by <strong>Supabase Cloud Database</strong> • High-Performance 15-Min Ingestion</div>
+      <div>Designed for fast comparison of gym occupancies across Germany</div>
     </footer>
   </div>
 
   <script>
-    const SUPABASE_REST_URL = "https://vnsqquagjxgjteuvypwo.supabase.co/rest/v1/gym_utilization?select=*&order=timestamp.asc&limit=5000";
+    // Supabase REST API Configuration
+    const SUPABASE_BASE_URL = "https://vnsqquagjxgjteuvypwo.supabase.co/rest/v1/gym_utilization";
     const SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl";
 
-    const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa', '#f43f5e', '#06b6d4', '#84cc16', '#e11d48', '#10b981', '#f59e0b'];
-    let globalData = {}; // { studioName: [{ timestamp, percentage, level }] }
+    const COLORS = [
+      '#38bdf8', // Cyan/Sky
+      '#34d399', // Emerald
+      '#fbbf24', // Amber
+      '#a78bfa', // Purple
+      '#f43f5e', // Rose
+      '#06b6d4', // Teal
+      '#84cc16', // Lime
+      '#f97316', // Orange
+      '#ec4899', // Pink
+      '#60a5fa'  // Blue
+    ];
+
+    let globalData = {};           // { studioName: [{ timestamp, percentage, level }] }
+    let latestSnapshots = {};      // { studioName: { percentage, level, timestamp } }
     let selectedStudios = new Set(['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker']);
+    let allAvailableStudios = [];
+    let currentTimeRange = '7d';
     let timeSeriesChartInstance = null;
     let hourlyChartInstance = null;
-    let allStudios = [];
+    let autoRefreshTimer = null;
 
     function cleanStudioName(name) {
       if (!name) return 'General Gym';
@@ -372,128 +721,155 @@
       return cleaned || name;
     }
 
-    function formatToGermanyTime(tsString) {
+    function formatToGermanyTime(tsString, includeDate = true) {
       if (!tsString) return '';
-      // If plain string without timezone info e.g. "2026-08-15 14:05:00", return as is
-      if (!tsString.includes('T') && !tsString.includes('Z') && !tsString.includes('+')) {
+      try {
+        const dateObj = new Date(tsString);
+        if (isNaN(dateObj.getTime())) return tsString;
+
+        const options = {
+          timeZone: 'Europe/Berlin',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        };
+        if (includeDate) {
+          options.month = '2-digit';
+          options.day = '2-digit';
+        }
+        return new Intl.DateTimeFormat('de-DE', options).format(dateObj);
+      } catch (e) {
         return tsString;
       }
-      const dateObj = new Date(tsString);
-      if (isNaN(dateObj)) return tsString;
-
-      return new Intl.DateTimeFormat('sv-SE', {
-        timeZone: 'Europe/Berlin',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      }).format(dateObj);
     }
 
-    async function loadData() {
+    function getSinceDateIso(range) {
+      const now = new Date();
+      if (range === '24h') {
+        return new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
+      } else if (range === '3d') {
+        return new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000).toISOString();
+      } else if (range === '7d') {
+        return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+      } else if (range === '14d') {
+        return new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000).toISOString();
+      }
+      return null;
+    }
+
+    // Step 1: Fetch list of studios and recent snapshots
+    async function loadStudioDirectoryAndSnapshots() {
       try {
-        const response = await fetch(SUPABASE_REST_URL, {
+        // Query the most recent 500 rows to discover all active studios and their latest capacity
+        const url = `${SUPABASE_BASE_URL}?select=timestamp,studio,percentage,level&order=id.desc&limit=500`;
+        const response = await fetch(url, {
           headers: {
             'apikey': SUPABASE_KEY,
             'Authorization': `Bearer ${SUPABASE_KEY}`
           }
         });
 
-        if (!response.ok) throw new Error("Supabase query failed");
+        if (!response.ok) throw new Error("Could not fetch studio directory from Supabase");
         const rows = await response.json();
-        
-        const studioData = {};
+
+        const studioSet = new Set();
         rows.forEach(r => {
           const st = cleanStudioName(r.studio);
-          if (!studioData[st]) studioData[st] = [];
-          
-          const tsFormatted = formatToGermanyTime(r.timestamp);
-
-          studioData[st].push({
-            timestamp: tsFormatted,
-            percentage: parseFloat(r.percentage) || 0,
-            level: r.level || 'LOW'
-          });
+          studioSet.add(st);
+          if (!latestSnapshots[st]) {
+            latestSnapshots[st] = {
+              percentage: parseFloat(r.percentage) || 0,
+              level: r.level || 'UNKNOWN',
+              timestamp: r.timestamp
+            };
+          }
         });
 
-        return studioData;
-      } catch (err) {
-        console.warn("Could not load from Supabase directly, falling back to CSV:", err);
-        return loadCSVFallback();
-      }
-    }
+        allAvailableStudios = Array.from(studioSet).sort((a, b) => a.localeCompare(b));
 
-    async function loadCSVFallback() {
-      try {
-        const response = await fetch('utilization_log.csv?cachebust=' + Date.now());
-        if (!response.ok) throw new Error("CSV file not found");
-        const text = await response.text();
-        return parseCSV(text);
-      } catch (err) {
-        console.warn("CSV fallback failed, using demo data");
-        return generateDemoData();
-      }
-    }
-
-    function parseCSV(csvText) {
-      const lines = csvText.trim().split('\n');
-      if (lines.length <= 1) return generateDemoData();
-
-      const studioData = {};
-      const header = lines[0].split(',').map(s => s.trim());
-      const hasStudioCol = header.includes('studio');
-
-      for (let i = 1; i < lines.length; i++) {
-        const parts = lines[i].split(',');
-        if (parts.length >= 4) {
-          let ts, studio, pct, level;
-          if (hasStudioCol && parts.length >= 5) {
-            ts = parts[0].trim();
-            studio = cleanStudioName(parts[1].trim());
-            pct = parseFloat(parts[4].trim()) || 0;
-            level = parts[5] ? parts[5].trim() : 'UNKNOWN';
-          } else {
-            ts = parts[0].trim();
-            studio = 'Bielefeld City';
-            pct = parseFloat(parts[3].trim()) || 0;
-            level = parts[4] ? parts[4].trim() : 'UNKNOWN';
+        // If no default studios found, fallback to Bielefeld or first 3
+        if (selectedStudios.size === 0) {
+          allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+          if (selectedStudios.size === 0 && allAvailableStudios.length > 0) {
+            allAvailableStudios.slice(0, 3).forEach(s => selectedStudios.add(s));
           }
-
-          if (!studioData[studio]) studioData[studio] = [];
-          studioData[studio].push({ timestamp: ts, percentage: pct, level: level });
         }
+
+        populateStudioCheckboxes();
+      } catch (err) {
+        console.error("Error loading studio directory:", err);
       }
-      return studioData;
     }
 
-    function generateDemoData() {
-      const demoStudios = ['Bielefeld City', 'Bielefeld Schildesche', 'Bielefeld Sieker', 'Bonn Hardtberg', 'Berlin Moabit'];
-      const studioData = {};
-      const now = new Date();
+    // Step 2: Query historical data from Supabase for selected studios and time range
+    async function fetchUtilizationData() {
+      if (selectedStudios.size === 0) {
+        globalData = {};
+        return;
+      }
 
-      demoStudios.forEach((st, idx) => {
-        studioData[st] = [];
-        for (let i = 96; i >= 0; i--) {
-          const t = new Date(now.getTime() - i * 15 * 60 * 1000);
-          const hour = t.getHours();
-          let base = Math.sin((hour - 6) / 16 * Math.PI) * (60 + idx * 8);
-          if (base < 0) base = 0;
-          const val = Math.min(100, Math.max(0, Math.round(base + (Math.random() * 10 - 5))));
-          
-          const formattedTime = t.getFullYear() + '-' +
-            String(t.getMonth() + 1).padStart(2, '0') + '-' +
-            String(t.getDate()).padStart(2, '0') + ' ' +
-            String(t.getHours()).padStart(2, '0') + ':' +
-            String(t.getMinutes()).padStart(2, '0') + ':00';
+      const sinceIso = getSinceDateIso(currentTimeRange);
+      const studioFilter = Array.from(selectedStudios).map(s => `"${s}"`).join(',');
 
-          studioData[st].push({ timestamp: formattedTime, percentage: val, level: 'LOW' });
+      let url = `${SUPABASE_BASE_URL}?select=timestamp,studio,percentage,level&studio=in.(${encodeURIComponent(studioFilter)})&order=timestamp.asc&limit=10000`;
+      if (sinceIso) {
+        url += `&timestamp=gte.${encodeURIComponent(sinceIso)}`;
+      }
+
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+
+        if (!response.ok) throw new Error("Supabase query failed: " + response.statusText);
+        const rows = await response.json();
+
+        const studioData = {};
+        selectedStudios.forEach(st => { studioData[st] = []; });
+
+        let latestTs = null;
+
+        rows.forEach(r => {
+          const st = cleanStudioName(r.studio);
+          if (selectedStudios.has(st)) {
+            if (!studioData[st]) studioData[st] = [];
+            
+            const pct = parseFloat(r.percentage) || 0;
+            studioData[st].push({
+              timestamp: r.timestamp,
+              percentage: pct,
+              level: r.level || 'UNKNOWN'
+            });
+
+            if (!latestTs || new Date(r.timestamp) > new Date(latestTs)) {
+              latestTs = r.timestamp;
+            }
+
+            // Update latest snapshot
+            latestSnapshots[st] = {
+              percentage: pct,
+              level: r.level || 'UNKNOWN',
+              timestamp: r.timestamp
+            };
+          }
+        });
+
+        globalData = studioData;
+
+        // Update header last updated text
+        if (latestTs) {
+          document.getElementById('lastUpdatedText').textContent = `Last sync: ${formatToGermanyTime(latestTs)} (Berlin Time)`;
+        } else {
+          document.getElementById('lastUpdatedText').textContent = `Live Database Connected`;
         }
-      });
 
-      return studioData;
+      } catch (err) {
+        console.error("Failed to load utilization records from Supabase:", err);
+        document.getElementById('lastUpdatedText').textContent = `Sync Error: Check connection`;
+      }
     }
 
     function toggleDropdown() {
@@ -508,13 +884,6 @@
     });
 
     function populateStudioCheckboxes() {
-      allStudios = Object.keys(globalData).sort((a, b) => a.localeCompare(b));
-      
-      if (selectedStudios.size === 0) {
-        allStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
-        if (selectedStudios.size === 0 && allStudios.length > 0) selectedStudios.add(allStudios[0]);
-      }
-
       filterStudioList();
     }
 
@@ -523,48 +892,86 @@
       const container = document.getElementById('studioListContainer');
       container.innerHTML = '';
 
-      allStudios.forEach(st => {
-        if (!query || st.toLowerCase().includes(query)) {
-          const label = document.createElement('label');
-          label.className = 'studio-item';
+      const filtered = allAvailableStudios.filter(st => !query || st.toLowerCase().includes(query));
 
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.checked = selectedStudios.has(st);
-          checkbox.onchange = (e) => {
-            if (e.target.checked) {
-              selectedStudios.add(st);
-            } else {
-              selectedStudios.delete(st);
-            }
-            updateDashboard();
-          };
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem; text-align: center;">No studios found matching search</div>';
+        return;
+      }
 
-          const span = document.createElement('span');
-          span.textContent = st;
+      filtered.forEach(st => {
+        const label = document.createElement('label');
+        label.className = 'studio-item';
 
-          label.appendChild(checkbox);
-          label.appendChild(span);
-          container.appendChild(label);
-        }
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = selectedStudios.has(st);
+        checkbox.onchange = async (e) => {
+          if (e.target.checked) {
+            selectedStudios.add(st);
+          } else {
+            selectedStudios.delete(st);
+          }
+          await updateDashboard();
+        };
+
+        const span = document.createElement('span');
+        span.textContent = st;
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+        container.appendChild(label);
       });
     }
 
-    function selectPreset(type) {
+    async function selectPreset(type) {
       if (type === 'bielefeld') {
         selectedStudios.clear();
-        allStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+        allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+      } else if (type === 'major') {
+        selectedStudios.clear();
+        const majorCities = ['Berlin', 'München', 'Munich', 'Hamburg', 'Köln', 'Cologne', 'Frankfurt', 'Bonn', 'Bielefeld'];
+        allAvailableStudios.filter(s => majorCities.some(city => s.toLowerCase().includes(city.toLowerCase()))).slice(0, 6).forEach(s => selectedStudios.add(s));
+      } else if (type === 'all') {
+        allAvailableStudios.forEach(s => selectedStudios.add(s));
       } else if (type === 'clear') {
         selectedStudios.clear();
       }
       filterStudioList();
-      updateDashboard();
+      await updateDashboard();
     }
 
-    function updateDashboard() {
-      document.getElementById('selectedCountBadge').textContent = `${selectedStudios.size} Selected`;
+    async function setTimeRange(range) {
+      if (currentTimeRange === range) return;
+      currentTimeRange = range;
+      
+      document.querySelectorAll('.time-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-range') === range);
+      });
+
+      await updateDashboard();
+    }
+
+    async function refreshDashboard(manual = false) {
+      const refreshBtn = document.getElementById('refreshBtn');
+      if (manual && refreshBtn) refreshBtn.classList.add('spinning');
+
+      await fetchUtilizationData();
       renderMetrics();
       renderCharts();
+      updateInsights();
+
+      if (manual && refreshBtn) {
+        setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
+      }
+    }
+
+    async function updateDashboard() {
+      document.getElementById('selectedCountBadge').textContent = `${selectedStudios.size} Selected`;
+      await fetchUtilizationData();
+      renderMetrics();
+      renderCharts();
+      updateInsights();
     }
 
     function renderMetrics() {
@@ -573,48 +980,175 @@
 
       const activeList = Array.from(selectedStudios);
       if (activeList.length === 0) {
-        container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.9rem; grid-column: 1 / -1; text-align: center; padding: 2rem;">No studios selected. Use the "Select Studios" button above to pick locations to compare.</div>';
+        container.innerHTML = `
+          <div style="color: var(--text-muted); font-size: 0.95rem; grid-column: 1 / -1; text-align: center; padding: 2.5rem; background: var(--bg-card); border-radius: 1rem; border: 1px dashed var(--border-color);">
+            👈 No gyms selected. Use the <strong>"Select Studios"</strong> dropdown above to pick locations to analyze.
+          </div>`;
         return;
       }
 
       activeList.forEach((st, idx) => {
         const records = globalData[st] || [];
-        if (records.length === 0) return;
+        const snapshot = latestSnapshots[st] || {};
+        
+        const latestPct = records.length > 0 ? records[records.length - 1].percentage : (snapshot.percentage ?? 0);
+        const level = records.length > 0 ? records[records.length - 1].level : (snapshot.level ?? 'UNKNOWN');
 
-        const latest = records[records.length - 1].percentage;
+        // Calculate average & peak
+        let avgPct = 0;
+        let peakPct = 0;
+        let peakHour = '--';
+
+        if (records.length > 0) {
+          const sum = records.reduce((acc, r) => acc + r.percentage, 0);
+          avgPct = (sum / records.length).toFixed(0);
+
+          const hourlyMap = {};
+          records.forEach(r => {
+            const h = new Date(r.timestamp).getHours();
+            if (!isNaN(h)) {
+              if (!hourlyMap[h]) hourlyMap[h] = [];
+              hourlyMap[h].push(r.percentage);
+            }
+          });
+
+          let maxAvg = -1;
+          for (let h in hourlyMap) {
+            const hAvg = hourlyMap[h].reduce((a, b) => a + b, 0) / hourlyMap[h].length;
+            if (hAvg > maxAvg) {
+              maxAvg = hAvg;
+              peakHour = `${String(h).padStart(2, '0')}:00`;
+              peakPct = Math.round(hAvg);
+            }
+          }
+        }
+
+        // Color & status tags
+        let colorClass = 'green';
+        let statusTag = 'LOW TRAFFIC';
+        let pillClass = 'low';
+
+        if (level === 'CLOSED' || latestPct === 0) {
+          colorClass = '';
+          statusTag = 'CLOSED';
+          pillClass = 'closed';
+        } else if (latestPct >= 65) {
+          colorClass = 'rose';
+          statusTag = 'BUSY';
+          pillClass = 'high';
+        } else if (latestPct >= 35) {
+          colorClass = 'amber';
+          statusTag = 'MODERATE';
+          pillClass = 'moderate';
+        }
 
         const card = document.createElement('div');
-        const colorClass = idx % 3 === 0 ? '' : (idx % 3 === 1 ? 'green' : 'amber');
         card.className = `metric-card ${colorClass}`;
         card.innerHTML = `
-          <div class="metric-studio">${st}</div>
-          <div class="metric-title">Current Utilization</div>
-          <div class="metric-value">${latest}%</div>
+          <div>
+            <div class="metric-header">
+              <div class="metric-studio" title="${st}">${st}</div>
+              <div class="status-pill ${pillClass}">${statusTag}</div>
+            </div>
+            <div class="metric-body">
+              <div class="metric-value">${latestPct}</div>
+              <div class="metric-unit">%</div>
+            </div>
+          </div>
+          <div class="metric-footer">
+            <div class="stat-item">
+              <span class="stat-label">Period Avg</span>
+              <span class="stat-val">${records.length > 0 ? avgPct + '%' : '--'}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Peak Hour</span>
+              <span class="stat-val">${peakHour} (${peakPct}%)</span>
+            </div>
+          </div>
         `;
         container.appendChild(card);
       });
     }
 
+    function updateInsights() {
+      const studios = Array.from(selectedStudios);
+      const titleEl = document.getElementById('insightsTitle');
+      const textEl = document.getElementById('insightsText');
+
+      if (studios.length === 0) {
+        titleEl.textContent = 'Select Studios to View Workout Insights';
+        textEl.textContent = 'Choose one or more gyms above to generate crowd predictions and quiet window recommendations.';
+        return;
+      }
+
+      // Calculate aggregated hourly profile
+      const hourlyAvg = Array(24).fill(0);
+      const hourlyCounts = Array(24).fill(0);
+
+      studios.forEach(st => {
+        (globalData[st] || []).forEach(r => {
+          const d = new Date(r.timestamp);
+          const h = d.getHours();
+          if (!isNaN(h) && r.percentage > 0) {
+            hourlyAvg[h] += r.percentage;
+            hourlyCounts[h] += 1;
+          }
+        });
+      });
+
+      const averages = hourlyAvg.map((sum, h) => hourlyCounts[h] > 0 ? (sum / hourlyCounts[h]) : 0);
+      
+      // Find quiet hours (<35%) and peak hours (>50%)
+      const quietHours = [];
+      const peakHours = [];
+
+      for (let h = 6; h <= 23; h++) {
+        if (averages[h] > 0 && averages[h] < 30) quietHours.push(`${h}:00`);
+        if (averages[h] >= 50) peakHours.push(`${h}:00`);
+      }
+
+      titleEl.textContent = `💡 Workout Recommendation (${studios.length} Gyms Selected)`;
+      
+      const quietStr = quietHours.length > 0 ? `🟢 <strong>Quietest Windows:</strong> ${quietHours.slice(0, 4).join(', ')}` : '🟢 Morning hours (06:00 - 09:00)';
+      const peakStr = peakHours.length > 0 ? `🔴 <strong>Peak Rush:</strong> ${peakHours.slice(0, 3).join(', ')}` : '🔴 Evening rush (17:00 - 20:00)';
+
+      textEl.innerHTML = `${quietStr} &nbsp;•&nbsp; ${peakStr}`;
+    }
+
     function renderCharts() {
       const studios = Array.from(selectedStudios);
 
+      // Collect all distinct timestamps and sort chronologically
+      const allTimestampsSet = new Set();
+      studios.forEach(st => {
+        (globalData[st] || []).forEach(r => allTimestampsSet.add(r.timestamp));
+      });
+      const allTimestamps = Array.from(allTimestampsSet).sort();
+
+      // Format labels for X axis
+      const formattedLabels = allTimestamps.map(ts => formatToGermanyTime(ts, true));
+
+      // Build time series datasets
       const timeSeriesDatasets = studios.map((st, idx) => {
-        const records = globalData[st] || [];
+        const recordsMap = new Map((globalData[st] || []).map(r => [r.timestamp, r.percentage]));
+        const color = COLORS[idx % COLORS.length];
+
+        // Map values to aligned timestamps
+        const dataPoints = allTimestamps.map(ts => recordsMap.has(ts) ? recordsMap.get(ts) : null);
+
         return {
           label: st,
-          data: records.map(r => ({ x: r.timestamp, y: r.percentage })),
-          borderColor: COLORS[idx % COLORS.length],
-          backgroundColor: COLORS[idx % COLORS.length] + '22',
+          data: dataPoints,
+          borderColor: color,
+          backgroundColor: color + '15',
           borderWidth: 2,
+          pointRadius: allTimestamps.length > 80 ? 1 : 3,
+          pointHoverRadius: 6,
           fill: studios.length === 1,
-          tension: 0.3,
-          pointRadius: records.length > 50 ? 2 : 4,
+          tension: 0.25,
+          spanGaps: true
         };
       });
-
-      const allTimestamps = Array.from(new Set(
-        studios.flatMap(st => (globalData[st] || []).map(r => r.timestamp))
-      )).sort();
 
       const ctx1 = document.getElementById('timeSeriesChart').getContext('2d');
       if (timeSeriesChartInstance) timeSeriesChartInstance.destroy();
@@ -622,20 +1156,52 @@
       timeSeriesChartInstance = new Chart(ctx1, {
         type: 'line',
         data: {
-          labels: allTimestamps,
+          labels: formattedLabels,
           datasets: timeSeriesDatasets
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: '#f8fafc' } } },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { color: '#f8fafc', font: { family: 'Inter', weight: '500' } }
+            },
+            tooltip: {
+              backgroundColor: '#111927',
+              titleColor: '#38bdf8',
+              bodyColor: '#f8fafc',
+              borderColor: 'rgba(255,255,255,0.1)',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function(context) {
+                  const val = context.parsed.y !== null ? `${context.parsed.y}%` : 'No data';
+                  return ` ${context.dataset.label}: ${val}`;
+                }
+              }
+            }
+          },
           scales: {
-            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', maxTicksLimit: 12 } },
-            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 }
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', maxTicksLimit: 14, font: { family: 'Inter', size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', font: { family: 'Inter' }, callback: v => v + '%' },
+              min: 0,
+              max: 100
+            }
           }
         }
       });
 
+      // Build 24-Hour Average Profile Chart
       const hourlyLabels = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
       const hourlyDatasets = studios.map((st, idx) => {
         const records = globalData[st] || [];
@@ -643,25 +1209,23 @@
         const hourlyCount = Array(24).fill(0);
 
         records.forEach(r => {
-          let h = 0;
-          if (r.timestamp.includes(' ')) {
-            h = parseInt((r.timestamp.split(' ')[1] || '0').split(':')[0], 10);
-          } else {
-            const d = new Date(r.timestamp);
-            if (!isNaN(d)) h = d.getHours();
-          }
-          if (h >= 0 && h < 24) {
+          const d = new Date(r.timestamp);
+          const h = d.getHours();
+          if (!isNaN(h) && h >= 0 && h < 24) {
             hourlySum[h] += r.percentage;
             hourlyCount[h] += 1;
           }
         });
 
-        const hourlyAvg = hourlySum.map((sum, i) => hourlyCount[i] > 0 ? (sum / hourlyCount[i]).toFixed(1) : 0);
+        const hourlyAvg = hourlySum.map((sum, i) => hourlyCount[i] > 0 ? Math.round(sum / hourlyCount[i]) : 0);
+        const color = COLORS[idx % COLORS.length];
 
         return {
           label: st,
           data: hourlyAvg,
-          backgroundColor: COLORS[idx % COLORS.length] + 'cc',
+          backgroundColor: color + 'cc',
+          borderColor: color,
+          borderWidth: 1,
           borderRadius: 4
         };
       });
@@ -678,19 +1242,57 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: '#f8fafc' } } },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { color: '#f8fafc', font: { family: 'Inter', weight: '500' } }
+            },
+            tooltip: {
+              backgroundColor: '#111927',
+              titleColor: '#38bdf8',
+              bodyColor: '#f8fafc',
+              borderColor: 'rgba(255,255,255,0.1)',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function(context) {
+                  return ` ${context.dataset.label}: ${context.parsed.y}% avg`;
+                }
+              }
+            }
+          },
           scales: {
-            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
-            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 }
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', font: { family: 'Inter', size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', font: { family: 'Inter' }, callback: v => v + '%' },
+              min: 0,
+              max: 100
+            }
           }
         }
       });
     }
 
     async function initDashboard() {
-      globalData = await loadData();
-      populateStudioCheckboxes();
-      updateDashboard();
+      await loadStudioDirectoryAndSnapshots();
+      await fetchUtilizationData();
+      renderMetrics();
+      renderCharts();
+      updateInsights();
+
+      // Auto-refresh every 2 minutes for real-time tracking
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshTimer = setInterval(() => {
+        refreshDashboard(false);
+      }, 120000);
     }
 
     initDashboard();

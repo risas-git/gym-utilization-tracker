@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # Allows you to run it manually from the Actions tab
 
 permissions:
-  contents: write # Allows the bot to push the CSV file back to the repo
+  contents: write # Allows the bot to push chart updates back to the repo
 
 jobs:
   scrape-and-save:
@@ -34,7 +34,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add utilization_log.csv gym_utilization_analysis.png
+          git add gym_utilization_analysis.png
           
           # Only commit if there are changes to avoid workflow errors
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update utilization log and chart" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update utilization analysis chart" && git push)

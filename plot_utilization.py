@@ -1,9 +1,17 @@
-import csv
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+import json
 import os
 import sys
+from zoneinfo import ZoneInfo
 
-CSV_FILE = "utilization_log.csv"
+try:
+    import requests
+except ImportError:
+    requests = None
+
+# Supabase REST API Configuration
+SUPABASE_URL = "https://vnsqquagjxgjteuvypwo.supabase.co/rest/v1/gym_utilization"
+SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl"
 OUTPUT_PLOT = "gym_utilization_analysis.png"
 
 COLORS = [
@@ -18,28 +26,103 @@ COLORS = [
 ]
 
 
-def load_data(filepath):
-    studio_data = {}  # {studio_name: [(timestamp, percentage, level)]}
+def clean_studio_name(name):
+    if not name:
+        return "General Gym"
+    import re
 
-    if not os.path.exists(filepath):
-        print(f"File {filepath} does not exist.")
-        return studio_data
+    cleaned = re.sub(r"^(ai\s*[-_]?\s*fitness\s*)", "", name, flags=re.IGNORECASE).strip()
+    if cleaned == "Bielefeld Eckendorfer":
+        cleaned = "Bielefeld City"
+    return cleaned if cleaned else name
 
-    with open(filepath, "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
+
+def parse_timestamp(ts_str):
+    if not ts_str:
+        return None
+    try:
+        # If standard ISO timestamp
+        ts_clean = ts_str.replace("Z", "+00:00")
+        dt = datetime.fromisoformat(ts_clean)
+        # Convert to Germany timezone for plotting
+        try:
+            berlin_tz = ZoneInfo("Europe/Berlin")
+            dt = dt.astimezone(berlin_tz)
+        except Exception:
+            pass
+        return dt
+    except Exception:
+        # Fallback to string matching
+        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M"):
             try:
-                dt = datetime.strptime(row["timestamp"], "%Y-%m-%d %H:%M:%S")
-                pct = float(row["percentage"])
-                studio = row.get("studio", "General Gym").strip()
-                if not studio or studio == "Bielefeld Eckendorfer":
-                    studio = "Bielefeld City"
-
-                if studio not in studio_data:
-                    studio_data[studio] = []
-                studio_data[studio].append((dt, pct, row.get("level", "UNKNOWN")))
-            except (ValueError, KeyError):
+                return datetime.strptime(ts_str, fmt)
+            except ValueError:
                 continue
+    return None
+
+
+def fetch_data_from_supabase(days=7):
+    headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "Range-Unit": "items",
+    }
+
+    since_dt = datetime.now(timezone.utc) - timedelta(days=days)
+    since_str = since_dt.isoformat()
+
+    # Query latest records from Supabase
+    url = (
+        f"{SUPABASE_URL}?select=timestamp,studio,percentage,level"
+        f"&timestamp=gte.{since_str}&order=timestamp.asc&limit=10000"
+    )
+
+    rows = []
+    try:
+        if requests is not None:
+            res = requests.get(url, headers=headers, timeout=20)
+            res.raise_for_status()
+            rows = res.json()
+        else:
+            import urllib.request
+
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=20) as response:
+                rows = json.loads(response.read().decode("utf-8"))
+    except Exception as e:
+        print(f"Error fetching data from Supabase: {e}")
+        # If timestamp filter fails or table is small, fallback to latest 5000 records
+        try:
+            fallback_url = f"{SUPABASE_URL}?select=timestamp,studio,percentage,level&order=id.desc&limit=5000"
+            if requests is not None:
+                res = requests.get(fallback_url, headers=headers, timeout=20)
+                rows = res.json()
+            else:
+                import urllib.request
+
+                req = urllib.request.Request(fallback_url, headers=headers)
+                with urllib.request.urlopen(req, timeout=20) as response:
+                    rows = json.loads(response.read().decode("utf-8"))
+            rows.reverse()
+        except Exception as e2:
+            print(f"Fallback query also failed: {e2}")
+            return {}
+
+    studio_data = {}
+    for r in rows:
+        studio = clean_studio_name(r.get("studio"))
+        ts = parse_timestamp(r.get("timestamp"))
+        if not ts:
+            continue
+        try:
+            pct = float(r.get("percentage", 0))
+        except (ValueError, TypeError):
+            pct = 0.0
+        level = r.get("level", "UNKNOWN")
+
+        if studio not in studio_data:
+            studio_data[studio] = []
+        studio_data[studio].append((ts, pct, level))
 
     return studio_data
 
@@ -56,7 +139,7 @@ def plot_with_matplotlib(studio_data):
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 9))
         fig.suptitle("Gym Utilization Tracker - Germany-Wide Studio Analysis", fontsize=16, fontweight="bold")
 
-        # Select top active studios for chart clarity if there are many
+        # Select top active studios for chart clarity
         sorted_studios = sorted(
             studio_data.keys(),
             key=lambda s: max([r[1] for r in studio_data[s]]) if studio_data[s] else 0,
@@ -76,6 +159,7 @@ def plot_with_matplotlib(studio_data):
                 timestamps,
                 percentages,
                 marker="o",
+                markersize=4,
                 linewidth=2,
                 label=studio,
                 color=color,
@@ -125,13 +209,13 @@ def plot_with_matplotlib(studio_data):
 
 
 def main():
-    studio_data = load_data(CSV_FILE)
+    studio_data = fetch_data_from_supabase(days=7)
     if not studio_data:
-        print(f"No valid data found in {CSV_FILE}. Run tracker.py first to accumulate logs.")
+        print("No valid data found in Supabase. Run tracker.py to log utilization records.")
         sys.exit(0)
 
     total_records = sum(len(v) for v in studio_data.values())
-    print(f"Loaded {total_records} records across {len(studio_data)} studio(s) from {CSV_FILE}.")
+    print(f"Loaded {total_records} records across {len(studio_data)} studio(s) directly from Supabase.")
     plot_with_matplotlib(studio_data)
 
 

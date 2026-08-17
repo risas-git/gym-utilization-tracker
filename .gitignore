@@ -1,0 +1,21 @@
+# Local environment and data files
+*.csv
+utilization_log.csv
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -11,9 +11,8 @@ except ImportError:
 
 STUDIO_DIRECTORY_URL = "https://www.ai-fitness.de/connect/v2/studio"
 UTILIZATION_URL_TEMPLATE = "https://www.ai-fitness.de/connect/v1/studio/{id}/utilization"
-CSV_FILE = "utilization_log.csv"
 
-# Supabase Credentials
+# Supabase REST API Configuration
 SUPABASE_URL = "https://vnsqquagjxgjteuvypwo.supabase.co/rest/v1/gym_utilization"
 SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl"
 
@@ -83,10 +82,10 @@ def fetch_studio_utilization(studio, timestamp):
             return {
                 "timestamp": timestamp,
                 "studio": name,
-                "slot_start": current_slot["startTime"],
-                "slot_end": current_slot["endTime"],
-                "percentage": current_slot["percentage"],
-                "level": current_slot["level"],
+                "slot_start": current_slot.get("startTime", "closed"),
+                "slot_end": current_slot.get("endTime", "closed"),
+                "percentage": current_slot.get("percentage", 0),
+                "level": current_slot.get("level", "UNKNOWN"),
             }
         else:
             return {
@@ -108,50 +107,50 @@ def fetch_studio_utilization(studio, timestamp):
         }
 
 
-def push_to_supabase(records):
-    try:
-        if requests is not None:
-            headers = {
-                "apikey": SUPABASE_KEY,
-                "Authorization": f"Bearer {SUPABASE_KEY}",
-                "Content-Type": "application/json",
-                "Prefer": "return=minimal",
-            }
-            res = requests.post(SUPABASE_URL, json=records, headers=headers, timeout=15)
-            res.raise_for_status()
-            print(f"Successfully pushed {len(records)} records to Supabase Cloud Database.")
-        else:
-            import urllib.request
+def push_to_supabase(records, batch_size=50):
+    """Pushes records to Supabase in batches for high reliability."""
+    if not records:
+        return
 
-            headers = {
-                "apikey": SUPABASE_KEY,
-                "Authorization": f"Bearer {SUPABASE_KEY}",
-                "Content-Type": "application/json",
-                "Prefer": "return=minimal",
-            }
-            req = urllib.request.Request(
-                SUPABASE_URL, data=json.dumps(records).encode("utf-8"), headers=headers, method="POST"
-            )
-            with urllib.request.urlopen(req, timeout=15) as res:
-                print(f"Successfully pushed {len(records)} records to Supabase Cloud Database.")
-    except Exception as e:
-        print(f"Error pushing to Supabase: {e}")
+    headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
+    }
 
+    total_inserted = 0
+    for i in range(0, len(records), batch_size):
+        chunk = records[i : i + batch_size]
+        try:
+            if requests is not None:
+                res = requests.post(SUPABASE_URL, json=chunk, headers=headers, timeout=15)
+                res.raise_for_status()
+            else:
+                import urllib.request
 
-def ensure_csv_header():
-    if not os.path.exists(CSV_FILE) or os.path.getsize(CSV_FILE) == 0:
-        with open(CSV_FILE, "w", encoding="utf-8") as f:
-            f.write("timestamp,studio,slot_start,slot_end,percentage,level\n")
+                req = urllib.request.Request(
+                    SUPABASE_URL,
+                    data=json.dumps(chunk).encode("utf-8"),
+                    headers=headers,
+                    method="POST",
+                )
+                with urllib.request.urlopen(req, timeout=15) as res:
+                    pass
+            total_inserted += len(chunk)
+        except Exception as e:
+            print(f"Error pushing batch {i // batch_size + 1} to Supabase: {e}")
+
+    print(f"Successfully pushed {total_inserted}/{len(records)} records to Supabase Cloud Database.")
 
 
 def log_utilization():
-    ensure_csv_header()
-
     try:
         germany_tz = ZoneInfo("Europe/Berlin")
         dt_now = datetime.now(germany_tz)
     except Exception:
         import datetime as dt_module
+
         germany_tz = dt_module.timezone(dt_module.timedelta(hours=2))
         dt_now = datetime.now(germany_tz)
 
@@ -159,29 +158,21 @@ def log_utilization():
     iso_str = dt_now.isoformat()
 
     studios = get_all_studios()
-    print(f"[{now_str}] Discovering & fetching utilization for {len(studios)} studios in Germany...")
+    print(f"[{now_str}] Discovering & fetching utilization for {len(studios)} studios across Germany...")
 
     # Fetch all studio utilization data in parallel using ThreadPoolExecutor
     db_records = []
-    csv_rows = []
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
         futures = [executor.submit(fetch_studio_utilization, s, iso_str) for s in studios]
         for future in concurrent.futures.as_completed(futures):
             rec = future.result()
             db_records.append(rec)
-            csv_rows.append(
-                f"{now_str},{rec['studio']},{rec['slot_start']},{rec['slot_end']},{rec['percentage']},{rec['level']}\n"
-            )
 
-    # Batch insert into Supabase Cloud Database
+    # Push all records directly to Supabase
     push_to_supabase(db_records)
 
-    # Also log to local CSV backup
-    with open(CSV_FILE, "a", encoding="utf-8") as f:
-        f.writelines(csv_rows)
-
-    print(f"[{now_str}] Logged {len(db_records)} studio records.")
+    print(f"[{now_str}] Finished logging {len(db_records)} studio records to Supabase.")
 
 
 if __name__ == "__main__":
