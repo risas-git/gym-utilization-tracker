@@ -1,51 +1,53 @@
-# Gym Utilization Tracker - Android App (Java)
+# 🚦 GymAmpel – Android App (Java)
 
-This is the native Android Studio project for the Gym Utilization Tracker, built with Java and modern AndroidX components.
-
----
-
-## 🚀 Getting Started with Android Studio
-
-### 1. Open the Project in Android Studio
-1. Launch **Android Studio**.
-2. Click **Open** (or `File > Open`).
-3. Select the `android/` directory inside this project:
-   `c:\Users\risas\Uni\project\gym-utilization-tracker\android`
-4. Android Studio will automatically recognize Gradle and sync all dependencies.
+Dies ist das native Android Studio Projekt für **GymAmpel**, entwickelt in Java mit modernen AndroidX-Komponenten und WebView.
 
 ---
 
-### 2. Running on an Emulator or Physical Device
-* **On Emulator**: Click the green **▶ Run** button at the top toolbar. If you don't have a virtual device, create one via **Device Manager** (e.g. Pixel 8, Android 14).
-* **On Real Phone**:
-  1. Enable **Developer Options** and **USB Debugging** on your phone.
-  2. Connect your phone to your PC via USB.
-  3. Select your device from the dropdown and click **▶ Run**.
+## 🚀 Erste Schritte mit Android Studio
+
+### 1. Projekt in Android Studio öffnen
+1. Starte **Android Studio**.
+2. Klicke auf **Open** (oder `Datei > Öffnen`).
+3. Wähle den Unterordner `android/` in diesem Projekt aus:
+   ```text
+   c:\Users\risas\Uni\project\gym-utilization-tracker\android
+   ```
+4. Android Studio erkennt Gradle automatisch und synchronisiert alle Abhängigkeiten.
 
 ---
 
-### 3. How to Share with Friends (Export APK)
-To share an installable `.apk` directly with friends:
-1. In Android Studio, go to the top menu: **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
-2. Once complete, click **locate** in the bottom-right popup.
-3. Send the `.apk` file (`app-debug.apk`) to your friends (via Telegram, WhatsApp, Google Drive, etc.).
-4. Your friends can open and install it directly on any Android device!
+### 2. Auf dem Emulator oder Smartphone testen
+* **Auf dem Emulator**: Klicke oben in der Menüleiste auf den grünen **▶ Play / Run-Button**. Falls kein Gerät vorhanden ist, erstelle eines über den **Device Manager** (z. B. Pixel 8, Android 14).
+* **Auf dem echten Smartphone**:
+  1. Aktiviere die **Entwickleroptionen** und **USB-Debugging** auf deinem Handy.
+  2. Verbinde dein Handy per USB-Kabel mit dem PC.
+  3. Bestätige auf dem Handy die Abfrage *„USB-Debugging zulassen?“*.
+  4. Wähle dein Handy im Dropdown-Menü in Android Studio aus und klicke auf **▶ Run**.
 
 ---
 
-### 4. How to Publish on the Google Play Store
-When you are ready for Google Play:
-1. Go to **Build > Generate Signed Bundle / APK...**
-2. Choose **Android App Bundle (.aab)**.
-3. Create or select your **Release Keystore** (save your key password!).
-4. Choose **release** build variant and click **Finish**.
-5. Upload the resulting `.aab` to your [Google Play Console](https://play.google.com/console).
+### 3. App an Freunde weitergeben (APK exportieren)
+Um eine installierbare `.apk`-Datei direkt an Freunde zu senden (z. B. via WhatsApp, Telegram oder Google Drive):
+1. Gehe im Menü auf: **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
+2. Nach Abschluss unten rechts auf **locate** klicken.
+3. Die erzeugte Datei (`app-debug.apk`) kannst du direkt weiterleiten. Deine Freunde können sie mit einem Tippen auf jedem Android-Gerät installieren!
 
 ---
 
-### 5. Syncing Web Updates
-If you make changes to the main web app at root `../index.html`, copy it into the Android assets folder:
+### 4. Im Google Play Store veröffentlichen
+Wenn du bereit für den Play Store bist:
+1. Gehe auf **Build > Generate Signed Bundle / APK...**
+2. Wähle **Android App Bundle (.aab)**.
+3. Erstelle oder wähle deinen **Release Keystore** (Schlüssel-Passwort gut merken!).
+4. Wähle die Build-Variante **release** und klicke auf **Finish**.
+5. Lade die erstellte `.aab`-Datei in deiner [Google Play Console](https://play.google.com/console) hoch.
+
+---
+
+### 5. Web-Updates synchronisieren
+Wenn du Änderungen an der Datei `../index.html` vornimmst, kopiere sie einfach in den Android-Assets-Ordner:
 ```powershell
 Copy-Item ..\index.html .\app\src\main\assets\index.html -Force
 ```
-Then rebuild or re-run the app.
+Danach die App in Android Studio neu starten oder bauen.
