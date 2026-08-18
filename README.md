@@ -1,16 +1,35 @@
-# Gym Utilization Tracker
+# 🚦 GymAmpel – Live Studio-Auslastungstracker
 
-Who also loves training in the gym but hates crowded ones where you have to wait for machines or ask *"How many sets do you have left?"*? 
+Wer kennt es nicht: Man möchte trainieren, aber das Fitnessstudio ist überfüllt und man muss an jedem Gerät warten? 
 
-With this app, you can view an overview of the business/occupancy of your nearest gyms to compare them and easily decide which one to go to!
-
-📊 **[View Interactive Dashboard (Live Web App)](https://risas-git.github.io/gym-utilization-tracker/)**
+Mit **GymAmpel** siehst du die Auslastung deiner Studios in Echtzeit, kannst Standorte vergleichen und findest sofort die besten und ruhigsten Trainingszeiten!
 
 ---
 
-## Features
+## 🔗 Schnellzugriff
 
-- **Germany-Wide Studio Tracking**: Automatically discovers and tracks all **200+ All Inclusive / AI Fitness studios across Germany**.
-- **Interactive Search & Filter**: Search and select any city or studio (e.g. Bielefeld City, Schildesche, Sieker, Bonn, Berlin, Munich) to compare capacity side-by-side.
-- **15-Minute Automated Parallel Scraping**: Runs via GitHub Actions ([scrape.yml](.github/workflows/scrape.yml)) on a 15-minute cron schedule, leveraging multithreaded requests to fetch 200+ studios in ~5 seconds.
-- **Cloud Database Storage**: Automatically logs all 15-minute capacity records into a Supabase PostgreSQL Cloud Database for long-term historical analytics.
+* 📊 **[Live Web-App öffnen (GitHub Pages)](https://risas-git.github.io/gym-utilization-tracker/)**
+* 📱 **[Natives Android Studio Projekt (Java)](android/)**
+
+---
+
+## ✨ Features
+
+- **🚦 Live-Auslastungsampel**: Schneller Überblick über den aktuellen Füllstand (🟢 Gering, 🟡 Mittel, 🔴 Hoch, ⚪ Geschlossen).
+- **🇩🇪 Deutschlandweites Studio-Tracking**: Automatische Erfassung von über **200+ All Inclusive / AI Fitness Studios in ganz Deutschland**.
+- **🔍 Interaktive Suche & Vergleich**: Suche nach Städten oder Studios (z. B. Bielefeld, Berlin, Köln, München, Frankfurt) und vergleiche sie direkt nebeneinander.
+- **📈 Verlaufs-Analytics & 24h-Profile**: Zeitreihendiagramme (15-Minuten-Intervalle) und stündliche Durchschnittsauslastungen zur optimalen Trainingsplanung.
+- **⚡ 15-Minuten automatisches Scraping**: Läuft vollautomatisch via GitHub Actions ([scrape.yml](.github/workflows/scrape.yml)) mit parallelen Abfragen in ~5 Sekunden.
+- **☁️ Supabase Cloud-Datenbank**: Sichere und performante Speicherung aller Auslastungsdaten in einer PostgreSQL-Cloud-Datenbank.
+- **📱 Native Android App (Java)**: Bereit zum Öffnen in Android Studio, Testen auf dem Smartphone per USB und Exportieren als `.apk` / `.aab` für Freunde und den Google Play Store.
+
+---
+
+## 📱 Android App starten
+
+Die Android-Version liegt im Unterordner [`android/`](android/):
+1. **Android Studio** öffnen.
+2. Den Ordner `android/` auswählen.
+3. Auf den grünen **▶ Run-Button** klicken (oder als APK für Freunde exportieren über *Build > Build Bundle(s) / APK(s) > Build APK(s)*).
+
+Ausführliche Details findest du in der [Android Dokumentation](android/README.md).
