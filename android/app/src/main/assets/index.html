@@ -613,8 +613,8 @@
 
     .pomeranian-stage {
       position: relative;
-      width: 180px;
-      height: 180px;
+      width: 240px;
+      height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -622,50 +622,44 @@
 
     .pomeranian-aura {
       position: absolute;
-      bottom: 18px;
-      width: 130px;
-      height: 24px;
-      background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.45) 0%, rgba(56, 189, 248, 0.2) 50%, transparent 75%);
+      bottom: 6px;
+      width: 200px;
+      height: 28px;
+      background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.45) 0%, rgba(56, 189, 248, 0.2) 55%, transparent 75%);
       border-radius: 50%;
       animation: auraPulse 1.8s ease-in-out infinite alternate;
     }
 
     .pomeranian-svg {
-      animation: dogBounce 1.8s ease-in-out infinite;
+      animation: pomProudBounce 2s ease-in-out infinite;
+      filter: drop-shadow(0 8px 24px rgba(56, 189, 248, 0.25));
     }
 
-    .pom-tail {
-      transform-origin: 72px 98px;
-      animation: tailWag 0.9s ease-in-out infinite alternate;
+    .pom-dumbbell {
+      animation: dumbbellLift 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
     }
 
-    .pom-workout {
-      transform-origin: 112px 98px;
-      animation: dumbbellCurl 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-    }
-
-    @keyframes dumbbellCurl {
+    @keyframes dumbbellLift {
       0%, 100% {
-        transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px);
       }
       50% {
-        transform: translateY(-14px) rotate(-8deg);
+        transform: translateY(-16px);
       }
     }
 
-    @keyframes tailWag {
-      0% { transform: rotate(-8deg); }
-      100% { transform: rotate(14deg); }
-    }
-
-    @keyframes dogBounce {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
+    @keyframes pomProudBounce {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-4px) scale(1.01);
+      }
     }
 
     @keyframes auraPulse {
-      0% { transform: scale(0.9); opacity: 0.6; }
-      100% { transform: scale(1.15); opacity: 1; }
+      0% { transform: scale(0.92); opacity: 0.55; }
+      100% { transform: scale(1.12); opacity: 1; }
     }
 
     .splash-title {
@@ -711,57 +705,135 @@
 </head>
 <body>
 
-  <!-- Splash Loading Screen with Pomeranian Dog Lifting Dumbbell -->
+  <!-- Splash Loading Screen with Exact Pomeranian Dog Silhouette -->
   <div id="splashScreen" class="splash-overlay">
     <div class="splash-content">
       <div class="pomeranian-stage">
         <div class="pomeranian-aura"></div>
-        <svg class="pomeranian-svg" viewBox="0 0 200 200" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
-          <!-- Fluffy Pomeranian Silhouette -->
-          <g class="pom-dog">
-            <!-- Curled Plume Tail -->
-            <path class="pom-tail" fill="#38BDF8" d="M68,110 C50,105 38,90 42,72 C46,54 62,48 76,52 C84,55 88,64 84,70 C80,75 72,74 70,68 C68,62 58,62 54,72 C50,82 58,94 72,98 Z" />
+        <svg class="pomeranian-svg" viewBox="0 0 310 270" width="220" height="192" xmlns="http://www.w3.org/2000/svg">
+          <g class="pom-character">
+            <!-- Full Fluffy Pomeranian Silhouette matching reference image -->
+            <path fill="#F8FAFC" d="
+              M 85,62
+              C 80,58 74,60 70,64
+              C 67,67 66,72 68,76
+              C 69,78 68,81 65,83
+              C 63,85 64,88 67,90
+              C 69,92 72,94 76,96
+              C 72,99 66,104 60,111
+              C 56,116 57,118 63,117
+              C 57,123 50,131 46,140
+              C 43,146 45,147 50,145
+              C 44,152 40,161 38,172
+              C 37,178 40,178 45,175
+              C 41,183 40,192 42,202
+              C 44,212 50,221 60,227
+              C 66,231 72,233 77,228
+              C 77,233 76,240 75,248
+              C 74,254 77,258 83,258
+              C 86,258 88,256 89,252
+              C 90,256 93,258 97,258
+              C 100,258 103,255 104,251
+              C 105,255 108,258 113,258
+              C 118,258 120,252 118,245
+              C 114,233 111,220 109,207
+              C 112,213 117,218 123,222
+              C 126,219 126,214 123,209
+              C 127,212 132,214 137,212
+              C 134,204 130,196 125,188
+              C 135,190 144,188 152,183
+              C 156,188 162,196 168,206
+              C 174,217 176,228 174,242
+              C 173,248 176,254 182,256
+              C 185,256 188,253 189,249
+              C 190,254 194,257 199,257
+              C 203,257 206,252 206,246
+              C 207,251 211,255 216,255
+              C 221,255 223,248 221,238
+              C 217,221 216,206 220,193
+              C 225,185 231,178 238,174
+              C 242,181 245,189 245,198
+              C 245,208 243,218 246,226
+              C 247,231 251,235 256,236
+              C 259,236 261,233 262,229
+              C 264,233 267,236 272,236
+              C 276,236 278,231 278,225
+              C 280,230 284,233 289,233
+              C 294,233 296,226 293,215
+              C 287,192 284,170 286,148
+              C 292,154 297,159 303,162
+              C 300,152 295,142 289,134
+              C 295,138 300,140 305,140
+              C 299,129 292,118 284,110
+              C 288,111 292,112 296,111
+              C 288,98 277,88 265,80
+              C 272,81 277,80 281,77
+              C 270,65 256,56 240,51
+              C 245,51 250,50 253,46
+              C 238,36 221,32 203,34
+              C 192,35 182,40 174,48
+              C 167,55 163,64 163,74
+              C 163,85 168,95 177,103
+              C 170,103 162,100 156,95
+              C 152,90 150,83 150,75
+              C 150,68 153,61 157,55
+              C 151,57 146,61 142,66
+              C 137,73 135,81 135,90
+              C 133,83 131,76 131,69
+              C 129,60 131,52 135,45
+              C 129,48 125,53 122,59
+              C 119,65 118,72 118,80
+              C 117,73 116,66 116,59
+              C 114,50 116,42 120,35
+              C 114,37 110,42 107,48
+              C 104,54 103,61 103,68
+              C 102,58 103,48 107,39
+              C 110,32 114,26 120,21
+              C 116,21 112,23 109,26
+              C 105,30 102,35 100,41
+              C 98,34 100,27 104,20
+              C 107,14 112,9 118,6
+              C 112,6 106,8 102,12
+              C 96,17 93,24 91,32
+              C 87,35 83,40 81,47
+              C 79,53 81,58 85,62
+              Z
+            " />
 
-            <!-- Fluffy Body Silhouette -->
-            <path fill="#F8FAFC" d="M72,95 C62,100 58,115 62,130 C64,138 72,145 84,146 C92,146 96,140 98,132 C104,136 112,138 120,136 C134,132 142,120 138,105 C136,96 130,90 124,86 C126,80 124,72 118,66 C112,60 102,58 95,62 C88,58 78,60 74,66 C68,74 68,88 72,95 Z" />
+            <!-- Exact negative space accents from reference image -->
+            <!-- Eye & Brow -->
+            <path fill="#0B0F19" d="M 88,68 C 93,65 98,66 102,70 C 98,73 93,73 88,71 Z" />
+            <circle cx="94" cy="69" r="2" fill="#F8FAFC" />
+            <path stroke="#0B0F19" stroke-width="2.5" stroke-linecap="round" fill="none" d="M 92,60 C 97,59 103,61 107,65" />
 
-            <!-- Fluffy Mane -->
-            <path fill="#F8FAFC" d="M102,78 C115,82 128,94 126,112 C124,124 116,134 104,136 C98,136 94,132 92,126 C90,116 94,92 102,78 Z" />
+            <!-- Ear inner contour line -->
+            <path stroke="#0B0F19" stroke-width="3" stroke-linecap="round" fill="none" d="M 106,26 C 103,36 106,47 114,54" />
 
-            <!-- Pointed Pomeranian Ears -->
-            <polygon fill="#F8FAFC" points="88,60 96,38 104,56" />
-            <polygon fill="#38BDF8" points="91,58 96,44 101,56" opacity="0.6" />
-            <polygon fill="#F8FAFC" points="106,56 116,36 122,58" />
-            <polygon fill="#38BDF8" points="109,56 115,42 119,57" opacity="0.6" />
+            <!-- Snout / Nose detail -->
+            <path fill="#0B0F19" d="M 68,75 C 71,74 74,75 75,78 C 73,79 70,78 68,77 Z" />
+            <path stroke="#0B0F19" stroke-width="2" stroke-linecap="round" fill="none" d="M 66,88 C 70,87 75,90 77,93" />
 
-            <!-- Snout & Nose -->
-            <path fill="#F8FAFC" d="M116,68 L134,74 C136,75 137,78 135,80 L126,86 Z" />
-            <circle cx="134" cy="75" r="2.5" fill="#38BDF8" />
+            <!-- Mane flame cuts -->
+            <path stroke="#0B0F19" stroke-width="3.2" stroke-linecap="round" fill="none" d="M 125,72 C 122,86 130,102 136,112" />
+            <path stroke="#0B0F19" stroke-width="2.6" stroke-linecap="round" fill="none" d="M 138,82 C 137,94 144,106 148,114" />
 
-            <!-- Eye -->
-            <path d="M108,68 Q113,64 118,69" stroke="#0B0F19" stroke-width="2.5" stroke-linecap="round" fill="none" />
+            <!-- Tail Crescent Cut -->
+            <path stroke="#0B0F19" stroke-width="3.6" stroke-linecap="round" fill="none" d="M 182,106 C 172,122 188,144 218,138" />
 
-            <!-- Back Paws -->
-            <ellipse cx="78" cy="144" rx="9" ry="5" fill="#E2E8F0" />
-            <ellipse cx="106" cy="144" rx="10" ry="5" fill="#E2E8F0" />
+            <!-- Rear Leg Cut -->
+            <path stroke="#0B0F19" stroke-width="3.2" stroke-linecap="round" fill="none" d="M 186,182 C 182,198 194,216 206,220" />
+            
+            <!-- Chest / Leg Separation Cut -->
+            <path stroke="#0B0F19" stroke-width="3.2" stroke-linecap="round" fill="none" d="M 104,188 C 108,202 105,218 98,228" />
           </g>
 
-          <!-- Animated Weight Lifting Paws & Dumbbell -->
-          <g class="pom-workout">
-            <!-- Front Arms / Paws -->
-            <path fill="#F8FAFC" d="M112,98 C116,98 126,98 132,94 C136,92 138,88 136,84 C134,80 128,82 122,86 L112,92 Z" />
-            <ellipse cx="132" cy="88" rx="5" ry="4" fill="#E2E8F0" />
-
-            <!-- Dumbbell Left Weight -->
-            <rect x="120" y="74" width="5" height="28" rx="2.5" fill="#34D399" />
-            <rect x="123" y="78" width="3" height="20" rx="1.5" fill="#22D3EE" />
-
-            <!-- Dumbbell Bar -->
-            <rect x="123" y="86" width="22" height="4" rx="2" fill="#FFFFFF" />
-
-            <!-- Dumbbell Right Weight -->
-            <rect x="142" y="78" width="3" height="20" rx="1.5" fill="#22D3EE" />
-            <rect x="144" y="74" width="5" height="28" rx="2.5" fill="#34D399" />
+          <!-- Animated Glowing Neon Dumbbell -->
+          <g class="pom-dumbbell">
+            <rect x="20" y="194" width="6" height="34" rx="3" fill="#34D399" />
+            <rect x="24" y="198" width="4" height="26" rx="2" fill="#22D3EE" />
+            <rect x="24" y="209" width="30" height="4" rx="2" fill="#FFFFFF" />
+            <rect x="50" y="198" width="4" height="26" rx="2" fill="#22D3EE" />
+            <rect x="52" y="194" width="6" height="34" rx="3" fill="#34D399" />
           </g>
         </svg>
       </div>
