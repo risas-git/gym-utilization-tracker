@@ -31,5 +31,3 @@ Die Android-Version liegt im Unterordner [`android/`](android/):
 1. **Android Studio** öffnen.
 2. Den Ordner `android/` auswählen.
 3. Auf den grünen **Run-Button** klicken.
-
-Ausführliche Details findest du in der [Android Dokumentation](android/README.md).
