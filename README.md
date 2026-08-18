@@ -21,7 +21,7 @@ Mit **GymAmpel** siehst du die Auslastung deiner Studios in Echtzeit, kannst Sta
 - **Verlaufs-Analytics & 24h-Profile**: Zeitreihendiagramme (15-Minuten-Intervalle) und stündliche Durchschnittsauslastungen zur optimalen Trainingsplanung.
 - **15-Minuten automatisches Scraping**: Läuft vollautomatisch via GitHub Actions ([scrape.yml](.github/workflows/scrape.yml)) mit parallelen Abfragen in ~5 Sekunden.
 - **Supabase Cloud-Datenbank**: Sichere und performante Speicherung aller Auslastungsdaten in einer PostgreSQL-Cloud-Datenbank.
-- **Native Android App (Java)**: Bereit zum Öffnen in Android Studio, Testen auf dem Smartphone per USB und Exportieren als `.apk` / `.aab` für Freunde und den Google Play Store.
+- **Native Android App (Java)**: Bereit zum Öffnen in Android Studio und Testen auf dem Smartphone per USB.
 
 ---
 
@@ -30,6 +30,6 @@ Mit **GymAmpel** siehst du die Auslastung deiner Studios in Echtzeit, kannst Sta
 Die Android-Version liegt im Unterordner [`android/`](android/):
 1. **Android Studio** öffnen.
 2. Den Ordner `android/` auswählen.
-3. Auf den grünen **Run-Button** klicken (oder als APK für Freunde exportieren über *Build > Build Bundle(s) / APK(s) > Build APK(s)*).
+3. Auf den grünen **Run-Button** klicken.
 
 Ausführliche Details findest du in der [Android Dokumentation](android/README.md).
