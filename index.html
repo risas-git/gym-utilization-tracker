@@ -581,7 +581,7 @@
   <div class="container">
     <header>
       <div class="title-area">
-        <h1>🚦 GymAmpel</h1>
+        <h1>GymAmpel</h1>
         <div class="subtitle">
           <span>Deutschlandweite Studio-Auslastung</span>
           <span>•</span>
@@ -639,7 +639,7 @@
 
     <!-- Insights Bar -->
     <div class="insights-card" id="insightsCard">
-      <div class="insights-icon">💡</div>
+      <div class="insights-icon">🟢</div>
       <div class="insights-content">
         <h4 id="insightsTitle">Optimale Trainingsempfehlung</h4>
         <p id="insightsText">Analysiere aktuelle und historische Auslastungsmuster für deine ausgewählten Studios...</p>
@@ -659,7 +659,7 @@
       <div class="chart-card">
         <div class="chart-header">
           <div>
-            <div class="chart-title">📈 Auslastungsverlauf (15-Minuten-Intervalle)</div>
+            <div class="chart-title">Auslastungsverlauf (15-Minuten-Intervalle)</div>
             <div class="chart-subtitle">Live-Zeitreihenverlauf der ausgewählten Fitnessstudios</div>
           </div>
         </div>
@@ -671,7 +671,7 @@
       <div class="chart-card">
         <div class="chart-header">
           <div>
-            <div class="chart-title">📊 24-Stunden-Durchschnittsprofil</div>
+            <div class="chart-title">24-Stunden-Durchschnittsprofil</div>
             <div class="chart-subtitle">Historische Durchschnittsauslastung nach Uhrzeit (00:00 - 23:00 Uhr)</div>
           </div>
         </div>
@@ -982,7 +982,7 @@
       if (activeList.length === 0) {
         container.innerHTML = `
           <div style="color: var(--text-muted); font-size: 0.95rem; grid-column: 1 / -1; text-align: center; padding: 2.5rem; background: var(--bg-card); border-radius: 1rem; border: 1px dashed var(--border-color);">
-            👈 Keine Studios ausgewählt. Nutze das Dropdown-Menü <strong>"Studios auswählen"</strong>, um Standorte zu vergleichen.
+            Keine Studios ausgewählt. Nutze das Dropdown-Menü <strong>"Studios auswählen"</strong>, um Standorte zu vergleichen.
           </div>`;
         return;
       }
@@ -1107,7 +1107,7 @@
         if (averages[h] >= 50) peakHours.push(`${h}:00`);
       }
 
-      titleEl.textContent = `💡 Trainingsempfehlung (${studios.length} Studios ausgewählt)`;
+      titleEl.textContent = `Trainingsempfehlung (${studios.length} Studios ausgewählt)`;
       
       const quietStr = quietHours.length > 0 ? `🟢 <strong>Ruhigste Phasen:</strong> ${quietHours.slice(0, 4).join(', ')} Uhr` : '🟢 Morgens (06:00 - 09:00 Uhr)';
       const peakStr = peakHours.length > 0 ? `🔴 <strong>Stoßzeiten:</strong> ${peakHours.slice(0, 3).join(', ')} Uhr` : '🔴 Abend-Rushhour (17:00 - 20:00 Uhr)';
