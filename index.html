@@ -523,7 +523,7 @@
     .canvas-container {
       position: relative;
       width: 100%;
-      height: 380px;
+      height: 420px;
     }
 
     /* Loading overlay */
@@ -568,10 +568,11 @@
     }
 
     @media (max-width: 768px) {
-      body { padding: 1rem; }
+      body { padding: 0.75rem; }
       header { flex-direction: column; align-items: stretch; }
       .header-controls { justify-content: space-between; }
-      .canvas-container { height: 290px; }
+      .chart-card { padding: 1.15rem 0.85rem; }
+      .canvas-container { height: 380px; }
       .dropdown-panel { width: 100%; left: 0; right: 0; }
     }
   </style>
@@ -671,8 +672,8 @@
       <div class="chart-card">
         <div class="chart-header">
           <div>
-            <div class="chart-title">24-Stunden-Durchschnittsprofil</div>
-            <div class="chart-subtitle">Historische Durchschnittsauslastung nach Uhrzeit (00:00 - 23:00 Uhr)</div>
+            <div class="chart-title">Tages-Durchschnittsprofil (06:00 - 23:00 Uhr)</div>
+            <div class="chart-subtitle">Historische Durchschnittsauslastung während der Öffnungszeiten</div>
           </div>
         </div>
         <div class="canvas-container">
@@ -1189,11 +1190,15 @@
           scales: {
             x: {
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8', maxTicksLimit: 14, font: { family: 'Inter', size: 11 } }
+              ticks: { 
+                color: '#94a3b8', 
+                maxTicksLimit: 7, 
+                font: { family: 'Inter', size: 11.5, weight: '500' } 
+              }
             },
             y: {
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8', font: { family: 'Inter' }, callback: v => v + '%' },
+              ticks: { color: '#94a3b8', font: { family: 'Inter', size: 12 }, callback: v => v + '%' },
               min: 0,
               max: 100
             }
@@ -1201,19 +1206,23 @@
         }
       });
 
-      // Build 24-Hour Average Profile Chart
-      const hourlyLabels = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
+      // Build Opening Hours Average Profile Chart (06:00 - 23:00)
+      const startHour = 6;
+      const endHour = 23;
+      const hourSlots = endHour - startHour + 1; // 18 hours (06:00 to 23:00)
+      const hourlyLabels = Array.from({length: hourSlots}, (_, i) => `${String(i + startHour).padStart(2, '0')}:00`);
+
       const hourlyDatasets = studios.map((st, idx) => {
         const records = globalData[st] || [];
-        const hourlySum = Array(24).fill(0);
-        const hourlyCount = Array(24).fill(0);
+        const hourlySum = Array(hourSlots).fill(0);
+        const hourlyCount = Array(hourSlots).fill(0);
 
         records.forEach(r => {
           const d = new Date(r.timestamp);
           const h = d.getHours();
-          if (!isNaN(h) && h >= 0 && h < 24) {
-            hourlySum[h] += r.percentage;
-            hourlyCount[h] += 1;
+          if (!isNaN(h) && h >= startHour && h <= endHour) {
+            hourlySum[h - startHour] += r.percentage;
+            hourlyCount[h - startHour] += 1;
           }
         });
 
@@ -1225,8 +1234,10 @@
           data: hourlyAvg,
           backgroundColor: color + 'cc',
           borderColor: color,
-          borderWidth: 1,
-          borderRadius: 4
+          borderWidth: 1.5,
+          borderRadius: 4,
+          barPercentage: 0.9,
+          categoryPercentage: 0.85
         };
       });
 
@@ -1249,7 +1260,7 @@
           plugins: {
             legend: {
               position: 'top',
-              labels: { color: '#f8fafc', font: { family: 'Inter', weight: '500' } }
+              labels: { color: '#f8fafc', font: { family: 'Inter', weight: '600', size: 12 }, padding: 14 }
             },
             tooltip: {
               backgroundColor: '#111927',
@@ -1268,11 +1279,17 @@
           scales: {
             x: {
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8', font: { family: 'Inter', size: 11 } }
+              ticks: { 
+                color: '#94a3b8', 
+                font: { family: 'Inter', size: 11.5, weight: '500' },
+                maxRotation: 45,
+                minRotation: 0,
+                autoSkip: false
+              }
             },
             y: {
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8', font: { family: 'Inter' }, callback: v => v + '%' },
+              ticks: { color: '#94a3b8', font: { family: 'Inter', size: 12 }, callback: v => v + '%' },
               min: 0,
               max: 100
             }
