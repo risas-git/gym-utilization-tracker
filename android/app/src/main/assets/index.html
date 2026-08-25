@@ -209,6 +209,56 @@
       border-radius: 4px;
     }
 
+    .dropdown-limit-banner {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 0.45rem;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.78rem;
+      color: var(--accent-blue);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      line-height: 1.35;
+    }
+
+    .toast-notification {
+      position: fixed;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: rgba(17, 25, 39, 0.95);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(251, 191, 36, 0.25);
+      backdrop-filter: blur(14px);
+      color: #f8fafc;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 90vw;
+      text-align: left;
+    }
+
+    .toast-notification.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast-notification .toast-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
     .studio-item {
       display: flex;
       align-items: center;
@@ -703,7 +753,11 @@
     }
   </style>
 </head>
-<body>
+  <!-- Global Floating Warning Toast -->
+  <div id="warningToast" class="toast-notification">
+    <span class="toast-icon">⚠️</span>
+    <span id="warningToastMsg">Maximal 4 Studios gleichzeitig erlaubt</span>
+  </div>
 
   <!-- Splash Loading Screen with Pure Solid Cute Pomeranian Silhouette -->
   <div id="splashScreen" class="splash-overlay">
@@ -798,11 +852,14 @@
           </button>
           
           <div class="dropdown-panel" id="dropdownPanel">
+            <div class="dropdown-limit-banner">
+              <span>⚡ <strong>Hinweis:</strong> Maximal <strong>4 Studios</strong> gleichzeitig für sekundengenaue Live-Aktualisierung.</span>
+            </div>
             <input type="text" class="search-box" id="studioSearch" placeholder="Stadt oder Studioname suchen..." oninput="filterStudioList()">
             <div class="preset-btns">
-              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld</button>
-              <button class="btn-sm" onclick="selectPreset('major')">Großstädte</button>
-              <button class="btn-sm" onclick="selectPreset('all')">Alle auswählen</button>
+              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld (3)</button>
+              <button class="btn-sm" onclick="selectPreset('major')">Großstädte (4)</button>
+              <button class="btn-sm" onclick="selectPreset('top4')">Top 4</button>
               <button class="btn-sm" onclick="selectPreset('clear')">Zurücksetzen</button>
             </div>
             <div class="studio-list" id="studioListContainer">
@@ -978,11 +1035,11 @@
 
         allAvailableStudios = Array.from(studioSet).sort((a, b) => a.localeCompare(b));
 
-        // If no default studios found, fallback to Bielefeld or first 3
+        // If no default studios found, fallback to Bielefeld or first 4
         if (selectedStudios.size === 0) {
-          allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+          allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
           if (selectedStudios.size === 0 && allAvailableStudios.length > 0) {
-            allAvailableStudios.slice(0, 3).forEach(s => selectedStudios.add(s));
+            allAvailableStudios.slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
           }
         }
 
@@ -1085,6 +1142,23 @@
       }
     });
 
+    const MAX_STUDIOS = 4;
+    let toastTimeout = null;
+
+    function showWarningToast(msg) {
+      const toast = document.getElementById('warningToast');
+      const msgEl = document.getElementById('warningToastMsg');
+      if (!toast || !msgEl) return;
+
+      msgEl.textContent = msg;
+      toast.classList.add('show');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
     function populateStudioCheckboxes() {
       filterStudioList();
     }
@@ -1110,6 +1184,11 @@
         checkbox.checked = selectedStudios.has(st);
         checkbox.onchange = async (e) => {
           if (e.target.checked) {
+            if (selectedStudios.size >= MAX_STUDIOS) {
+              e.target.checked = false;
+              showWarningToast(`Maximal ${MAX_STUDIOS} Studios gleichzeitig auswählbar – bitte zuerst ein anderes Studio abwählen.`);
+              return;
+            }
             selectedStudios.add(st);
           } else {
             selectedStudios.delete(st);
@@ -1129,13 +1208,14 @@
     async function selectPreset(type) {
       if (type === 'bielefeld') {
         selectedStudios.clear();
-        allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).forEach(s => selectedStudios.add(s));
+        allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
       } else if (type === 'major') {
         selectedStudios.clear();
         const majorCities = ['Berlin', 'München', 'Munich', 'Hamburg', 'Köln', 'Cologne', 'Frankfurt', 'Bonn', 'Bielefeld'];
-        allAvailableStudios.filter(s => majorCities.some(city => s.toLowerCase().includes(city.toLowerCase()))).slice(0, 6).forEach(s => selectedStudios.add(s));
-      } else if (type === 'all') {
-        allAvailableStudios.forEach(s => selectedStudios.add(s));
+        allAvailableStudios.filter(s => majorCities.some(city => s.toLowerCase().includes(city.toLowerCase()))).slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
+      } else if (type === 'top4') {
+        selectedStudios.clear();
+        allAvailableStudios.slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
       } else if (type === 'clear') {
         selectedStudios.clear();
       }
@@ -1169,7 +1249,17 @@
     }
 
     async function updateDashboard() {
-      document.getElementById('selectedCountBadge').textContent = `${selectedStudios.size} ausgewählt`;
+      const badge = document.getElementById('selectedCountBadge');
+      if (badge) {
+        badge.textContent = `${selectedStudios.size} / ${MAX_STUDIOS} ausgewählt`;
+        if (selectedStudios.size >= MAX_STUDIOS) {
+          badge.style.background = 'var(--accent-amber)';
+          badge.style.color = '#090e17';
+        } else {
+          badge.style.background = 'var(--accent-blue)';
+          badge.style.color = '#090e17';
+        }
+      }
       await fetchUtilizationData();
       renderMetrics();
       renderCharts();
@@ -1502,6 +1592,11 @@
     async function initDashboard() {
       const minSplashTime = 3200; // 3.2 seconds minimum splash duration
       const startTime = Date.now();
+
+      const badge = document.getElementById('selectedCountBadge');
+      if (badge) {
+        badge.textContent = `${selectedStudios.size} / ${MAX_STUDIOS} ausgewählt`;
+      }
 
       await loadStudioDirectoryAndSnapshots();
       await fetchUtilizationData();
