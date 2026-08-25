@@ -857,9 +857,7 @@
             </div>
             <input type="text" class="search-box" id="studioSearch" placeholder="Stadt oder Studioname suchen..." oninput="filterStudioList()">
             <div class="preset-btns">
-              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld (3)</button>
-              <button class="btn-sm" onclick="selectPreset('major')">Großstädte (4)</button>
-              <button class="btn-sm" onclick="selectPreset('top4')">Top 4</button>
+              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld</button>
               <button class="btn-sm" onclick="selectPreset('clear')">Zurücksetzen</button>
             </div>
             <div class="studio-list" id="studioListContainer">
@@ -1209,13 +1207,6 @@
       if (type === 'bielefeld') {
         selectedStudios.clear();
         allAvailableStudios.filter(s => s.toLowerCase().includes('bielefeld')).slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
-      } else if (type === 'major') {
-        selectedStudios.clear();
-        const majorCities = ['Berlin', 'München', 'Munich', 'Hamburg', 'Köln', 'Cologne', 'Frankfurt', 'Bonn', 'Bielefeld'];
-        allAvailableStudios.filter(s => majorCities.some(city => s.toLowerCase().includes(city.toLowerCase()))).slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
-      } else if (type === 'top4') {
-        selectedStudios.clear();
-        allAvailableStudios.slice(0, MAX_STUDIOS).forEach(s => selectedStudios.add(s));
       } else if (type === 'clear') {
         selectedStudios.clear();
       }
