@@ -97,9 +97,24 @@
 
     .header-controls {
       display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.65rem;
+    }
+
+    .time-filter-row {
+      display: flex;
       align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    .studio-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      justify-content: flex-end;
     }
 
     .dropdown-container {
@@ -110,17 +125,19 @@
       background: var(--bg-card);
       color: var(--text-main);
       border: 1px solid var(--border-color);
-      padding: 0.65rem 1.15rem;
+      padding: 0.55rem 1rem;
       border-radius: 0.6rem;
       font-family: inherit;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: space-between;
+      gap: 0.65rem;
       font-weight: 500;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
     }
 
     .dropdown-btn:hover {
@@ -723,10 +740,45 @@
 
       .header-controls {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.55rem;
+        width: 100%;
+      }
+
+      .time-filter-row {
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .time-filter-group {
+        display: flex;
+        width: 100%;
         justify-content: space-between;
+        overflow-x: auto;
+        max-width: 100%;
+        scrollbar-width: none;
+        padding: 0.2rem;
+        gap: 0.15rem;
+      }
+
+      .time-filter-group::-webkit-scrollbar {
+        display: none;
+      }
+
+      .time-pill {
+        flex: 1;
+        text-align: center;
+        padding: 0.38rem 0.25rem;
+        font-size: 0.73rem;
+        white-space: nowrap;
+      }
+
+      .studio-filter-row {
+        display: flex;
         align-items: center;
-        gap: 0.4rem;
+        justify-content: space-between;
+        gap: 0.45rem;
         width: 100%;
       }
 
@@ -735,29 +787,10 @@
         min-width: 0;
       }
 
-      .dropdown-trigger {
+      .dropdown-btn {
         width: 100%;
-        font-size: 0.8rem;
-        padding: 0.5rem 0.65rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .time-filter-group {
-        overflow-x: auto;
-        max-width: 100%;
-        scrollbar-width: none;
-        padding: 0.2rem;
-      }
-
-      .time-filter-group::-webkit-scrollbar {
-        display: none;
-      }
-
-      .time-pill {
-        padding: 0.35rem 0.48rem;
-        font-size: 0.74rem;
+        font-size: 0.82rem;
+        padding: 0.52rem 0.75rem;
       }
 
       .chart-card {
@@ -1034,50 +1067,60 @@
       </div>
 
       <div class="header-controls">
-        <!-- Time Filter Pills -->
-        <div class="time-filter-group" id="timeFilterGroup">
-          <button class="time-pill" data-range="24h" onclick="setTimeRange('24h')">24 Std.</button>
-          <button class="time-pill" data-range="3d" onclick="setTimeRange('3d')">3 Tage</button>
-          <button class="time-pill active" data-range="7d" onclick="setTimeRange('7d')">7 Tage</button>
-          <button class="time-pill" data-range="14d" onclick="setTimeRange('14d')">14 Tage</button>
-          <button class="time-pill" data-range="all" onclick="setTimeRange('all')">Gesamt</button>
-        </div>
-
-        <!-- Studio Selector Dropdown -->
-        <div class="dropdown-container">
-          <button class="dropdown-btn" id="dropdownToggleBtn" onclick="toggleDropdown()">
-            <span>Studios auswählen</span>
-            <span id="selectedCountBadge" style="background: var(--accent-blue); color: #090e17; padding: 0.15rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">3 ausgewählt</span>
-            ▼
-          </button>
-          
-          <div class="dropdown-panel" id="dropdownPanel">
-            <div class="dropdown-limit-banner">
-              <span>⚡ <strong>Hinweis:</strong> Maximal <strong>4 Studios</strong> gleichzeitig für sekundengenaue Live-Aktualisierung.</span>
-            </div>
-            <input type="text" class="search-box" id="studioSearch" placeholder="Stadt oder Studioname suchen..." oninput="filterStudioList()">
-            <div class="preset-btns">
-              <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld</button>
-              <button class="btn-sm" onclick="selectPreset('clear')">Zurücksetzen</button>
-            </div>
-            <div class="studio-list" id="studioListContainer">
-              <div style="padding: 1rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-                Studio-Verzeichnis wird geladen...
-              </div>
-            </div>
+        <!-- Top Row: Time Filter Pills -->
+        <div class="time-filter-row">
+          <div class="time-filter-group" id="timeFilterGroup">
+            <button class="time-pill" data-range="24h" onclick="setTimeRange('24h')">24 Std.</button>
+            <button class="time-pill" data-range="3d" onclick="setTimeRange('3d')">3 Tage</button>
+            <button class="time-pill active" data-range="7d" onclick="setTimeRange('7d')">7 Tage</button>
+            <button class="time-pill" data-range="14d" onclick="setTimeRange('14d')">14 Tage</button>
+            <button class="time-pill" data-range="all" onclick="setTimeRange('all')">Gesamt</button>
           </div>
         </div>
 
-        <!-- Refresh Button -->
-        <button class="btn-icon" id="refreshBtn" title="Live-Daten aktualisieren" onclick="refreshDashboard(true)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
-          </svg>
-        </button>
+        <!-- Bottom Row: Studio Selector Dropdown & Actions -->
+        <div class="studio-filter-row">
+          <div class="dropdown-container">
+            <button class="dropdown-btn" id="dropdownToggleBtn" onclick="toggleDropdown()">
+              <span style="display: flex; align-items: center; gap: 0.4rem;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Studios auswählen
+              </span>
+              <span id="selectedCountBadge" style="background: var(--accent-blue); color: #090e17; padding: 0.15rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">3 / 4 ausgewählt</span>
+              <span style="font-size: 0.7rem; opacity: 0.7;">▼</span>
+            </button>
+            
+            <div class="dropdown-panel" id="dropdownPanel">
+              <div class="dropdown-limit-banner">
+                <span>⚡ <strong>Hinweis:</strong> Maximal <strong>4 Studios</strong> gleichzeitig für sekundengenaue Live-Aktualisierung.</span>
+              </div>
+              <input type="text" class="search-box" id="studioSearch" placeholder="Stadt oder Studioname suchen..." oninput="filterStudioList()">
+              <div class="preset-btns">
+                <button class="btn-sm" onclick="selectPreset('bielefeld')">Bielefeld</button>
+                <button class="btn-sm" onclick="selectPreset('clear')">Zurücksetzen</button>
+              </div>
+              <div class="studio-list" id="studioListContainer">
+                <div style="padding: 1rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+                  Studio-Verzeichnis wird geladen...
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="live-badge" id="liveStatusBadge">
-          <span class="badge-dot"></span>
-          Supabase DB
+          <!-- Refresh Button -->
+          <button class="btn-icon" id="refreshBtn" title="Live-Daten aktualisieren" onclick="refreshDashboard(true)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+          </button>
+
+          <div class="live-badge" id="liveStatusBadge">
+            <span class="badge-dot"></span>
+            Supabase DB
+          </div>
         </div>
       </div>
     </header>
