@@ -2,6 +2,8 @@ from datetime import datetime, timedelta, timezone
 import json
 import os
 import sys
+import urllib.parse
+import urllib.request
 from zoneinfo import ZoneInfo
 
 try:
@@ -69,44 +71,40 @@ def fetch_data_from_supabase(days=7):
     }
 
     since_dt = datetime.now(timezone.utc) - timedelta(days=days)
-    since_str = since_dt.isoformat()
-
-    # Query latest records from Supabase
-    url = (
-        f"{SUPABASE_URL}?select=timestamp,studio,percentage,level"
-        f"&timestamp=gte.{since_str}&order=timestamp.asc&limit=10000"
-    )
+    since_str = urllib.parse.quote(since_dt.isoformat())
 
     rows = []
-    try:
-        if requests is not None:
-            res = requests.get(url, headers=headers, timeout=20)
-            res.raise_for_status()
-            rows = res.json()
-        else:
-            import urllib.request
+    limit_per_page = 1000
+    max_pages = 5
 
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=20) as response:
-                rows = json.loads(response.read().decode("utf-8"))
-    except Exception as e:
-        print(f"Error fetching data from Supabase: {e}")
-        # If timestamp filter fails or table is small, fallback to latest 5000 records
+    for page in range(max_pages):
+        offset = page * limit_per_page
+        url = (
+            f"{SUPABASE_URL}?select=timestamp,studio,percentage,level"
+            f"&timestamp=gte.{since_str}&order=timestamp.desc&limit={limit_per_page}&offset={offset}"
+        )
+        batch = []
         try:
-            fallback_url = f"{SUPABASE_URL}?select=timestamp,studio,percentage,level&order=id.desc&limit=5000"
             if requests is not None:
-                res = requests.get(fallback_url, headers=headers, timeout=20)
-                rows = res.json()
+                res = requests.get(url, headers=headers, timeout=20)
+                res.raise_for_status()
+                batch = res.json()
             else:
-                import urllib.request
-
-                req = urllib.request.Request(fallback_url, headers=headers)
+                req = urllib.request.Request(url, headers=headers)
                 with urllib.request.urlopen(req, timeout=20) as response:
-                    rows = json.loads(response.read().decode("utf-8"))
-            rows.reverse()
-        except Exception as e2:
-            print(f"Fallback query also failed: {e2}")
-            return {}
+                    batch = json.loads(response.read().decode("utf-8"))
+        except Exception as e:
+            print(f"Error fetching page {page} from Supabase: {e}")
+            break
+
+        if not batch:
+            break
+        rows.extend(batch)
+        if len(batch) < limit_per_page:
+            break
+
+    # Reverse rows to restore chronological order (oldest to newest) for plotting
+    rows.reverse()
 
     studio_data = {}
     for r in rows:

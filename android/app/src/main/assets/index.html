@@ -950,8 +950,8 @@
     // Step 1: Fetch list of studios and recent snapshots
     async function loadStudioDirectoryAndSnapshots() {
       try {
-        // Query the most recent 500 rows to discover all active studios and their latest capacity
-        const url = `${SUPABASE_BASE_URL}?select=timestamp,studio,percentage,level&order=id.desc&limit=500`;
+        // Query the most recent 1000 rows (covers ~5 scraping runs across all 200 studios)
+        const url = `${SUPABASE_BASE_URL}?select=timestamp,studio,percentage,level&order=id.desc&limit=1000`;
         const response = await fetch(url, {
           headers: {
             'apikey': SUPABASE_KEY,
@@ -966,6 +966,7 @@
         rows.forEach(r => {
           const st = cleanStudioName(r.studio);
           studioSet.add(st);
+          // The first time a studio is seen in descending order is its true latest live snapshot
           if (!latestSnapshots[st]) {
             latestSnapshots[st] = {
               percentage: parseFloat(r.percentage) || 0,
@@ -1001,7 +1002,8 @@
       const sinceIso = getSinceDateIso(currentTimeRange);
       const studioFilter = Array.from(selectedStudios).map(s => `"${s}"`).join(',');
 
-      let url = `${SUPABASE_BASE_URL}?select=timestamp,studio,percentage,level&studio=in.(${encodeURIComponent(studioFilter)})&order=timestamp.asc&limit=10000`;
+      // Sort descending so the most recent data (today/yesterday) is always retrieved even if hitting the 1000-row cap
+      let url = `${SUPABASE_BASE_URL}?select=timestamp,studio,percentage,level&studio=in.(${encodeURIComponent(studioFilter)})&order=timestamp.desc&limit=1000`;
       if (sinceIso) {
         url += `&timestamp=gte.${encodeURIComponent(sinceIso)}`;
       }
@@ -1015,12 +1017,13 @@
         });
 
         if (!response.ok) throw new Error("Supabase query failed: " + response.statusText);
-        const rows = await response.json();
+        let rows = await response.json();
+
+        // Reverse rows so they are in chronological order (oldest to newest) for chart rendering
+        rows.reverse();
 
         const studioData = {};
         selectedStudios.forEach(st => { studioData[st] = []; });
-
-        let latestTs = null;
 
         rows.forEach(r => {
           const st = cleanStudioName(r.studio);
@@ -1034,20 +1037,29 @@
               level: r.level || 'UNKNOWN'
             });
 
-            if (!latestTs || new Date(r.timestamp) > new Date(latestTs)) {
-              latestTs = r.timestamp;
+            // Update latest snapshot if newer
+            if (!latestSnapshots[st] || new Date(r.timestamp) >= new Date(latestSnapshots[st].timestamp)) {
+              latestSnapshots[st] = {
+                percentage: pct,
+                level: r.level || 'UNKNOWN',
+                timestamp: r.timestamp
+              };
             }
-
-            // Update latest snapshot
-            latestSnapshots[st] = {
-              percentage: pct,
-              level: r.level || 'UNKNOWN',
-              timestamp: r.timestamp
-            };
           }
         });
 
         globalData = studioData;
+
+        // Determine latest timestamp across selected studios' snapshots
+        let latestTs = null;
+        selectedStudios.forEach(st => {
+          const snap = latestSnapshots[st];
+          if (snap && snap.timestamp) {
+            if (!latestTs || new Date(snap.timestamp) > new Date(latestTs)) {
+              latestTs = snap.timestamp;
+            }
+          }
+        });
 
         // Update header last updated text
         if (latestTs) {
@@ -1181,8 +1193,8 @@
         const records = globalData[st] || [];
         const snapshot = latestSnapshots[st] || {};
         
-        const latestPct = records.length > 0 ? records[records.length - 1].percentage : (snapshot.percentage ?? 0);
-        const level = records.length > 0 ? records[records.length - 1].level : (snapshot.level ?? 'UNKNOWN');
+        const latestPct = snapshot.percentage !== undefined ? snapshot.percentage : (records.length > 0 ? records[records.length - 1].percentage : 0);
+        const level = snapshot.level || (records.length > 0 ? records[records.length - 1].level : 'UNKNOWN');
 
         // Calculate average & peak
         let avgPct = 0;
