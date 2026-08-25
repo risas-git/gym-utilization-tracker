@@ -59,9 +59,13 @@ public class MainActivity extends AppCompatActivity {
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
 
         // Enable hardware acceleration rendering for smooth charts
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        webView.setHorizontalScrollBarEnabled(false);
         webView.setBackgroundColor(ContextCompat.getColor(this, R.color.bg_dark));
 
         webView.setWebViewClient(new WebViewClient() {
