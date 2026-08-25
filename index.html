@@ -661,55 +661,50 @@
       gap: 0.75rem;
     }
 
-    .pomeranian-stage {
+    .dumbbell-stage {
       position: relative;
-      width: 240px;
-      height: 220px;
+      width: 140px;
+      height: 110px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-bottom: 0.5rem;
     }
 
-    .pomeranian-aura {
+    .dumbbell-aura {
       position: absolute;
-      bottom: 6px;
-      width: 200px;
-      height: 28px;
-      background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.45) 0%, rgba(56, 189, 248, 0.2) 55%, transparent 75%);
+      bottom: 8px;
+      width: 90px;
+      height: 14px;
+      background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.45) 0%, rgba(56, 189, 248, 0.15) 55%, transparent 75%);
       border-radius: 50%;
-      animation: auraPulse 1.8s ease-in-out infinite alternate;
+      animation: dumbbellShadowPulse 1.6s ease-in-out infinite alternate;
     }
 
-    .pomeranian-svg {
-      animation: pomProudBounce 2s ease-in-out infinite;
-      filter: drop-shadow(0 8px 24px rgba(56, 189, 248, 0.25));
+    .dumbbell-svg {
+      animation: dumbbellUpDown 1.6s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 16px rgba(52, 211, 153, 0.4)) drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
     }
 
-    .pom-dumbbell {
-      animation: dumbbellLift 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-    }
-
-    @keyframes dumbbellLift {
-      0%, 100% {
-        transform: translateY(0px);
+    @keyframes dumbbellUpDown {
+      0% {
+        transform: translateY(8px);
       }
-      50% {
-        transform: translateY(-16px);
+      100% {
+        transform: translateY(-14px);
       }
     }
 
-    @keyframes pomProudBounce {
-      0%, 100% {
-        transform: translateY(0px) scale(1);
+    @keyframes dumbbellShadowPulse {
+      0% {
+        transform: scale(1.15);
+        opacity: 0.75;
       }
-      50% {
-        transform: translateY(-4px) scale(1.01);
+      100% {
+        transform: scale(0.65);
+        opacity: 0.3;
       }
-    }
-
-    @keyframes auraPulse {
-      0% { transform: scale(0.92); opacity: 0.55; }
-      100% { transform: scale(1.12); opacity: 1; }
     }
 
     .splash-title {
@@ -759,57 +754,40 @@
     <span id="warningToastMsg">Maximal 4 Studios gleichzeitig erlaubt</span>
   </div>
 
-  <!-- Splash Loading Screen with Pure Solid Cute Pomeranian Silhouette -->
+  <!-- Splash Loading Screen with Centered Lifting Dumbbell -->
   <div id="splashScreen" class="splash-overlay">
     <div class="splash-content">
-      <div class="pomeranian-stage">
-        <div class="pomeranian-aura"></div>
-        <svg class="pomeranian-svg" viewBox="0 0 220 190" width="180" height="155" xmlns="http://www.w3.org/2000/svg">
-          <!-- 100% Solid Cute Fluffy Pomeranian Silhouette -->
-          <g class="pom-character">
-            <path fill="#F8FAFC" d="
-              M 174,64
-              C 170,62 164,59 159,52
-              C 156,48 157,42 156,36
-              L 153,20
-              C 151,16 147,18 145,23
-              L 141,36
-              C 137,38 133,36 130,32
-              L 127,18
-              C 125,14 121,16 120,21
-              L 117,36
-              C 109,46 101,54 89,58
-              C 79,52 76,40 83,28
-              C 89,18 101,14 111,20
-              C 115,22 117,20 115,16
-              C 103,6 85,8 73,20
-              C 61,32 61,52 71,68
-              C 63,73 53,82 47,94
-              C 37,112 37,132 47,148
-              C 53,158 63,166 73,168
-              C 77,168 79,164 79,158
-              L 77,144
-              C 85,150 97,152 109,150
-              C 117,148 123,144 127,138
-              L 127,156
-              C 127,163 131,168 136,168
-              C 141,168 143,163 142,154
-              L 139,140
-              C 149,133 159,122 165,108
-              C 173,90 174,74 175,66
-              C 175,63 175,64 174,64
-              Z
-            " />
-          </g>
+      <div class="dumbbell-stage">
+        <div class="dumbbell-aura"></div>
+        <svg class="dumbbell-svg" viewBox="0 0 120 60" width="110" height="55" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="dbGrip" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#94a3b8" />
+              <stop offset="50%" stop-color="#f8fafc" />
+              <stop offset="100%" stop-color="#94a3b8" />
+            </linearGradient>
+            <linearGradient id="dbPlateEmerald" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#34d399" />
+              <stop offset="100%" stop-color="#059669" />
+            </linearGradient>
+            <linearGradient id="dbPlateCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#0284c7" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Left Weight Plates -->
+          <rect x="8" y="10" width="8" height="40" rx="3" fill="url(#dbPlateEmerald)" />
+          <rect x="18" y="15" width="7" height="30" rx="2.5" fill="url(#dbPlateCyan)" />
+          <rect x="26" y="24" width="4" height="12" rx="1.5" fill="#64748b" />
 
-          <!-- Animated Glowing Neon Dumbbell -->
-          <g class="pom-dumbbell">
-            <rect x="180" y="100" width="5" height="26" rx="2.5" fill="#34D399" />
-            <rect x="183" y="103" width="3" height="20" rx="1.5" fill="#22D3EE" />
-            <rect x="183" y="112" width="22" height="3.5" rx="1.5" fill="#FFFFFF" />
-            <rect x="202" y="103" width="3" height="20" rx="1.5" fill="#22D3EE" />
-            <rect x="204" y="100" width="5" height="26" rx="2.5" fill="#34D399" />
-          </g>
+          <!-- Center Handle Bar -->
+          <rect x="28" y="27" width="64" height="6" rx="3" fill="url(#dbGrip)" />
+
+          <!-- Right Weight Plates -->
+          <rect x="90" y="24" width="4" height="12" rx="1.5" fill="#64748b" />
+          <rect x="95" y="15" width="7" height="30" rx="2.5" fill="url(#dbPlateCyan)" />
+          <rect x="104" y="10" width="8" height="40" rx="3" fill="url(#dbPlateEmerald)" />
         </svg>
       </div>
 
