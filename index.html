@@ -551,18 +551,20 @@
     .metric-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       margin-bottom: 0.75rem;
+      gap: 0.6rem;
     }
 
     .metric-studio {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text-main);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 170px;
+      white-space: normal;
+      word-break: break-word;
+      overflow: visible;
+      flex: 1;
+      min-width: 0;
     }
 
     .status-pill {
@@ -880,21 +882,25 @@
       }
 
       .metrics-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 0.5rem;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
         margin-bottom: 1.25rem;
       }
 
       .metric-card {
-        padding: 0.75rem 0.65rem;
+        padding: 1rem 1.15rem;
       }
 
       .metric-value {
-        font-size: 1.65rem;
+        font-size: 2.1rem;
       }
 
       .metric-studio {
-        font-size: 0.8rem;
+        font-size: 1.05rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        max-width: none;
       }
 
       .insights-card {
