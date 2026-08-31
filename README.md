@@ -46,10 +46,3 @@ Mit **GymAmpel** siehst du die Auslastung deiner Studios in Echtzeit, kannst Sta
 2. **Datenabruf**: `tracker.py` holt per Multithreading (`ThreadPoolExecutor`) in Sekunden die aktuellen Auslastungsdaten für alle 200+ Studios in Deutschland ab.
 3. **Persistierung**: Die Datensätze werden gebatcht in Supabase gespeichert.
 4. **Visualisierung & Auswertung**: Sowohl die GitHub Pages Web-App als auch die native Android App rufen die Live- und Historiendaten direkt via Supabase REST API ab.
-
-## 📱 Android App starten
-
-Die Android-Version liegt im Unterordner [`android/`](android/):
-1. **Android Studio** öffnen.
-2. Den Ordner `android/` auswählen.
-3. Auf den grünen **Run-Button** (▶️) klicken.
