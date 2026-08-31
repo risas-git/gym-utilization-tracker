@@ -2047,29 +2047,172 @@
       textEl.innerHTML = `${quietStr} &nbsp;•&nbsp; ${peakStr}`;
     }
 
+    // Build a continuous, uniform 15-minute timeline across the entire time range,
+    // seamlessly filling unlogged daytime gaps with historical hourly curves and night closures with 0%.
+    function buildContinuousTimeline(studios, sinceIso) {
+      const now = new Date();
+      let startMs;
+      if (sinceIso) {
+        startMs = new Date(sinceIso).getTime();
+      } else {
+        let earliestMs = Infinity;
+        studios.forEach(st => {
+          (globalData[st] || []).forEach(r => {
+            const t = new Date(r.timestamp).getTime();
+            if (t < earliestMs) earliestMs = t;
+          });
+        });
+        startMs = earliestMs !== Infinity ? earliestMs : (now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      }
+
+      // Round startMs down to 15-minute boundary
+      const intervalMs = 15 * 60 * 1000; // 15 minutes
+      startMs = Math.floor(startMs / intervalMs) * intervalMs;
+      const endMs = Math.ceil(now.getTime() / intervalMs) * intervalMs;
+
+      // 1. Pre-calculate true historical hourly average for each studio from non-zero opening-hour readings
+      const studioHourlyAvg = {};
+      const studioDayAvg = {};
+
+      studios.forEach(st => {
+        const records = globalData[st] || [];
+        const hourlySums = {};
+        const hourlyCounts = {};
+        let daySum = 0;
+        let dayCount = 0;
+
+        records.forEach(r => {
+          const dt = getBerlinDateDetails(r.timestamp);
+          const pct = parseFloat(r.percentage);
+          if (dt && dt.isOpeningHour && !isNaN(pct) && pct > 0) {
+            const h = dt.hour;
+            hourlySums[h] = (hourlySums[h] || 0) + pct;
+            hourlyCounts[h] = (hourlyCounts[h] || 0) + 1;
+            daySum += pct;
+            dayCount += 1;
+          }
+        });
+
+        studioDayAvg[st] = dayCount > 0 ? (daySum / dayCount) : 25;
+        studioHourlyAvg[st] = {};
+        for (let h = 6; h <= 22; h++) {
+          if (hourlyCounts[h] && hourlyCounts[h] > 0) {
+            studioHourlyAvg[st][h] = hourlySums[h] / hourlyCounts[h];
+          }
+        }
+      });
+
+      // 2. Map existing real measurements to nearest 15-minute bucket
+      const studioRealMap = {};
+      studios.forEach(st => {
+        studioRealMap[st] = new Map();
+        (globalData[st] || []).forEach(r => {
+          const t = new Date(r.timestamp).getTime();
+          const bucket = Math.round(t / intervalMs) * intervalMs;
+          studioRealMap[st].set(bucket, r);
+        });
+      });
+
+      // 3. Generate uniform 15-minute time slots
+      const timelineSlots = [];
+      for (let t = startMs; t <= endMs; t += intervalMs) {
+        timelineSlots.push(new Date(t).toISOString());
+      }
+
+      // 4. Fill continuous data for each studio
+      const continuousData = {};
+      studios.forEach(st => {
+        const hourlyMap = studioHourlyAvg[st] || {};
+        const fallbackAvg = studioDayAvg[st] || 25;
+        continuousData[st] = [];
+
+        timelineSlots.forEach(isoStr => {
+          const t = new Date(isoStr).getTime();
+          const dt = getBerlinDateDetails(isoStr);
+          const h = dt ? dt.hour : 0;
+          const isOpening = dt ? dt.isOpeningHour : false;
+
+          // Check if real measurement exists in this bucket or adjacent ±15 mins
+          let realRec = studioRealMap[st].get(t);
+          if (!realRec) realRec = studioRealMap[st].get(t - intervalMs);
+          if (!realRec) realRec = studioRealMap[st].get(t + intervalMs);
+
+          if (realRec && parseFloat(realRec.percentage) > 0) {
+            continuousData[st].push({
+              timestamp: isoStr,
+              percentage: Math.round(parseFloat(realRec.percentage)),
+              level: realRec.level || 'UNKNOWN',
+              isImputed: false
+            });
+          } else if (realRec && !isOpening) {
+            // Closed during night
+            continuousData[st].push({
+              timestamp: isoStr,
+              percentage: 0,
+              level: 'CLOSED',
+              isImputed: false
+            });
+          } else {
+            // Gap fill during missing scrape intervals
+            if (isOpening) {
+              let targetAvg = hourlyMap[h];
+              if (targetAvg === undefined || targetAvg <= 0) {
+                const adj = [h - 1, h + 1, h - 2, h + 2];
+                for (let nearH of adj) {
+                  if (hourlyMap[nearH] && hourlyMap[nearH] > 0) {
+                    targetAvg = hourlyMap[nearH];
+                    break;
+                  }
+                }
+              }
+              if (targetAvg === undefined || targetAvg <= 0) {
+                targetAvg = fallbackAvg;
+              }
+
+              const pct = Math.round(targetAvg);
+              const lvl = pct >= 65 ? 'HIGH' : (pct >= 35 ? 'MODERATE' : 'LOW');
+              continuousData[st].push({
+                timestamp: isoStr,
+                percentage: pct,
+                level: lvl,
+                isImputed: true
+              });
+            } else {
+              continuousData[st].push({
+                timestamp: isoStr,
+                percentage: 0,
+                level: 'CLOSED',
+                isImputed: false
+              });
+            }
+          }
+        });
+      });
+
+      return { timelineSlots, continuousData };
+    }
+
     function renderTimeSeriesChart() {
       const studios = Array.from(selectedStudios);
+      if (studios.length === 0) {
+        if (timeSeriesChartInstance) {
+          timeSeriesChartInstance.destroy();
+          timeSeriesChartInstance = null;
+        }
+        return;
+      }
 
-      // Collect all distinct timestamps and sort chronologically
-      const allTimestampsSet = new Set();
-      studios.forEach(st => {
-        (globalData[st] || []).forEach(r => allTimestampsSet.add(r.timestamp));
-      });
-      const allTimestamps = Array.from(allTimestampsSet).sort();
+      const sinceIso = getSinceDateIso(currentTimeRange);
+      const { timelineSlots, continuousData } = buildContinuousTimeline(studios, sinceIso);
 
       // Format labels for X axis
-      const formattedLabels = allTimestamps.map(ts => formatToGermanyTime(ts, true));
+      const formattedLabels = timelineSlots.map(ts => formatToGermanyTime(ts, true));
 
-      // Build time series datasets
+      // Build time series datasets with continuous, smooth curves
       const timeSeriesDatasets = studios.map((st, idx) => {
-        const recordsMap = new Map((globalData[st] || []).map(r => [r.timestamp, r]));
+        const records = continuousData[st] || [];
         const color = COLORS[idx % COLORS.length];
-
-        // Map values to aligned timestamps
-        const dataPoints = allTimestamps.map(ts => {
-          const rec = recordsMap.get(ts);
-          return rec !== undefined ? rec.percentage : null;
-        });
+        const dataPoints = records.map(r => r.percentage);
 
         return {
           label: st,
@@ -2077,10 +2220,10 @@
           borderColor: color,
           backgroundColor: color + '15',
           borderWidth: 2,
-          pointRadius: allTimestamps.length > 80 ? 1 : 3,
-          pointHoverRadius: 6,
+          pointRadius: timelineSlots.length > 100 ? 0 : 2,
+          pointHoverRadius: 5,
           fill: studios.length === 1,
-          tension: 0.25,
+          tension: 0.3,
           spanGaps: true
         };
       });
@@ -2117,8 +2260,7 @@
                 label: function(context) {
                   const val = context.parsed.y !== null ? `${context.parsed.y}%` : 'Keine Daten';
                   const st = context.dataset.label;
-                  const ts = allTimestamps[context.dataIndex];
-                  const rec = (globalData[st] || []).find(r => r.timestamp === ts);
+                  const rec = (continuousData[st] || [])[context.dataIndex];
                   const note = (rec && rec.isImputed) ? ' (Ø geschätzt)' : '';
                   return ` ${st}: ${val}${note}`;
                 }
