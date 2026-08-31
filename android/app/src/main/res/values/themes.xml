@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.GymTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color -->
-        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorPrimary">@color/accent_red</item>
         <item name="colorPrimaryVariant">@color/bg_card</item>
-        <item name="colorOnPrimary">@color/bg_dark</item>
+        <item name="colorOnPrimary">@color/text_white</item>
         <!-- Secondary brand color -->
-        <item name="colorSecondary">@color/accent_emerald</item>
-        <item name="colorSecondaryVariant">@color/accent_emerald</item>
-        <item name="colorOnSecondary">@color/bg_dark</item>
+        <item name="colorSecondary">@color/accent_red_bright</item>
+        <item name="colorSecondaryVariant">@color/accent_red</item>
+        <item name="colorOnSecondary">@color/text_white</item>
         <!-- Status bar and navigation bar -->
         <item name="android:statusBarColor">@color/bg_dark</item>
         <item name="android:navigationBarColor">@color/bg_dark</item>

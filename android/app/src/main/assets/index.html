@@ -11,21 +11,23 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --bg-primary: #0b0f19;
-      --bg-card: #151e32;
-      --bg-card-hover: #1c2742;
-      --bg-glass: rgba(21, 30, 50, 0.75);
+      --bg-primary: #0a0a0d;
+      --bg-card: #141418;
+      --bg-card-hover: #1c1c22;
+      --bg-glass: rgba(20, 20, 24, 0.85);
       --border-color: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(56, 189, 248, 0.5);
+      --border-focus: rgba(239, 68, 68, 0.5);
       --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent-blue: #38bdf8;
+      --text-muted: #a1a1aa;
+      --accent-red: #ef4444;
+      --accent-red-bright: #ff2a4b;
+      --accent-red-dark: #dc2626;
       --accent-emerald: #34d399;
       --accent-amber: #fbbf24;
       --accent-rose: #f43f5e;
       --accent-purple: #a78bfa;
-      --card-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5);
-      --glow-blue: 0 0 20px rgba(56, 189, 248, 0.2);
+      --card-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.7);
+      --glow-red: 0 0 25px rgba(239, 68, 68, 0.25);
     }
 
     html, body {
@@ -44,8 +46,8 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-primary);
       background-image: 
-        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(52, 211, 153, 0.06) 0%, transparent 40%);
+        radial-gradient(circle at 15% 10%, rgba(239, 68, 68, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(220, 38, 38, 0.07) 0%, transparent 45%);
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -77,7 +79,7 @@
       font-size: 2rem;
       font-weight: 800;
       letter-spacing: -0.025em;
-      background: linear-gradient(135deg, #38bdf8 0%, #34d399 50%, #a78bfa 100%);
+      background: linear-gradient(135deg, #ff2a4b 0%, #ef4444 50%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: flex;
@@ -139,13 +141,13 @@
       gap: 0.5rem;
       font-weight: 500;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .dropdown-btn:hover {
-      border-color: var(--accent-blue);
+      border-color: var(--accent-red);
       background: var(--bg-card-hover);
-      box-shadow: var(--glow-blue);
+      box-shadow: var(--glow-red);
     }
 
     .dropdown-label {
@@ -165,8 +167,8 @@
     }
 
     .selected-count-badge {
-      background: var(--accent-blue);
-      color: #090e17;
+      background: var(--accent-red);
+      color: #ffffff;
       padding: 0.18rem 0.5rem;
       border-radius: 999px;
       font-size: 0.75rem;
@@ -176,9 +178,9 @@
     }
 
     .live-pill-inline {
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.3);
-      color: var(--accent-emerald);
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--accent-red-bright);
       padding: 0.2rem 0.55rem;
       border-radius: 9999px;
       font-size: 0.72rem;
@@ -195,10 +197,10 @@
       right: 0;
       width: 360px;
       max-height: 480px;
-      background: #111927;
+      background: #141418;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 0.85rem;
-      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.75);
       z-index: 1000;
       display: none;
       flex-direction: column;
@@ -218,7 +220,7 @@
 
     .search-box {
       width: 100%;
-      background: #090e17;
+      background: #0a0a0d;
       border: 1px solid var(--border-color);
       color: var(--text-main);
       padding: 0.6rem 0.85rem;
@@ -230,7 +232,7 @@
     }
 
     .search-box:focus {
-      border-color: var(--accent-blue);
+      border-color: var(--accent-red);
     }
 
     .preset-btns {
@@ -241,9 +243,9 @@
     }
 
     .btn-sm {
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      color: var(--accent-blue);
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--accent-red-bright);
       padding: 0.3rem 0.6rem;
       border-radius: 0.35rem;
       font-size: 0.75rem;
@@ -256,8 +258,8 @@
     }
 
     .btn-sm:hover {
-      background: rgba(56, 189, 248, 0.2);
-      border-color: var(--accent-blue);
+      background: rgba(239, 68, 68, 0.25);
+      border-color: var(--accent-red);
     }
 
     .studio-list {
@@ -273,17 +275,17 @@
       width: 5px;
     }
     .studio-list::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #27272a;
       border-radius: 4px;
     }
 
     .dropdown-limit-banner {
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
       border-radius: 0.45rem;
       padding: 0.45rem 0.65rem;
       font-size: 0.78rem;
-      color: var(--accent-blue);
+      color: var(--accent-red-bright);
       margin-bottom: 0.6rem;
       display: flex;
       align-items: center;
@@ -296,9 +298,9 @@
       top: 1.5rem;
       left: 50%;
       transform: translateX(-50%) translateY(-30px);
-      background: rgba(17, 25, 39, 0.95);
-      border: 1px solid rgba(251, 191, 36, 0.5);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(251, 191, 36, 0.25);
+      background: rgba(20, 20, 24, 0.95);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(239, 68, 68, 0.25);
       backdrop-filter: blur(14px);
       color: #f8fafc;
       padding: 0.75rem 1.25rem;
@@ -344,7 +346,7 @@
     }
 
     .studio-item input[type="checkbox"] {
-      accent-color: var(--accent-blue);
+      accent-color: var(--accent-red);
       width: 15px;
       height: 15px;
       cursor: pointer;
@@ -377,9 +379,9 @@
     }
 
     .time-pill.active {
-      background: var(--accent-blue);
-      color: #0b0f19;
-      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+      background: var(--accent-red);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
     /* Day of week & Holiday filter pills for Hourly Profile */
@@ -396,13 +398,13 @@
     }
 
     .day-filter-scroll::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #27272a;
       border-radius: 2px;
     }
 
     .day-filter-group {
       display: flex;
-      background: rgba(11, 15, 25, 0.8);
+      background: rgba(10, 10, 13, 0.9);
       border: 1px solid var(--border-color);
       border-radius: 0.6rem;
       padding: 0.2rem;
@@ -431,10 +433,10 @@
     }
 
     .day-pill.active {
-      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-      color: #090e17;
+      background: linear-gradient(135deg, #ff2a4b 0%, #dc2626 100%);
+      color: #ffffff;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35);
+      box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
     }
 
     .day-pill.holiday-pill {
@@ -446,7 +448,7 @@
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       color: #090e17;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(251, 191, 36, 0.35);
+      box-shadow: 0 2px 10px rgba(251, 191, 36, 0.35);
     }
 
     /* Refresh button */
@@ -466,8 +468,8 @@
 
     .btn-icon:hover {
       color: var(--text-main);
-      border-color: var(--accent-blue);
-      box-shadow: var(--glow-blue);
+      border-color: var(--accent-red);
+      box-shadow: var(--glow-red);
     }
 
     .btn-icon.spinning svg {
@@ -479,9 +481,9 @@
     }
 
     .live-badge {
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.3);
-      color: var(--accent-emerald);
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--accent-red-bright);
       padding: 0.4rem 0.75rem;
       border-radius: 9999px;
       font-size: 0.8rem;
@@ -494,9 +496,9 @@
     .badge-dot {
       width: 7px;
       height: 7px;
-      background-color: var(--accent-emerald);
+      background-color: var(--accent-red-bright);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-red);
       animation: pulse 2s infinite;
     }
 
@@ -540,7 +542,7 @@
       left: 0;
       width: 4px;
       height: 100%;
-      background: var(--accent-blue);
+      background: var(--accent-red);
     }
 
     .metric-card.green::before { background: var(--accent-emerald); }
@@ -579,7 +581,7 @@
     .status-pill.low { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
     .status-pill.moderate { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.3); }
     .status-pill.high { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
-    .status-pill.closed { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); border: 1px solid rgba(148, 163, 184, 0.3); }
+    .status-pill.closed { background: rgba(161, 161, 170, 0.15); color: var(--text-muted); border: 1px solid rgba(161, 161, 170, 0.3); }
 
     .metric-body {
       display: flex;
@@ -630,20 +632,20 @@
 
     /* Insights Banner */
     .insights-card {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(52, 211, 153, 0.08) 100%);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(20, 20, 24, 0.9) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.25);
       border-radius: 1rem;
       padding: 1.15rem 1.5rem;
       margin-bottom: 1.75rem;
       display: flex;
       align-items: center;
       gap: 1.25rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .insights-icon {
       font-size: 1.8rem;
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(239, 68, 68, 0.15);
       width: 48px;
       height: 48px;
       border-radius: 50%;
@@ -656,7 +658,7 @@
     .insights-content h4 {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--accent-blue);
+      color: var(--accent-red-bright);
       margin-bottom: 0.2rem;
     }
 
@@ -721,15 +723,15 @@
       justify-content: center;
       min-height: 250px;
       gap: 1rem;
-      color: var(--accent-blue);
+      color: var(--accent-red-bright);
       font-weight: 500;
     }
 
     .spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid rgba(56, 189, 248, 0.2);
-      border-top-color: var(--accent-blue);
+      border: 3px solid rgba(239, 68, 68, 0.2);
+      border-top-color: var(--accent-red-bright);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -746,7 +748,7 @@
     }
 
     footer a {
-      color: var(--accent-blue);
+      color: var(--accent-red-bright);
       text-decoration: none;
     }
 
@@ -939,8 +941,8 @@
       height: 100vh;
       background-color: var(--bg-primary);
       background-image: 
-        radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 50% 70%, rgba(52, 211, 153, 0.08) 0%, transparent 60%);
+        radial-gradient(circle at 50% 40%, rgba(239, 68, 68, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 50% 70%, rgba(220, 38, 38, 0.08) 0%, transparent 60%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -981,14 +983,14 @@
       bottom: 8px;
       width: 90px;
       height: 14px;
-      background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.45) 0%, rgba(56, 189, 248, 0.15) 55%, transparent 75%);
+      background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.5) 0%, rgba(220, 38, 38, 0.18) 55%, transparent 75%);
       border-radius: 50%;
       animation: dumbbellShadowPulse 1.6s ease-in-out infinite alternate;
     }
 
     .dumbbell-svg {
       animation: dumbbellUpDown 1.6s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 16px rgba(52, 211, 153, 0.4)) drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
+      filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.5)) drop-shadow(0 0 8px rgba(220, 38, 38, 0.3));
     }
 
     @keyframes dumbbellUpDown {
@@ -1017,7 +1019,7 @@
       letter-spacing: -0.02em;
       color: #f8fafc;
       margin-top: 0.25rem;
-      background: linear-gradient(135deg, #38bdf8 0%, #34d399 100%);
+      background: linear-gradient(135deg, #ff2a4b 0%, #ef4444 50%, #ffffff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1040,7 +1042,7 @@
     .splash-progress-bar {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, #38bdf8, #34d399);
+      background: linear-gradient(90deg, #dc2626, #ff2a4b);
       border-radius: 999px;
       animation: progressFill 3.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
@@ -1070,19 +1072,19 @@
               <stop offset="50%" stop-color="#f8fafc" />
               <stop offset="100%" stop-color="#94a3b8" />
             </linearGradient>
-            <linearGradient id="dbPlateEmerald" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#34d399" />
-              <stop offset="100%" stop-color="#059669" />
+            <linearGradient id="dbPlateCrimson" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ef4444" />
+              <stop offset="100%" stop-color="#991b1b" />
             </linearGradient>
-            <linearGradient id="dbPlateCyan" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8" />
-              <stop offset="100%" stop-color="#0284c7" />
+            <linearGradient id="dbPlateRed" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ff2a4b" />
+              <stop offset="100%" stop-color="#dc2626" />
             </linearGradient>
           </defs>
           
           <!-- Left Weight Plates -->
-          <rect x="8" y="10" width="8" height="40" rx="3" fill="url(#dbPlateEmerald)" />
-          <rect x="18" y="15" width="7" height="30" rx="2.5" fill="url(#dbPlateCyan)" />
+          <rect x="8" y="10" width="8" height="40" rx="3" fill="url(#dbPlateCrimson)" />
+          <rect x="18" y="15" width="7" height="30" rx="2.5" fill="url(#dbPlateRed)" />
           <rect x="26" y="24" width="4" height="12" rx="1.5" fill="#64748b" />
 
           <!-- Center Handle Bar -->
@@ -1090,8 +1092,8 @@
 
           <!-- Right Weight Plates -->
           <rect x="90" y="24" width="4" height="12" rx="1.5" fill="#64748b" />
-          <rect x="95" y="15" width="7" height="30" rx="2.5" fill="url(#dbPlateCyan)" />
-          <rect x="104" y="10" width="8" height="40" rx="3" fill="url(#dbPlateEmerald)" />
+          <rect x="95" y="15" width="7" height="30" rx="2.5" fill="url(#dbPlateRed)" />
+          <rect x="104" y="10" width="8" height="40" rx="3" fill="url(#dbPlateCrimson)" />
         </svg>
       </div>
 
@@ -1249,16 +1251,16 @@
     const SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl";
 
     const COLORS = [
-      '#38bdf8', // Cyan/Sky
-      '#34d399', // Emerald
-      '#fbbf24', // Amber
-      '#a78bfa', // Purple
-      '#f43f5e', // Rose
+      '#ff2a4b', // Signature All Inclusive Gym Crimson Red
+      '#fbbf24', // Amber Gold
+      '#38bdf8', // Ice Cyan
+      '#34d399', // Emerald Mint
+      '#a78bfa', // Violet Purple
+      '#f97316', // Vibrant Orange
+      '#ec4899', // Hot Pink
       '#06b6d4', // Teal
-      '#84cc16', // Lime
-      '#f97316', // Orange
-      '#ec4899', // Pink
-      '#60a5fa'  // Blue
+      '#84cc16', // Lime Green
+      '#60a5fa'  // Electric Blue
     ];
 
     let globalData = {};           // { studioName: [{ timestamp, percentage, level }] }
@@ -1851,8 +1853,8 @@
           badge.style.background = 'var(--accent-amber)';
           badge.style.color = '#090e17';
         } else {
-          badge.style.background = 'var(--accent-blue)';
-          badge.style.color = '#090e17';
+          badge.style.background = 'var(--accent-red)';
+          badge.style.color = '#ffffff';
         }
       }
       await fetchUtilizationData();
@@ -2256,10 +2258,10 @@
               labels: { color: '#f8fafc', font: { family: 'Inter', weight: '500' } }
             },
             tooltip: {
-              backgroundColor: '#111927',
-              titleColor: '#38bdf8',
+              backgroundColor: '#141418',
+              titleColor: '#ff2a4b',
               bodyColor: '#f8fafc',
-              borderColor: 'rgba(255,255,255,0.1)',
+              borderColor: 'rgba(239, 68, 68, 0.3)',
               borderWidth: 1,
               padding: 10,
               callbacks: {
@@ -2392,10 +2394,10 @@
               labels: { color: '#f8fafc', font: { family: 'Inter', weight: '600', size: 12 }, padding: 14 }
             },
             tooltip: {
-              backgroundColor: '#111927',
-              titleColor: '#38bdf8',
+              backgroundColor: '#141418',
+              titleColor: '#ff2a4b',
               bodyColor: '#f8fafc',
-              borderColor: 'rgba(255,255,255,0.1)',
+              borderColor: 'rgba(239, 68, 68, 0.3)',
               borderWidth: 1,
               padding: 10,
               callbacks: {

@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Customize SwipeRefreshLayout colors
         swipeRefreshLayout.setColorSchemeColors(
-                ContextCompat.getColor(this, R.color.accent_blue),
-                ContextCompat.getColor(this, R.color.accent_emerald)
+                ContextCompat.getColor(this, R.color.accent_red),
+                ContextCompat.getColor(this, R.color.accent_red_bright)
         );
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(
                 ContextCompat.getColor(this, R.color.bg_card)

@@ -5,14 +5,14 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     
-    <!-- Deep midnight background -->
+    <!-- Deep obsidian black background -->
     <path
-        android:fillColor="#0B0F19"
+        android:fillColor="#0A0A0D"
         android:pathData="M0,0h108v108h-108z" />
 
-    <!-- Calm ambient aura in center -->
+    <!-- Deep crimson ambient aura in center -->
     <path
-        android:fillColor="#0D2E2B"
-        android:fillAlpha="0.8"
+        android:fillColor="#3B0D14"
+        android:fillAlpha="0.85"
         android:pathData="M54,20 A34,34 0 1,0 54,88 A34,34 0 1,0 54,20 Z" />
 </vector>

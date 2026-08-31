@@ -17,13 +17,13 @@ SUPABASE_KEY = "sb_publishable_pKmBZFPN2bcGOEA3l7yrjA_tpusw3Pl"
 OUTPUT_PLOT = "gym_utilization_analysis.png"
 
 COLORS = [
-    "#2563eb",  # Blue
+    "#ef4444",  # Crimson Red
+    "#f59e0b",  # Amber/Gold
+    "#2563eb",  # Electric Blue
     "#10b981",  # Emerald Green
-    "#f59e0b",  # Amber/Orange
     "#8b5cf6",  # Purple
     "#ec4899",  # Pink
     "#06b6d4",  # Cyan
-    "#f43f5e",  # Red
     "#84cc16",  # Lime
 ]
 
