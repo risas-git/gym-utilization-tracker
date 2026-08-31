@@ -47,25 +47,6 @@ Mit **GymAmpel** siehst du die Auslastung deiner Studios in Echtzeit, kannst Sta
 3. **Persistierung**: Die Datensätze werden gebatcht in Supabase gespeichert.
 4. **Visualisierung & Auswertung**: Sowohl die GitHub Pages Web-App als auch die native Android App rufen die Live- und Historiendaten direkt via Supabase REST API ab.
 
----
-
-## 💻 Lokale Ausführung (Python)
-
-Voraussetzung: Python 3.10+
-
-```bash
-# 1. Abhängigkeiten installieren
-pip install -r requirements.txt
-
-# 2. Auslastungsdaten manuell abfragen & in Supabase speichern
-python tracker.py
-
-# 3. Lokale Analyse-Grafik generieren
-python plot_utilization.py
-```
-
----
-
 ## 📱 Android App starten
 
 Die Android-Version liegt im Unterordner [`android/`](android/):
