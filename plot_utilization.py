@@ -122,7 +122,57 @@ def fetch_data_from_supabase(days=7):
             studio_data[studio] = []
         studio_data[studio].append((ts, pct, level))
 
-    return studio_data
+    return impute_daytime_zeros(studio_data)
+
+
+def impute_daytime_zeros(studio_data):
+    """Replaces zeros during opening hours (06:00 - 23:00) with historical hourly averages."""
+    cleaned_data = {}
+    for studio, records in studio_data.items():
+        if not records:
+            cleaned_data[studio] = []
+            continue
+
+        # Pass 1: Compute hourly averages of valid non-zero measurements during opening hours (06:00 - 23:00)
+        hourly_sums = {}
+        hourly_counts = {}
+        daytime_sum = 0
+        daytime_count = 0
+
+        for dt, pct, _ in records:
+            if 6 <= dt.hour < 23 and pct > 0:
+                hourly_sums[dt.hour] = hourly_sums.get(dt.hour, 0.0) + pct
+                hourly_counts[dt.hour] = hourly_counts.get(dt.hour, 0) + 1
+                daytime_sum += pct
+                daytime_count += 1
+
+        hourly_avgs = {
+            h: (hourly_sums[h] / hourly_counts[h]) for h in hourly_counts
+        }
+        overall_day_avg = (daytime_sum / daytime_count) if daytime_count > 0 else 0.0
+
+        # Pass 2: Replace daytime 0% / CLOSED values with calculated average
+        new_records = []
+        for dt, pct, level in records:
+            if 6 <= dt.hour < 23 and (pct == 0.0 or level == "CLOSED"):
+                target_avg = hourly_avgs.get(dt.hour)
+                if not target_avg:
+                    for near_h in [dt.hour - 1, dt.hour + 1, dt.hour - 2, dt.hour + 2]:
+                        if near_h in hourly_avgs:
+                            target_avg = hourly_avgs[near_h]
+                            break
+                if not target_avg:
+                    target_avg = overall_day_avg
+
+                if target_avg > 0:
+                    pct = round(target_avg)
+                    level = "HIGH" if pct >= 65 else ("MODERATE" if pct >= 35 else "LOW")
+
+            new_records.append((dt, pct, level))
+
+        cleaned_data[studio] = new_records
+
+    return cleaned_data
 
 
 def plot_with_matplotlib(studio_data):
